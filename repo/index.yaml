@@ -2,25 +2,25 @@ apiVersion: v1
 entries:
   crontab-ui:
   - apiVersion: v2
-    appVersion: 0.3.16-rc.2
-    created: "2023-02-28T18:07:55.858836+01:00"
+    appVersion: 0.3.16.2
+    created: "2023-02-28T19:19:44.126945+01:00"
     description: A modified version of https://github.com/alseambusher/crontab-ui
       with Cloud commander
-    digest: be1a0250a6a4a1f114258366c32c1f8dc7817916903333fabe028efd009d6d16
+    digest: 3568b8cabe0a80576116b64ab9250ddf0c85be282a71d2fd8e8ed94d9a29a856
     name: crontab-ui
     type: application
     urls:
-    - https://helm-repo.highcanfly.club/crontab-ui-0.3.16-rc.2.tgz
-    version: 0.3.16-rc.2
+    - https://helm-repo.highcanfly.club/crontab-ui-1.0.0.tgz
+    version: 1.0.0
   hcfmailer:
   - apiVersion: v2
-    appVersion: 2.3.9-rc.9
-    created: "2023-02-28T18:07:55.859669+01:00"
+    appVersion: 2.3.9.9
+    created: "2023-02-28T19:19:44.127717+01:00"
     description: An adapted version of Listmonk
-    digest: 9eb123d14de473059764a3780aa1c09d515c1866fb7b94e5afc0afc95875efd4
+    digest: f9f2484b80573cbdf836c24cac71120849c15801d4dee61658b96ec2cfff861d
     name: hcfmailer
     type: application
     urls:
-    - https://helm-repo.highcanfly.club/hcfmailer-2.3.9-rc.9.tgz
-    version: 2.3.9-rc.9
-generated: "2023-02-28T18:07:55.858166+01:00"
+    - https://helm-repo.highcanfly.club/hcfmailer-1.0.0.tgz
+    version: 1.0.0
+generated: "2023-02-28T19:19:44.126354+01:00"
