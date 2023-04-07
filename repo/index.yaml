@@ -3,10 +3,10 @@ entries:
   crontab-ui:
   - apiVersion: v2
     appVersion: 0.3.16.2
-    created: "2023-04-07T15:34:16.518001+02:00"
+    created: "2023-04-07T18:18:35.609556+02:00"
     description: A modified version of https://github.com/alseambusher/crontab-ui
       with Cloud commander
-    digest: f986f93a940f8a9d6ac3102b6cc1c64339933d09c29cee344d50da12fc677358
+    digest: 798cac5b95892702601ce9634ea4fcf37894f50a51f9a2c61f596d2100e718ad
     name: crontab-ui
     type: application
     urls:
@@ -14,10 +14,20 @@ entries:
     version: 1.0.0
   dolidock:
   - apiVersion: v2
-    appVersion: 0.1.0
-    created: "2023-04-07T15:34:16.518983+02:00"
+    appVersion: 0.1.1
+    created: "2023-04-07T18:18:35.616407+02:00"
     description: A Helm chart for Kubernetes
-    digest: c9bfafdc6c8f2c110abf3cabccabe4f1c719d48667ec4303fda586d52311cfa3
+    digest: e3149fc159905a78c4ee546be73bd228e19d6ce0d6c833ff761f0f105380e07d
+    name: dolidock
+    type: application
+    urls:
+    - https://helm-repo.highcanfly.club/dolidock-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-04-07T18:18:35.610519+02:00"
+    description: A Helm chart for Kubernetes
+    digest: c2073ea0e31c37b180cd700d23545b005f5d8d78cfb2eb6a1af6deb3a80cf329
     name: dolidock
     type: application
     urls:
@@ -26,12 +36,12 @@ entries:
   hcfmailer:
   - apiVersion: v2
     appVersion: 2.3.9.9
-    created: "2023-04-07T15:34:16.519856+02:00"
+    created: "2023-04-07T18:18:35.617636+02:00"
     description: An adapted version of Listmonk
-    digest: 2917ff88161cd76cb9ac2bcf9ebf7c2db6dab49eba0c9ef8571fde0e9e396bea
+    digest: f2ccc22c72a77d1b9b37acc5011f65beb08c71291638cf252c51e5039d26ecd9
     name: hcfmailer
     type: application
     urls:
     - https://helm-repo.highcanfly.club/hcfmailer-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-07T15:34:16.517301+02:00"
+generated: "2023-04-07T18:18:35.608961+02:00"
