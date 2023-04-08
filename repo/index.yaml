@@ -3,10 +3,10 @@ entries:
   crontab-ui:
   - apiVersion: v2
     appVersion: 0.3.16.2
-    created: "2023-04-07T18:18:35.609556+02:00"
+    created: "2023-04-08T11:38:03.291047+02:00"
     description: A modified version of https://github.com/alseambusher/crontab-ui
       with Cloud commander
-    digest: 798cac5b95892702601ce9634ea4fcf37894f50a51f9a2c61f596d2100e718ad
+    digest: ef0604bced275f303506f26e96b56752af5a61e3f46ff530002d8c04f0ef3f42
     name: crontab-ui
     type: application
     urls:
@@ -14,8 +14,18 @@ entries:
     version: 1.0.0
   dolidock:
   - apiVersion: v2
+    appVersion: 0.1.2
+    created: "2023-04-08T11:38:03.296433+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 7552c2925acca30fdc18e6d81f8fdf6b4bad6e9875b6df149208a4a9a3a88e4b
+    name: dolidock
+    type: application
+    urls:
+    - https://helm-repo.highcanfly.club/dolidock-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 0.1.1
-    created: "2023-04-07T18:18:35.616407+02:00"
+    created: "2023-04-08T11:38:03.294979+02:00"
     description: A Helm chart for Kubernetes
     digest: e3149fc159905a78c4ee546be73bd228e19d6ce0d6c833ff761f0f105380e07d
     name: dolidock
@@ -25,9 +35,9 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-04-07T18:18:35.610519+02:00"
+    created: "2023-04-08T11:38:03.292866+02:00"
     description: A Helm chart for Kubernetes
-    digest: c2073ea0e31c37b180cd700d23545b005f5d8d78cfb2eb6a1af6deb3a80cf329
+    digest: c9bfafdc6c8f2c110abf3cabccabe4f1c719d48667ec4303fda586d52311cfa3
     name: dolidock
     type: application
     urls:
@@ -36,12 +46,12 @@ entries:
   hcfmailer:
   - apiVersion: v2
     appVersion: 2.3.9.9
-    created: "2023-04-07T18:18:35.617636+02:00"
+    created: "2023-04-08T11:38:03.297969+02:00"
     description: An adapted version of Listmonk
-    digest: f2ccc22c72a77d1b9b37acc5011f65beb08c71291638cf252c51e5039d26ecd9
+    digest: 6700c34e844cde9ea9eab37bd84a14f494b9956b4efb26fdcae4a31783b7ec38
     name: hcfmailer
     type: application
     urls:
     - https://helm-repo.highcanfly.club/hcfmailer-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-07T18:18:35.608961+02:00"
+generated: "2023-04-08T11:38:03.290274+02:00"
