@@ -1,3 +1,5 @@
 charts/crontab-ui
 charts/hcfmailer
 charts/dolidock
+charts/index.html.post
+charts/index.html.pre
