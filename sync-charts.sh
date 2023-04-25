@@ -12,5 +12,7 @@ curl -J -L https://github.com/ismogroup/dolidock/archive/HEAD.tar.gz | tar xvz -
 helm package charts/dolidock
 curl -J -L https://github.com/highcanfly-club/cert-manager-webhook-oci/archive/HEAD.tar.gz  | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*deploy*"
 helm package charts/cert-manager-webhook-oci
-mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz repo/
+curl -J -L https://github.com/highcanfly-club/ubuntu-w64build/archive/HEAD.tar.gz  | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/ubuntu-w64build*"
+helm package charts/ubuntu-w64build
+mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz ubuntu-w64build-*.tgz repo/
 helm repo index repo/ --url=https://helm-repo.highcanfly.club

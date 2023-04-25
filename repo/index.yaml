@@ -3,10 +3,10 @@ entries:
   cert-manager-webhook-oci:
   - apiVersion: v1
     appVersion: 1.3.1
-    created: "2023-04-21T11:19:22.796371+02:00"
+    created: "2023-04-25T12:02:33.848198+02:00"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
-    digest: f14dac79b489bc0d6c5ff2868b579c3851cce1f64593d5fe6cba5707115afaa4
+    digest: cb2acea0daced745e0f49c2fd5d22db4d994d01e478ff203eb1f22d8a43fd5ec
     icon: https://www.oracle.com/asset/web/favicons/favicon-32.png
     name: cert-manager-webhook-oci
     urls:
@@ -14,7 +14,7 @@ entries:
     version: 1.3.1
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2023-04-21T11:19:22.795843+02:00"
+    created: "2023-04-25T12:02:33.847768+02:00"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
     digest: 6634e78ad2f43f84a781c5496c292ff19af38739194cbfc3b9d87e1ad95cf77b
@@ -25,7 +25,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: 1.2.0
-    created: "2023-04-21T11:19:22.794107+02:00"
+    created: "2023-04-25T12:02:33.846946+02:00"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
     digest: 368c97cd6f6f7fff4911728035dca14df27bc2dcea873908114ba35ff2cd6920
@@ -37,10 +37,10 @@ entries:
   crontab-ui:
   - apiVersion: v2
     appVersion: 0.3.16.2
-    created: "2023-04-21T11:19:22.796766+02:00"
+    created: "2023-04-25T12:02:33.848561+02:00"
     description: A modified version of https://github.com/alseambusher/crontab-ui
       with Cloud commander
-    digest: 137095c4b3dbdfc5f907111495d4503a4289910be36980c3ac2e720954311415
+    digest: d73b643dae53e96a7329884674cf0901c1daa259a352be136e18fd800bf8318a
     name: crontab-ui
     type: application
     urls:
@@ -49,9 +49,9 @@ entries:
   dolidock:
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2023-04-21T11:19:22.799434+02:00"
+    created: "2023-04-25T12:02:33.852818+02:00"
     description: A Helm chart for Kubernetes
-    digest: 0961967ff96c10edfdb1b684f9880590c3e6fa11872b11eaafbc41b8bcd6123c
+    digest: 4d56ccfcef6f63fd95d88a2cdefe8fd071e95642a38b3e5b0dc2802e44ee2a08
     name: dolidock
     type: application
     urls:
@@ -59,7 +59,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2023-04-21T11:19:22.79857+02:00"
+    created: "2023-04-25T12:02:33.851902+02:00"
     description: A Helm chart for Kubernetes
     digest: e3149fc159905a78c4ee546be73bd228e19d6ce0d6c833ff761f0f105380e07d
     name: dolidock
@@ -69,7 +69,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-04-21T11:19:22.79771+02:00"
+    created: "2023-04-25T12:02:33.850273+02:00"
     description: A Helm chart for Kubernetes
     digest: c9bfafdc6c8f2c110abf3cabccabe4f1c719d48667ec4303fda586d52311cfa3
     name: dolidock
@@ -80,12 +80,23 @@ entries:
   hcfmailer:
   - apiVersion: v2
     appVersion: 2.3.9.9
-    created: "2023-04-21T11:19:22.800281+02:00"
+    created: "2023-04-25T12:02:33.853679+02:00"
     description: An adapted version of Listmonk
-    digest: f97a0b96698cb013ec6398b71c8974161147b7f6c4dd607026c47a599f365be9
+    digest: 7122edecde6cc051b811030d426b465b9a60c151ad3f2794fe30589489033433
     name: hcfmailer
     type: application
     urls:
     - https://helm-repo.highcanfly.club/hcfmailer-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-21T11:19:22.793496+02:00"
+  ubuntu-w64build:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-04-25T12:02:33.854177+02:00"
+    description: A Helm chart for Kubernetes
+    digest: b660a4c85a63e4f3a5d59c979513f73b6788491f0117fee18b2687b069334a75
+    name: ubuntu-w64build
+    type: application
+    urls:
+    - https://helm-repo.highcanfly.club/ubuntu-w64build-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-04-25T12:02:33.845919+02:00"
