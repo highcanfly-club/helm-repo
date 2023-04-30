@@ -14,5 +14,7 @@ curl -J -L https://github.com/highcanfly-club/cert-manager-webhook-oci/archive/H
 helm package charts/cert-manager-webhook-oci
 curl -J -L https://github.com/highcanfly-club/ubuntu-w64build/archive/HEAD.tar.gz  | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/ubuntu-w64build*"
 helm package charts/ubuntu-w64build
-mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz ubuntu-w64build-*.tgz repo/
+curl -J -L https://github.com/highcanfly-club/helm-dashboard/archive/HEAD.tar.gz  | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/helm-dashboard*"
+helm package charts/helm-dashboard
+mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz ubuntu-w64build-*.tgz helm-dashboard-*.tgz repo/
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
