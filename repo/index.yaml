@@ -3,10 +3,10 @@ entries:
   cert-manager-webhook-oci:
   - apiVersion: v1
     appVersion: 1.3.1
-    created: "2023-05-01T08:49:03.883655+02:00"
+    created: "2023-05-01T15:53:59.376317+02:00"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
-    digest: f01a7bf3b43c64e12260891c0649e647b0c392db6d6049b687971c6b46877504
+    digest: 651b6c4e72033914415e04f81518e614078e5cbc74d418de3db300d214be65fd
     icon: https://www.oracle.com/asset/web/favicons/favicon-32.png
     name: cert-manager-webhook-oci
     urls:
@@ -14,7 +14,7 @@ entries:
     version: 1.3.1
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2023-05-01T08:49:03.883122+02:00"
+    created: "2023-05-01T15:53:59.375834+02:00"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
     digest: 6634e78ad2f43f84a781c5496c292ff19af38739194cbfc3b9d87e1ad95cf77b
@@ -25,7 +25,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: 1.2.0
-    created: "2023-05-01T08:49:03.882025+02:00"
+    created: "2023-05-01T15:53:59.375064+02:00"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
     digest: 368c97cd6f6f7fff4911728035dca14df27bc2dcea873908114ba35ff2cd6920
@@ -37,10 +37,10 @@ entries:
   crontab-ui:
   - apiVersion: v2
     appVersion: 0.3.16.2
-    created: "2023-05-01T08:49:03.884109+02:00"
+    created: "2023-05-01T15:53:59.376678+02:00"
     description: A modified version of https://github.com/alseambusher/crontab-ui
       with Cloud commander
-    digest: fd84003362fe49e3dc2fe5c742e41345f5a7a106dff3c4eec831081ae513b055
+    digest: f05a65f7d807dc23e03f9d57b3b8e2911890e9eb8098057c1f0a435938efd9af
     name: crontab-ui
     type: application
     urls:
@@ -49,9 +49,9 @@ entries:
   dolidock:
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2023-05-01T08:49:03.890179+02:00"
+    created: "2023-05-01T15:53:59.38039+02:00"
     description: A Helm chart for Kubernetes
-    digest: 213a63d237758d396fce5502d9fa7589db0075773f991f9c15619e31ddbed4c9
+    digest: c3ed889230c2e7827aba4caa022c1422dc80f24d4e872d4475268466f58d9b6f
     name: dolidock
     type: application
     urls:
@@ -59,7 +59,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2023-05-01T08:49:03.888221+02:00"
+    created: "2023-05-01T15:53:59.379493+02:00"
     description: A Helm chart for Kubernetes
     digest: e3149fc159905a78c4ee546be73bd228e19d6ce0d6c833ff761f0f105380e07d
     name: dolidock
@@ -69,7 +69,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-05-01T08:49:03.886475+02:00"
+    created: "2023-05-01T15:53:59.377837+02:00"
     description: A Helm chart for Kubernetes
     digest: c9bfafdc6c8f2c110abf3cabccabe4f1c719d48667ec4303fda586d52311cfa3
     name: dolidock
@@ -80,20 +80,32 @@ entries:
   hcfmailer:
   - apiVersion: v2
     appVersion: 2.3.9.9
-    created: "2023-05-01T08:49:03.891265+02:00"
+    created: "2023-05-01T15:53:59.381269+02:00"
     description: An adapted version of Listmonk
-    digest: e562fa84c74d2d122275fb65f645d44e89b26858633afdaae5bdd6720bf1241f
+    digest: fa0e2740160c82313b659d58f8e80d44ca8b7c42508327863fa6a53922413acc
     name: hcfmailer
     type: application
     urls:
     - https://helm-repo.highcanfly.club/hcfmailer-1.0.0.tgz
     version: 1.0.0
+  hcfmailerplus:
+  - apiVersion: v2
+    appVersion: v20230501.2
+    created: "2023-05-01T15:53:59.382011+02:00"
+    description: A Helm chart for HighCanFly HCFMailer+
+    digest: 3730b7ff16f64f68ea5500b362ad434b1a51aa43a33b6abc7da8787b14fe2bc7
+    icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
+    name: hcfmailerplus
+    type: application
+    urls:
+    - https://helm-repo.highcanfly.club/hcfmailerplus-0.1.0.tgz
+    version: 0.1.0
   helm-dashboard:
   - apiVersion: v2
     appVersion: 1.3.1a
-    created: "2023-05-01T08:49:03.896182+02:00"
+    created: "2023-05-01T15:53:59.385703+02:00"
     description: A GUI Dashboard for Helm by Komodor
-    digest: dcab819fd14c69d8f805134d8e007dddf8fa71ec4cec7c73787fea43f83ca9e7
+    digest: 339b9a1e003166af79b50b118d1ba893553eb1e8c21c365fb726d0e3e3b123d1
     icon: https://raw.githubusercontent.com/highcanfly-club/helm-dashboard/main/pkg/dashboard/static/logo.svg
     name: helm-dashboard
     type: application
@@ -102,7 +114,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 1.3.1
-    created: "2023-05-01T08:49:03.892961+02:00"
+    created: "2023-05-01T15:53:59.38311+02:00"
     description: A GUI Dashboard for Helm by Komodor
     digest: 045eb618fe71d27ad07e194963040116d188ed871b072ae3a28172f3aaac0ff5
     icon: https://raw.githubusercontent.com/highcanfly-club/helm-dashboard/main/pkg/dashboard/static/logo.svg
@@ -114,9 +126,9 @@ entries:
   ubuntu-w64build:
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2023-05-01T08:49:03.897767+02:00"
+    created: "2023-05-01T15:53:59.387003+02:00"
     description: A Helm chart for Kubernetes
-    digest: a0f825460a988180b12b8fd88c9328be9a823300663e89db06267e575b0f1842
+    digest: fbfa859b5577e3409a56259b7482c20ab0bea42cd1a61ecfee2f78af1f0a6e33
     name: ubuntu-w64build
     type: application
     urls:
@@ -124,7 +136,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-05-01T08:49:03.897165+02:00"
+    created: "2023-05-01T15:53:59.386558+02:00"
     description: A Helm chart for Kubernetes
     digest: b660a4c85a63e4f3a5d59c979513f73b6788491f0117fee18b2687b069334a75
     name: ubuntu-w64build
@@ -132,4 +144,4 @@ entries:
     urls:
     - https://helm-repo.highcanfly.club/ubuntu-w64build-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-01T08:49:03.879332+02:00"
+generated: "2023-05-01T15:53:59.374011+02:00"
