@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ismoerp
+  labels:
+  {{- include "dolidock.labels" . | nindent 4 }}
+spec:
+  rules:
+  - host: {{ required "dolistock.postfixHostname is required" .Values.dolistock.postfixHostname }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: 'dolidock'
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  - host: admin-{{ required "dolistock.postfixHostname is required" .Values.dolistock.postfixHostname }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: 'phpmyadmin'
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  - host: crontabui-{{ required "dolistock.postfixHostname is required" .Values.dolistock.postfixHostname }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: 'crontabui'
+            port:
+              number: 8000
+        path: /
+        pathType: Prefix

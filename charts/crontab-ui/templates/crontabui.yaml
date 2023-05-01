@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "crontab-ui.fullname" . }}-crontabui
+  labels:
+  {{- include "crontab-ui.labels" . | nindent 4 }}
+stringData:
+  crontabui-password: {{ required "crontabui.crontabuiPassword is required" .Values.crontabui.crontabuiPassword
+    | quote }}
+  crontabui-user: {{ required "crontabui.crontabuiUser is required" .Values.crontabui.crontabuiUser
+    | quote }}
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "crontab-ui.fullname" . }}-crontabui
+  labels:
+    io.kompose.service: crontabui
+  {{- include "crontab-ui.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.crontabui.type }}
+  selector:
+    io.kompose.service: crontabui
+  {{- include "crontab-ui.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.crontabui.ports | toYaml | nindent 2 -}}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "crontab-ui.fullname" . }}-crontabui
+  labels:
+  {{- include "crontab-ui.labels" . | nindent 4 }}
+spec:
+  rules:
+  - host: crontabui-eltorio.cloud.okteto.net
+    http:
+      paths:
+      - backend:
+          service:
+            name: '{{ include "crontab-ui.fullname" . }}-crontabui'
+            port:
+              number: 8000
+        path: /
+        pathType: Prefix

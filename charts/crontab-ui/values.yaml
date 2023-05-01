@@ -1,0 +1,21 @@
+crontabui:
+  crontabui:
+    image:
+      repository: highcanfly/crontab-ui
+      tag: latest
+    resources:
+      limits:
+        cpu: 250m
+        memory: "214748364"
+  crontabuiPassword: ""
+  crontabuiUser: ""
+  ports:
+  - name: "8000"
+    port: 8000
+    targetPort: 8000
+  replicas: 1
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local
+pvc:
+  data:
+    storageRequest: 1Gi

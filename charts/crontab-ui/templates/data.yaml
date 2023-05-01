@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "crontab-ui.fullname" . }}-data
+  labels:
+    io.kompose.service: crontabui-data
+  {{- include "crontab-ui.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.pvc.data.storageRequest | quote }}
+  volumeMode: Filesystem

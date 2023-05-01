@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "crontab-ui.fullname" . }}-crontabui
+  labels:
+    io.kompose.service: crontabui
+  {{- include "crontab-ui.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.crontabui.replicas }}
+  selector:
+    matchLabels:
+      io.kompose.service: crontabui
+    {{- include "crontab-ui.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        io.kompose.network/hcf-default: "true"
+        io.kompose.service: crontabui
+      {{- include "crontab-ui.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: BASIC_AUTH_USER
+          valueFrom:
+            secretKeyRef:
+              key: crontabui-user
+              name: {{ include "crontab-ui.fullname" . }}-crontabui
+        - name: BASIC_AUTH_PWD
+          valueFrom:
+            secretKeyRef:
+              key: crontabui-password
+              name: {{ include "crontab-ui.fullname" . }}-crontabui
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ .Values.kubernetesClusterDomain }}
+        image: {{ .Values.crontabui.crontabui.image.repository }}:{{ .Values.crontabui.crontabui.image.tag
+          | default .Chart.AppVersion }}
+        name: crontabui
+        ports:
+        - containerPort: 8000
+        resources: {{- toYaml .Values.crontabui.crontabui.resources | nindent 10 }}
+        securityContext:
+          runAsGroup: 0
+          runAsUser: 0
+        volumeMounts:
+        - mountPath: /opt/cron
+          name: crontabui-data
+      restartPolicy: Always
+      volumes:
+      - name: crontabui-data
+        persistentVolumeClaim:
+          claimName: {{ include "crontab-ui.fullname" . }}-data

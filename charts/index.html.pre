@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>cert-manager-webhook-oci</title>
+  </head>
+  <body>
+    <h1>cert-manager-webhook-oci</h1>
+    <p>
+      This cert-manager webhook allows DNS01 resolution using Oracle Cloud
+      Infrastructure. Please refer to our
+      <a href="https://gitlab.com/dn13/cert-manager-webhook-oci"
+        >code repository</a
+      >
+      for more information on how to set it up.
+    </p>
+    <h2>Helm chart releases</h2>
+    <ul>
