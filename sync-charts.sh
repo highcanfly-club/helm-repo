@@ -18,5 +18,7 @@ curl -J -L https://github.com/highcanfly-club/helm-dashboard/archive/HEAD.tar.gz
 helm package charts/helm-dashboard
 curl -J -L https://github.com/highcanfly-club/hcfmailer-plus/archive/HEAD.tar.gz | tar xvz -C charts --strip 3 $TAR_WILDCARDS "*helm/hcfmailerplus*"
 helm package charts/hcfmailerplus
-mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz ubuntu-w64build-*.tgz helm-dashboard-*.tgz helm hcfmailerplus-*.tgz repo/
+curl -J -L https://github.com/highcanfly-club/easyappointments-k8s/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/easyappointments*"
+helm package charts/easyappointments
+mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz ubuntu-w64build-*.tgz helm-dashboard-*.tgz helm hcfmailerplus-*.tgz easyappointments-*.tgz repo/
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
