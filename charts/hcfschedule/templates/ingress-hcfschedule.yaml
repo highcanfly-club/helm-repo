@@ -1,0 +1,29 @@
+#########################################################################
+# © Ronan LE MEILLAT 2023
+# released under the GPLv3 terms
+#########################################################################
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+      cert-manager.io/cluster-issuer: {{ .Values.ingressHCFSchedule.clusterIssuer }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+  name: hcfschedule-ingress
+spec:
+  ingressClassName: {{ .Values.ingressHCFSchedule.ingressClassName }}
+  rules:
+    - host: {{ .Values.ingressHCFSchedule.host }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: hcfschedule-service
+                port:
+                  number: 8888
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - {{ .Values.ingressHCFSchedule.host }}
+      secretName: hcfschedule-cert

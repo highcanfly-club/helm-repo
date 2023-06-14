@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "hcfschedule.fullname" . }}-test-connection"
+  labels:
+    {{- include "hcfschedule.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "hcfschedule.fullname" . }}:{{ .Values.service.testport }}']
+  restartPolicy: Never

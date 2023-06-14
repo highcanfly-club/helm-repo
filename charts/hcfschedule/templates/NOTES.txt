@@ -1,0 +1,4 @@
+To finish the HCF!Schedule installation you must visit
+       https://{{ .Values.ingressHCFSchedule.host }}
+
+       There you'll define the administrator login
