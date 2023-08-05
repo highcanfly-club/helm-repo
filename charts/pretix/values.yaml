@@ -5,12 +5,19 @@
 masterAdminPassword: admin  # this is the password on the first run for admin@localhost
 replicaCount: 1
 pvcpretix:
+  storage: 512Mi
+postgresql:
   storage: 1Gi
+  postgreuser: pretixuser
+  postgrepass: pretixpass
+  postgredb: pretixdb
+
 image:
   repository: highcanfly/pretix
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
+  startingTime: 60
 
 smtpd:
   cloudflareApiKey: ""
@@ -73,8 +80,9 @@ service:
 
 ingress:
   ingressClassName: nginx
-  host: pretix.cluster.local
-  clusterIssuer: cert-ca-issuer
+  hosts:
+    - host: pretix.cluster.local
+      clusterIssuer: cert-ca-issuer
 
 
 resources: {}

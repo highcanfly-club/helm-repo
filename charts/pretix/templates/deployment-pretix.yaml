@@ -31,8 +31,10 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           env:
+            {{- with (first .Values.ingress.hosts) }}
             - name: PRETIX_HOST
-              value: {{ .Values.ingress.host }}
+              value: {{ .host }}
+            {{- end }}
             - name: MASTER_ADMIN_PASSWORD
               valueFrom:
                   secretKeyRef:
@@ -51,9 +53,9 @@ spec:
           volumeMounts:
             - name: lv-storage
               mountPath: /data
-          {{- if not .Values.DEVMODE }}
+          {{- if .Values.HEALTHCHECK }}
           livenessProbe:
-            initialDelaySeconds: 180
+            initialDelaySeconds: {{ .Values.image.startingTime}}
             httpGet:
               port: 80
               path: /healthcheck/
@@ -61,7 +63,7 @@ spec:
               - name: Host
                 value: {{ .Values.ingress.host }}
           readinessProbe:
-            initialDelaySeconds: 180
+            initialDelaySeconds: {{ .Values.image.startingTime}}
             httpGet:
               port: 80
               path: /healthcheck/
