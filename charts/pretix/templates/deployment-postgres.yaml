@@ -1,3 +1,4 @@
+{{- if eq .Values.databaseBackend "postgres" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,7 +19,7 @@ spec:
         image: postgres:12-bullseye
         ports:
           - name: pgsql-server
-            containerPort: 5432
+            containerPort: {{ .Values.postgresql.port }}
         volumeMounts:
           - name: lv-storage
             mountPath: /var/lib/posgresql
@@ -39,3 +40,4 @@ spec:
         - name: lv-storage
           persistentVolumeClaim:
             claimName: pvc-postgres
+{{- end }}
