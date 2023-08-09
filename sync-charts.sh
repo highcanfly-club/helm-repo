@@ -24,5 +24,7 @@ curl -J -L https://github.com/highcanfly-club/hcfschedule/archive/hcf.tar.gz | t
 helm package charts/hcfschedule
 curl -J -L https://github.com/highcanfly-club/pretix/archive/hcf.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/pretix*"
 helm package charts/pretix
-mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz ubuntu-w64build-*.tgz helm-dashboard-*.tgz helm hcfmailerplus-*.tgz easyappointments-*.tgz hcfschedule-*.tgz pretix-*.tgz repo/
+curl -J -L https://github.com/highcanfly-club/helm-roundecubemail/archive/HEAD.tar.gz | tar xvz -C charts --strip 1 $TAR_WILDCARDS "*roundcube*"
+helm package charts/roundcube
+mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz ubuntu-w64build-*.tgz helm-dashboard-*.tgz helm hcfmailerplus-*.tgz easyappointments-*.tgz hcfschedule-*.tgz pretix-*.tgz roundcube-*.tgz repo/
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
