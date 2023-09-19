@@ -56,6 +56,8 @@ spec:
               value: {{ quote .Values.roundcube.defaultPort }}
             - name: ROUNDCUBEMAIL_SMTP_SERVER
               value: {{ quote .Values.roundcube.smtpServer }}
+            - name: ROUNDCUBEMAIL_SMTP_PORT
+              value: {{quote .Values.roundcube.smtpPort}}
             - name: ROUNDCUBEMAIL_DB_TYPE
               value: {{ quote .Values.roundcube.dbType }}
             - name: ROUNDCUBEMAIL_DB_HOST
@@ -74,6 +76,10 @@ spec:
                       name: roundcube-credentials
             - name: ROUNDCUBEMAIL_DB_NAME
               value: {{ quote .Values.roundcube.dbName }}
+            {{ if .Values.roundcube.smtpUseImapAuth}}
+            - name: ROUNDCUBEMAIL_FORWARD_AUTH
+              value: "1"
+            {{ end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

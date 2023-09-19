@@ -12,11 +12,13 @@ roundcube:
   dbUser: roundcube
   dbPassword: agoodpassword
   dbName: roundcubemail
+  smtpUseImapAuth: false
+  smtpPort: 587
 
 replicaCount: 1
 
 image:
-  repository: roundcube/roundcubemail
+  repository: highcanfly/roundcubemail
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
