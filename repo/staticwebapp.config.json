@@ -2,7 +2,7 @@
     "routes": [
         {
           "route": "/",
-          "rewrite": "/index.yaml"
+          "rewrite": "/index.html"
         }
       ],
     "mimeTypes": {
