@@ -32,4 +32,4 @@ mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz ubuntu-w64
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
 # needs to install repo-html plugin;
 # helm plugin install https://github.com/halkeye/helm-repo-html
-helm repo-html -i repo/index.yaml -o repo/index.html
+helm repo-html -i repo/index.yaml -o repo/index.html -t index.tpl
