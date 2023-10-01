@@ -28,7 +28,21 @@ curl -J -L https://github.com/highcanfly-club/helm-roundecubemail/archive/HEAD.t
 helm package charts/roundcube
 curl -J -L https://github.com/highcanfly-club/hcf-coder/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/hcf-coder*"
 helm package charts/hcf-coder
-mv crontab-ui-*.tgz hcfmailer-*.tgz dolidock-*.tgz cert-manager-*.tgz ubuntu-w64build-*.tgz helm-dashboard-*.tgz helm hcfmailerplus-*.tgz easyappointments-*.tgz hcfschedule-*.tgz pretix-*.tgz roundcube-*.tgz hcf-coder-*.tgz repo/
+curl -J -L https://github.com/highcanfly-club/odoo-bitnami-custom/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/odoo*"
+helm package charts/odoo
+mv crontab-ui-*.tgz \
+        hcfmailer-*.tgz \
+        dolidock-*.tgz \
+        cert-manager-*.tgz \
+        ubuntu-w64build-*.tgz \
+        helm-dashboard-*.tgz \
+        hcfmailerplus-*.tgz \
+        easyappointments-*.tgz \
+        hcfschedule-*.tgz \
+        pretix-*.tgz \
+        roundcube-*.tgz \
+        hcf-coder-*.tgz \
+        odoo-*.tgz repo/
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
 # needs to install repo-html plugin;
 # helm plugin install https://github.com/halkeye/helm-repo-html
