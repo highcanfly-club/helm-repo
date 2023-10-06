@@ -1,0 +1,51 @@
+smtpd:
+  updateStrategy: RollingUpdate # Recreate | RollingUpdate
+  useCloudflareDDNS: "0"
+  useLetsEncrypt: "0"
+  relayHost: ""
+  ports:
+  - name: "25"
+    port: 25
+    targetPort: 25
+  replicas: 1
+  image:
+    repository: highcanfly/smtp-relay
+    tag: latest
+  resources:
+    limits:
+      cpu: 500m
+      memory: "300Mi"
+    requests:
+      cpu: 10m
+      memory: "30Mi"
+  type: ClusterIP
+
+gitea:
+  persistence:
+    size: 2Gi
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+    enabled: true
+    ingressClassName: nginx
+    hostname: odoo.example.org
+    tls: false
+  image:
+    pullPolicy: Always
+  serviceAccount:
+    automountServiceAccountToken: true
+    name: gitea-account
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 500m
+  extraEnvVars:
+    - name: BACKUP_FROM
+      value: "backup-odoo@example.org"
+    - name: BACKUP_TO
+      value: "admin@example.org"
+    - name: FQDN
+      value: odoo.example.org
+  updateStrategy:
+    type: Recreate
+    rollingUpdate: null
