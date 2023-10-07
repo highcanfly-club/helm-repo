@@ -19,7 +19,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 subjects:
 - kind: ServiceAccount
-  name: {{ .Values.gitea.serviceAccount.name }} # "name" is case sensitive
+  name: {{ .Values.odoo.serviceAccount.name }} # "name" is case sensitive
 roleRef:
   kind: Role #this must be Role or ClusterRole
   name: secret-reader 

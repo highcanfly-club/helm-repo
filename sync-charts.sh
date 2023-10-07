@@ -30,6 +30,8 @@ curl -J -L https://github.com/highcanfly-club/hcf-coder/archive/HEAD.tar.gz | ta
 helm package charts/hcf-coder
 curl -J -L https://github.com/highcanfly-club/odoo-bitnami-custom/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/odoo*"
 helm package charts/odoo
+curl -J -L https://github.com/highcanfly-club/gitea-bitnami-custom/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/gitea*"
+helm package charts/gitea
 mv crontab-ui-*.tgz \
         hcfmailer-*.tgz \
         dolidock-*.tgz \
@@ -42,7 +44,9 @@ mv crontab-ui-*.tgz \
         pretix-*.tgz \
         roundcube-*.tgz \
         hcf-coder-*.tgz \
-        odoo-*.tgz repo/
+        odoo-*.tgz \
+        gitea-*.tgz \
+        repo/ 
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
 # needs to install repo-html plugin;
 # helm plugin install https://github.com/halkeye/helm-repo-html
