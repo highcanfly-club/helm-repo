@@ -3,10 +3,10 @@ entries:
   cert-manager-webhook-oci:
   - apiVersion: v1
     appVersion: 1.3.1
-    created: "2023-11-18T12:35:00.38214+01:00"
+    created: "2023-11-27T10:17:58.144809+01:00"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
-    digest: c34f0be693f0424f086aaf04504c33bfcd805b0dc00e242110a78b359772b091
+    digest: 1a9371c673572d22207cbcabcedb67b29d6f7dacc1e1b5de00822338eb036a32
     icon: https://www.oracle.com/asset/web/favicons/favicon-32.png
     name: cert-manager-webhook-oci
     urls:
@@ -14,7 +14,7 @@ entries:
     version: 1.3.1
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2023-11-18T12:35:00.381356+01:00"
+    created: "2023-11-27T10:17:58.144017+01:00"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
     digest: 6634e78ad2f43f84a781c5496c292ff19af38739194cbfc3b9d87e1ad95cf77b
@@ -25,7 +25,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: 1.2.0
-    created: "2023-11-18T12:35:00.380558+01:00"
+    created: "2023-11-27T10:17:58.143366+01:00"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
     digest: 368c97cd6f6f7fff4911728035dca14df27bc2dcea873908114ba35ff2cd6920
@@ -37,10 +37,10 @@ entries:
   crontab-ui:
   - apiVersion: v2
     appVersion: 0.3.16.2
-    created: "2023-11-18T12:35:00.382883+01:00"
+    created: "2023-11-27T10:17:58.145512+01:00"
     description: A modified version of https://github.com/alseambusher/crontab-ui
       with Cloud commander
-    digest: 5bdcab9904281eedc83921abbe0b530847de1d5070583700bacd710a8eb74e6a
+    digest: 135efb85e4a998049b9a880f43dcde0306430fd20e6fff9454b8738facf64c86
     name: crontab-ui
     type: application
     urls:
@@ -49,9 +49,9 @@ entries:
   dolidock:
   - apiVersion: v2
     appVersion: 18.0.2.1
-    created: "2023-11-18T12:35:00.398398+01:00"
+    created: "2023-11-27T10:17:58.161138+01:00"
     description: A Helm chart for deploying a full Dolibarr stack
-    digest: edaefc2a948c764d45cc8b6d487ddb193219fd082242136226a9013f0b687c64
+    digest: 3f2d514b9c5365ef043ed78b9f12a2713ac11f8764bd57067591062aec1b9f3a
     name: dolidock
     type: application
     urls:
@@ -59,7 +59,7 @@ entries:
     version: 0.9.13
   - apiVersion: v2
     appVersion: 18.0.1.11
-    created: "2023-11-18T12:35:00.395487+01:00"
+    created: "2023-11-27T10:17:58.159172+01:00"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 631856cc4dd9bf9874f61fa0ec7966f086c18b22eedb1764f8e700f3d82b5835
     name: dolidock
@@ -69,7 +69,7 @@ entries:
     version: 0.9.12
   - apiVersion: v2
     appVersion: 18.0.1.10
-    created: "2023-11-18T12:35:00.393614+01:00"
+    created: "2023-11-27T10:17:58.157078+01:00"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: be811a6e8ea47a7157bc07a845832dfd506f42828e878e35890bcb981111d715
     name: dolidock
@@ -79,7 +79,7 @@ entries:
     version: 0.9.11
   - apiVersion: v2
     appVersion: 18.0.1.10
-    created: "2023-11-18T12:35:00.392104+01:00"
+    created: "2023-11-27T10:17:58.155401+01:00"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 53e473aff06ebe817c233771c985acfa366fcb4c49e034754b146293a5c83b67
     name: dolidock
@@ -89,7 +89,7 @@ entries:
     version: 0.9.10
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2023-11-18T12:35:00.409118+01:00"
+    created: "2023-11-27T10:17:58.175452+01:00"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 812a5fa0423717f8c56faf7f1f6d1046b4bd9b8ba1ef849808b9708a3c5e31a0
     name: dolidock
@@ -99,7 +99,7 @@ entries:
     version: 0.9.9
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2023-11-18T12:35:00.407828+01:00"
+    created: "2023-11-27T10:17:58.174008+01:00"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 63ff45407aa534ab8a4d179f6d1acfe30f1ab8626cd58073eb996853a9f35d7b
     name: dolidock
@@ -109,7 +109,7 @@ entries:
     version: 0.9.8
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2023-11-18T12:35:00.406586+01:00"
+    created: "2023-11-27T10:17:58.172563+01:00"
     description: A Helm chart for Kubernetes
     digest: 73f073a955c29f9ec6bf3023b0e556f53ad2200a44484f08e9ef4c88bba1c719
     name: dolidock
@@ -119,7 +119,7 @@ entries:
     version: 0.9.7
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2023-11-18T12:35:00.40527+01:00"
+    created: "2023-11-27T10:17:58.171094+01:00"
     description: A Helm chart for Kubernetes
     digest: 4c43c3dc067fac2321b10d8a44a41c4b9c3b303838ec2aa545f8ba9e915f09aa
     name: dolidock
@@ -129,7 +129,7 @@ entries:
     version: 0.9.6
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2023-11-18T12:35:00.404067+01:00"
+    created: "2023-11-27T10:17:58.169542+01:00"
     description: A Helm chart for Kubernetes
     digest: 1ef397d6decf83bc70a4984879754db4f3f38a38025f8cc0107a827764f7e48b
     name: dolidock
@@ -139,7 +139,7 @@ entries:
     version: 0.9.5
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2023-11-18T12:35:00.402513+01:00"
+    created: "2023-11-27T10:17:58.167314+01:00"
     description: A Helm chart for Kubernetes
     digest: 91be13b19a6ee319c32758e0899ba61accac93211e4ab57143708f1fc726fb7d
     name: dolidock
@@ -149,7 +149,7 @@ entries:
     version: 0.9.4
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2023-11-18T12:35:00.401151+01:00"
+    created: "2023-11-27T10:17:58.165868+01:00"
     description: A Helm chart for Kubernetes
     digest: 86a66f3d6a68adc9ce6b748518ab14dce5a6d43b5f93589f67b2a00c5ef6ac2f
     name: dolidock
@@ -159,7 +159,7 @@ entries:
     version: 0.9.3
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2023-11-18T12:35:00.399772+01:00"
+    created: "2023-11-27T10:17:58.164453+01:00"
     description: A Helm chart for Kubernetes
     digest: 2da381f19d967cb0fb73e61db3c5cbc3f655e891dd2e4e8911e3be933e24e364
     name: dolidock
@@ -169,7 +169,7 @@ entries:
     version: 0.9.2
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2023-11-18T12:35:00.390689+01:00"
+    created: "2023-11-27T10:17:58.153924+01:00"
     description: A Helm chart for Kubernetes
     digest: 723bb70e86e3de5519898cd8b5fe04e00c9c60744103f9d7ec0042f513fc4b0f
     name: dolidock
@@ -179,7 +179,7 @@ entries:
     version: 0.9.1
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2023-11-18T12:35:00.389275+01:00"
+    created: "2023-11-27T10:17:58.152328+01:00"
     description: A Helm chart for Kubernetes
     digest: 9b6799ce0c5e47d88f30b3b93d7adc0f89536994227eb1f75feeb94586e54ab3
     name: dolidock
@@ -189,7 +189,7 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2023-11-18T12:35:00.387864+01:00"
+    created: "2023-11-27T10:17:58.150665+01:00"
     description: A Helm chart for Kubernetes
     digest: a03d9fc5d6a9bcf7deb0b4a52ea3945a2d849209df11980e36adb24275c1a909
     name: dolidock
@@ -199,7 +199,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2023-11-18T12:35:00.386005+01:00"
+    created: "2023-11-27T10:17:58.148614+01:00"
     description: A Helm chart for Kubernetes
     digest: e3149fc159905a78c4ee546be73bd228e19d6ce0d6c833ff761f0f105380e07d
     name: dolidock
@@ -209,7 +209,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-11-18T12:35:00.384695+01:00"
+    created: "2023-11-27T10:17:58.1473+01:00"
     description: A Helm chart for Kubernetes
     digest: c9bfafdc6c8f2c110abf3cabccabe4f1c719d48667ec4303fda586d52311cfa3
     name: dolidock
@@ -220,9 +220,9 @@ entries:
   easyappointments:
   - apiVersion: v2
     appVersion: 1.5.0-dev.3
-    created: "2023-11-18T12:35:00.411213+01:00"
+    created: "2023-11-27T10:17:58.177963+01:00"
     description: A Helm chart for deploying Easyappointments on Kubernetes
-    digest: 088e795e358e548f8ef60c25b208e3042c6d662ad7f31b54dbac9ccd4e2dbd5e
+    digest: daf07020c2fcdd552865ab88e525c94482fa1aa514b2499840a28b30f5af6258
     name: easyappointments
     type: application
     urls:
@@ -230,7 +230,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.5.0-dev.3
-    created: "2023-11-18T12:35:00.409695+01:00"
+    created: "2023-11-27T10:17:58.176208+01:00"
     description: A Helm chart for deploying Easyappointments on Kubernetes
     digest: dc2e8929c448181b8d3d6892ab3b31783ed0b3c4712906b9bed4de48ab45749b
     name: easyappointments
@@ -241,7 +241,7 @@ entries:
   gitea:
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2023-11-18T12:35:00.581443+01:00"
+    created: "2023-11-27T10:17:58.39892+01:00"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -250,7 +250,7 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 18.2.0
     description: A Helm chart for deploying Gitea for Highcanfly
-    digest: 73bae8f6a69422c0476c3b4ce38b6cc8bcdf685b1e3e17a612edec0b0e65ba88
+    digest: 4a59627a7f072bf0b2d34179fcc9a4cce0fe37f66894366d15998879970ddf8e
     name: gitea
     sources:
     - https://github.com/highcanfly-club/helm-repo/tree/main/charts/gitea
@@ -260,7 +260,7 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2023-11-18T12:35:00.558976+01:00"
+    created: "2023-11-27T10:17:58.369863+01:00"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -279,7 +279,7 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2023-11-18T12:35:00.535608+01:00"
+    created: "2023-11-27T10:17:58.336576+01:00"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -298,7 +298,7 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2023-11-18T12:35:00.512653+01:00"
+    created: "2023-11-27T10:17:58.305063+01:00"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -317,7 +317,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2023-11-18T12:35:00.488187+01:00"
+    created: "2023-11-27T10:17:58.274562+01:00"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -336,7 +336,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2023-11-18T12:35:00.464374+01:00"
+    created: "2023-11-27T10:17:58.243008+01:00"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -355,7 +355,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2023-11-18T12:35:00.438227+01:00"
+    created: "2023-11-27T10:17:58.207373+01:00"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -374,7 +374,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2023-11-18T12:35:00.422034+01:00"
+    created: "2023-11-27T10:17:58.189453+01:00"
     dependencies:
     - name: gitea
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -390,10 +390,20 @@ entries:
     version: 0.1.0
   hcf-coder:
   - apiVersion: v2
-    appVersion: 1.5.3
-    created: "2023-11-18T12:35:00.586657+01:00"
+    appVersion: 1.5.7
+    created: "2023-11-27T10:17:58.407029+01:00"
     description: A Helm chart for deploying hcf-coder on Kubernetes
-    digest: 9f3ba4fa3ca2f34f8c555a4b4babfada09d006b8d2117c3aa67763b06747212d
+    digest: 4ad2289b90c48b10e0a59fca8b61b3200a33c238db5cb4129d567dfdbcba870f
+    name: hcf-coder
+    type: application
+    urls:
+    - https://helm-repo.highcanfly.club/hcf-coder-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
+    appVersion: 1.5.3
+    created: "2023-11-27T10:17:58.406456+01:00"
+    description: A Helm chart for deploying hcf-coder on Kubernetes
+    digest: 47fa886d142682651dd7e159f1492ab4be1fbe37575ca1c7e4399f2e80dcf589
     name: hcf-coder
     type: application
     urls:
@@ -401,7 +411,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2023-11-18T12:35:00.586202+01:00"
+    created: "2023-11-27T10:17:58.405084+01:00"
     description: A Helm chart for Kubernetes
     digest: e2039064b07a4d912e6c9a0d6ca82c5c0c0a51988761d75f92623e415d368926
     name: hcf-coder
@@ -411,7 +421,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2023-11-18T12:35:00.585313+01:00"
+    created: "2023-11-27T10:17:58.404113+01:00"
     description: A Helm chart for Kubernetes
     digest: e4f322e0f1040910bd6f5d46a5c2c4d574bde8cd96ab87e78de0102ddbd1b360
     name: hcf-coder
@@ -421,7 +431,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2023-11-18T12:35:00.583784+01:00"
+    created: "2023-11-27T10:17:58.402512+01:00"
     description: A Helm chart for Kubernetes
     digest: d41101f911c04877d6b018128444e78841085f1ccdf102e7e71126f442c2cee5
     name: hcf-coder
@@ -431,7 +441,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2023-11-18T12:35:00.582986+01:00"
+    created: "2023-11-27T10:17:58.401551+01:00"
     description: A Helm chart for Kubernetes
     digest: 117060bbf4ee3ce1b41cc28749b3258a12920ff472bc39cf9eff46670f03a951
     name: hcf-coder
@@ -441,7 +451,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2023-11-18T12:35:00.58222+01:00"
+    created: "2023-11-27T10:17:58.400614+01:00"
     description: A Helm chart for Kubernetes
     digest: 3496d9795d0eba973fdc8d405b06c71ae9056234887a5626fe8345e77cc89eb8
     name: hcf-coder
@@ -452,9 +462,9 @@ entries:
   hcfmailer:
   - apiVersion: v2
     appVersion: 2.3.9.9
-    created: "2023-11-18T12:35:00.588477+01:00"
+    created: "2023-11-27T10:17:58.409141+01:00"
     description: An adapted version of Listmonk
-    digest: eec71c1aec094e5a03244e9c2aa73801ed596cd72ae5592b6f0ae03f81e82788
+    digest: 9e0b44c7496b8532a4ed82db7c6c3f715e7c9e3275a6e949e8f2fa34b19d1aa7
     name: hcfmailer
     type: application
     urls:
@@ -463,9 +473,9 @@ entries:
   hcfmailerplus:
   - apiVersion: v2
     appVersion: v20230910.1
-    created: "2023-11-18T12:35:00.593515+01:00"
+    created: "2023-11-27T10:17:58.413666+01:00"
     description: A Helm chart for HighCanFly HCFMailer+
-    digest: 6cfe09c4de03356faebeb182e024b150466180c6cab982e2b6d7e62d9b0bf5f0
+    digest: 5fce3e32692959b98feffc9d5c687be0928c08eb476ecee77c14e47b8d85d3a7
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
     name: hcfmailerplus
     type: application
@@ -474,7 +484,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: v20230511.1
-    created: "2023-11-18T12:35:00.591763+01:00"
+    created: "2023-11-27T10:17:58.412318+01:00"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: 12ea58315df8bc8a4eae6e46adc0b456cb95be833f2d4ba0128fd5ccfd814771
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -485,7 +495,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: v20230509.3
-    created: "2023-11-18T12:35:00.590663+01:00"
+    created: "2023-11-27T10:17:58.41123+01:00"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: 81774bf7b92c85d4a506c1cd7d65ef12adebb3a2fb9a7627a03b375310a40d44
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -496,7 +506,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: v20230501.2
-    created: "2023-11-18T12:35:00.589546+01:00"
+    created: "2023-11-27T10:17:58.410173+01:00"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: b2161df2974afe426eea69889817cb9a6710727bf120c5ec7250ad4eaae86130
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -508,9 +518,9 @@ entries:
   hcfschedule:
   - apiVersion: v2
     appVersion: 1.5.0-dev.3
-    created: "2023-11-18T12:35:00.595231+01:00"
+    created: "2023-11-27T10:17:58.415329+01:00"
     description: A Helm chart for deploying HCF!Shedule on Kubernetes
-    digest: 4fd7c0a9dea8aa4de74ed6150a73c429b470a66d4d58626ad3b6ef494069ca1a
+    digest: a8b33279062afb6545c59e9785acc4e32465055eca512116b4466c201b50f8f2
     name: hcfschedule
     type: application
     urls:
@@ -519,9 +529,9 @@ entries:
   helm-dashboard:
   - apiVersion: v2
     appVersion: 1.3.1a
-    created: "2023-11-18T12:35:00.598078+01:00"
+    created: "2023-11-27T10:17:58.418022+01:00"
     description: A GUI Dashboard for Helm by Komodor
-    digest: 2754ced17b0f02fb5667894e2ca9a514beb5b854e1ae6c6dd9120d753250210b
+    digest: 67cf90a89afa07ff09cddfcd64612e6c977ec55dabb56c600057b4899d921ce6
     icon: https://raw.githubusercontent.com/highcanfly-club/helm-dashboard/main/pkg/dashboard/static/logo.svg
     name: helm-dashboard
     type: application
@@ -530,7 +540,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 1.3.1
-    created: "2023-11-18T12:35:00.596357+01:00"
+    created: "2023-11-27T10:17:58.416328+01:00"
     description: A GUI Dashboard for Helm by Komodor
     digest: 045eb618fe71d27ad07e194963040116d188ed871b072ae3a28172f3aaac0ff5
     icon: https://raw.githubusercontent.com/highcanfly-club/helm-dashboard/main/pkg/dashboard/static/logo.svg
@@ -542,13 +552,13 @@ entries:
   minio:
   - apiVersion: v2
     appVersion: v2.47.2
-    created: "2023-11-18T12:35:00.604568+01:00"
+    created: "2023-11-27T10:17:58.424109+01:00"
     dependencies:
     - name: minio
       repository: https://charts.min.io/
       version: 5.0.14
     description: A Helm chart for Kubernetes
-    digest: ff81ad896c71ccab8408e99c3d7cebdb7cae594519bc974c15ae45aa1b670a86
+    digest: 80df1bc2fc1e7c8810c32426f005d80b5fce5d08c7a120b738d60e8611c3fbb3
     name: minio
     sources:
     - https://github.com/eltorio/minio-prometheus-chart.git
@@ -558,7 +568,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: v2.47.2
-    created: "2023-11-18T12:35:00.602018+01:00"
+    created: "2023-11-27T10:17:58.42183+01:00"
     dependencies:
     - name: minio
       repository: https://charts.min.io/
@@ -575,13 +585,13 @@ entries:
   odoo:
   - apiVersion: v2
     appVersion: 16.0.0.17
-    created: "2023-11-18T12:35:00.676763+01:00"
+    created: "2023-11-27T10:17:58.505139+01:00"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
       version: 24.0.5
     description: A Helm chart for deploying Odoo
-    digest: a962d685336df288805e22ec9e15a37147db35c6372a8505d96e9f80978a20a4
+    digest: cb1b5f23d660543ce6ec7a6e9f08bc6db76e43b24742010d6f8f1df5f108ba1b
     name: odoo
     type: application
     urls:
@@ -589,7 +599,7 @@ entries:
     version: 0.3.2
   - apiVersion: v2
     appVersion: 16.0.0.13
-    created: "2023-11-18T12:35:00.663655+01:00"
+    created: "2023-11-27T10:17:58.488959+01:00"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -603,7 +613,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: 16.0.0.13
-    created: "2023-11-18T12:35:00.647342+01:00"
+    created: "2023-11-27T10:17:58.470885+01:00"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -617,7 +627,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 16.0.0.13
-    created: "2023-11-18T12:35:00.631134+01:00"
+    created: "2023-11-27T10:17:58.452862+01:00"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -631,7 +641,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 16.0.0.1
-    created: "2023-11-18T12:35:00.61427+01:00"
+    created: "2023-11-27T10:17:58.43413+01:00"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -646,9 +656,9 @@ entries:
   pretix:
   - apiVersion: v2
     appVersion: 4.21.21
-    created: "2023-11-18T12:35:00.682586+01:00"
+    created: "2023-11-27T10:17:58.512499+01:00"
     description: A Helm chart for deploying Pretix on Kubernetes
-    digest: c22c4ea7392f841331b015095732ab2f73b7e68c1debd52783f9838f45f5e41e
+    digest: 98d4e544b696d670b53fe8d80bfc2c8b6c26e7f33fa3418806d4d5336005e4cd
     name: pretix
     type: application
     urls:
@@ -656,7 +666,7 @@ entries:
     version: 0.3.5
   - apiVersion: v2
     appVersion: 4.21.21
-    created: "2023-11-18T12:35:00.681479+01:00"
+    created: "2023-11-27T10:17:58.511082+01:00"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: 0b9f9c1fdc8e86f400a720b3b798c23b5b81e42c3f0da145483f8ff43f6efd96
     name: pretix
@@ -666,7 +676,7 @@ entries:
     version: 0.3.4
   - apiVersion: v2
     appVersion: 4.21.21
-    created: "2023-11-18T12:35:00.680577+01:00"
+    created: "2023-11-27T10:17:58.510048+01:00"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: af0484cc485293dc9aa9e5b236379a62726d7445b32d4db1fd86d9d42293a4b4
     name: pretix
@@ -676,7 +686,7 @@ entries:
     version: 0.3.3
   - apiVersion: v2
     appVersion: 4.21.21
-    created: "2023-11-18T12:35:00.679632+01:00"
+    created: "2023-11-27T10:17:58.508985+01:00"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: ad7880ae3c9b105e3dfed5d564a96bb6dd094dd378af2ce25489734828c801c4
     name: pretix
@@ -686,7 +696,7 @@ entries:
     version: 0.3.2
   - apiVersion: v2
     appVersion: 4.21.19
-    created: "2023-11-18T12:35:00.678766+01:00"
+    created: "2023-11-27T10:17:58.507783+01:00"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: 1ca68b1c334076fe4bcb3ed5eff06e8121140f7cddf1c93524f44dbf66433a24
     name: pretix
@@ -696,7 +706,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 4.21.0
-    created: "2023-11-18T12:35:00.677867+01:00"
+    created: "2023-11-27T10:17:58.506651+01:00"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: 1f6356abe30774658a165c692333198acc07125158a11080b5cb716786378cbf
     name: pretix
@@ -707,9 +717,9 @@ entries:
   roundcube:
   - apiVersion: v2
     appVersion: 1.6.2
-    created: "2023-11-18T12:35:00.684475+01:00"
+    created: "2023-11-27T10:17:58.514721+01:00"
     description: Our Helm chart for our roundcube needs
-    digest: aec8193101223f7309d0f4d9fc0f6f55187ae43c77dc31cd13fefffdd085167e
+    digest: 54375181faf2346cfecbcf103a124dcbf3e59989fcfcf10aca2d8c56ad884e1f
     name: roundcube
     type: application
     urls:
@@ -717,7 +727,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.6.2-apache
-    created: "2023-11-18T12:35:00.683274+01:00"
+    created: "2023-11-27T10:17:58.513413+01:00"
     description: Our Helm chart for our roundcube needs
     digest: dfe969a4f44099d88734ce5aecdb7a1b115c9949e663a632b78d89e533eaf987
     name: roundcube
@@ -728,9 +738,9 @@ entries:
   ubuntu-w64build:
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2023-11-18T12:35:00.685642+01:00"
+    created: "2023-11-27T10:17:58.516164+01:00"
     description: A Helm chart for Kubernetes
-    digest: a50f517b27bba477314d88fa829d937e114ecf4318f134d1682ec8583ecbbabd
+    digest: 814c8abd49da8370a86defea23c9e52096b26c7af3e0b967a618bee8ca60f22a
     name: ubuntu-w64build
     type: application
     urls:
@@ -738,7 +748,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-11-18T12:35:00.684982+01:00"
+    created: "2023-11-27T10:17:58.51538+01:00"
     description: A Helm chart for Kubernetes
     digest: b660a4c85a63e4f3a5d59c979513f73b6788491f0117fee18b2687b069334a75
     name: ubuntu-w64build
@@ -746,4 +756,4 @@ entries:
     urls:
     - https://helm-repo.highcanfly.club/ubuntu-w64build-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-18T12:35:00.379511+01:00"
+generated: "2023-11-27T10:17:58.141362+01:00"
