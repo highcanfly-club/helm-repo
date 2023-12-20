@@ -51,7 +51,7 @@ mv crontab-ui-*.tgz \
         odoo-*.tgz \
         gitea-*.tgz \
         minio-*.tgz \
-        whois-rest-* \
+        whois-rest*.tgz \
         repo/ 
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
 # needs to install repo-html plugin;
