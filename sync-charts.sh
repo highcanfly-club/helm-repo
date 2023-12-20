@@ -34,6 +34,8 @@ curl -J -L https://github.com/highcanfly-club/gitea-bitnami-custom/archive/HEAD.
 helm package charts/gitea
 curl -J -L https://github.com/eltorio/minio-prometheus-chart/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/minio*"
 helm package charts/minio
+curl -J -L https://github.com/eltorio/whois-rest/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/whois-rest*"
+helm package charts/whois-rest
 mv crontab-ui-*.tgz \
         hcfmailer-*.tgz \
         dolidock-*.tgz \
@@ -49,6 +51,7 @@ mv crontab-ui-*.tgz \
         odoo-*.tgz \
         gitea-*.tgz \
         minio-*.tgz \
+        whois-rest-* \
         repo/ 
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
 # needs to install repo-html plugin;
