@@ -177,3 +177,32 @@ cloudflared:
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""
+
+getlaserfile:
+  image:
+    repository: "eltorio/getlaserfile"
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 80
+  enabled: false
+  autoscaling: 
+    enabled: false
+  probe:
+    enabled: true
+  config: |
+        paths:
+        - repolocation: "/repo1"
+          url: "/url1"
+          path: "/path1"
+        - repolocation: "/repo2"
+          url: "/url2"
+          path: "/path2"
+  ingress:
+    enabled: true
+    hosts:
+    - host: distrib.chart-example.local
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+    tls: [] 
