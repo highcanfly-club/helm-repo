@@ -24,6 +24,7 @@ else
         get_repo "highcanfly-club/cert-manager-webhook-oci" "cert-manager-webhook-oci" 2
         get_repo "highcanfly-club/ubuntu-w64build" "helm/ubuntu-w64build" 2
         get_repo "highcanfly-club/helm-dashboard" "helm/helm-dashboard" 2
+        get_repo "highcanfly-club/hcfmailer" "helm/hcfmailer" 3
         get_repo "highcanfly-club/hcfmailer-plus" "helm/hcfmailerplus" 3
         get_repo "highcanfly-club/easyappointments-k8s" "helm/easyappointments" 2
         get_repo "highcanfly-club/hcfschedule" "helm/hcfschedule" 2
