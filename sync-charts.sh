@@ -12,8 +12,8 @@ get_repo() {
     _name=$(basename $path)
     echo $_name
     curl -J -L  https://github.com/${repo}/archive/HEAD.tar.gz | tar xvz -C charts --strip ${strip} $TAR_WILDCARDS "*${path}*"
-#     helm package charts/${_name}
-#     mv ${_name}-*.tgz repo/
+    helm package charts/${_name}
+    mv ${_name}-*.tgz repo/
 }
 
 if [[ -n $1 && -n $2 && -n $3 ]]; then
