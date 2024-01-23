@@ -36,21 +36,25 @@ curl -J -L https://github.com/eltorio/minio-prometheus-chart/archive/HEAD.tar.gz
 helm package charts/minio
 curl -J -L https://github.com/eltorio/whois-rest/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/whois-rest*"
 helm package charts/whois-rest
-mv crontab-ui-*.tgz \
-        hcfmailer-*.tgz \
-        dolidock-*.tgz \
+curl -J -L https://github.com/highcanfly-club/docker-smtp-relay/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/flex-smtpd*"
+helm package charts/flex-smtpd
+mv \
         cert-manager-*.tgz \
-        ubuntu-w64build-*.tgz \
-        helm-dashboard-*.tgz \
-        hcfmailerplus-*.tgz \
+        crontab-ui-*.tgz \
+        dolidock-*.tgz \
         easyappointments-*.tgz \
+        flex-smtpd-*.tgz \
+        gitea-*.tgz \
+        hcf-coder-*.tgz \
+        hcfmailer-*.tgz \
+        hcfmailerplus-*.tgz \
         hcfschedule-*.tgz \
+        helm-dashboard-*.tgz \
+        minio-*.tgz \
+        odoo-*.tgz \
         pretix-*.tgz \
         roundcube-*.tgz \
-        hcf-coder-*.tgz \
-        odoo-*.tgz \
-        gitea-*.tgz \
-        minio-*.tgz \
+        ubuntu-w64build-*.tgz \
         whois-rest*.tgz \
         repo/ 
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
