@@ -4,59 +4,36 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
         TAR_WILDCARDS="--wildcards"
 fi
-curl -J -L  https://github.com/highcanfly-club/crontab-ui/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/crontab-ui*" 
-helm package charts/crontab-ui
-curl -J -L  https://github.com/highcanfly-club/hcfmailer/archive/HEAD.tar.gz | tar xvz -C charts --strip 3 $TAR_WILDCARDS "*helm/hcfmailer*"
-helm package charts/hcfmailer
-curl -J -L https://github.com/ismogroup/dolidock/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/dolidock*"
-helm package charts/dolidock
-curl -J -L https://github.com/highcanfly-club/cert-manager-webhook-oci/archive/HEAD.tar.gz  | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*deploy*"
-helm package charts/cert-manager-webhook-oci
-curl -J -L https://github.com/highcanfly-club/ubuntu-w64build/archive/HEAD.tar.gz  | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/ubuntu-w64build*"
-helm package charts/ubuntu-w64build
-curl -J -L https://github.com/highcanfly-club/helm-dashboard/archive/HEAD.tar.gz  | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/helm-dashboard*"
-helm package charts/helm-dashboard
-curl -J -L https://github.com/highcanfly-club/hcfmailer-plus/archive/HEAD.tar.gz | tar xvz -C charts --strip 3 $TAR_WILDCARDS "*helm/hcfmailerplus*"
-helm package charts/hcfmailerplus
-curl -J -L https://github.com/highcanfly-club/easyappointments-k8s/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/easyappointments*"
-helm package charts/easyappointments
-curl -J -L https://github.com/highcanfly-club/hcfschedule/archive/hcf.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/hcfschedule*"
-helm package charts/hcfschedule
-curl -J -L https://github.com/highcanfly-club/pretix/archive/hcf.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/pretix*"
-helm package charts/pretix
-curl -J -L https://github.com/highcanfly-club/helm-roundecubemail/archive/HEAD.tar.gz | tar xvz -C charts --strip 1 $TAR_WILDCARDS "*roundcube*"
-helm package charts/roundcube
-curl -J -L https://github.com/highcanfly-club/hcf-coder/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/hcf-coder*"
-helm package charts/hcf-coder
-curl -J -L https://github.com/highcanfly-club/odoo-bitnami-custom/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/odoo*"
-helm package charts/odoo
-curl -J -L https://github.com/highcanfly-club/gitea-bitnami-custom/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/gitea*"
-helm package charts/gitea
-curl -J -L https://github.com/eltorio/minio-prometheus-chart/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/minio*"
-helm package charts/minio
-curl -J -L https://github.com/eltorio/whois-rest/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/whois-rest*"
-helm package charts/whois-rest
-curl -J -L https://github.com/highcanfly-club/docker-smtp-relay/archive/HEAD.tar.gz | tar xvz -C charts --strip 2 $TAR_WILDCARDS "*helm/flex-smtpd*"
-helm package charts/flex-smtpd
-mv \
-        cert-manager-*.tgz \
-        crontab-ui-*.tgz \
-        dolidock-*.tgz \
-        easyappointments-*.tgz \
-        flex-smtpd-*.tgz \
-        gitea-*.tgz \
-        hcf-coder-*.tgz \
-        hcfmailer-*.tgz \
-        hcfmailerplus-*.tgz \
-        hcfschedule-*.tgz \
-        helm-dashboard-*.tgz \
-        minio-*.tgz \
-        odoo-*.tgz \
-        pretix-*.tgz \
-        roundcube-*.tgz \
-        ubuntu-w64build-*.tgz \
-        whois-rest*.tgz \
-        repo/ 
+
+get_repo() {
+    repo=$1
+    name=$2
+    strip=$3
+    curl -J -L  https://github.com/${repo}/archive/HEAD.tar.gz | tar xvz -C charts --strip ${strip} $TAR_WILDCARDS "*${name}*"
+    helm package charts/${name}
+    mv ${name}-*.tgz repo/
+}
+
+if [[ -n $1 && -n $2 && -n $3 ]]; then
+        get_repo $1 $2 $3
+else
+        get_repo "highcanfly-club/crontab-ui" "crontab-ui" 3
+        get_repo "ismogroup/dolidock" "dolidock" 2
+        get_repo "highcanfly-club/cert-manager-webhook-oci" "cert-manager-webhook-oci" 2
+        get_repo "highcanfly-club/ubuntu-w64build" "ubuntu-w64build" 2
+        get_repo "highcanfly-club/helm-dashboard" "helm-dashboard" 2
+        get_repo "highcanfly-club/hcfmailer-plus" "hcfmailerplus" 3
+        get_repo "highcanfly-club/easyappointments-k8s" "easyappointments" 2
+        get_repo "highcanfly-club/hcfschedule" "hcfschedule" 2
+        get_repo "highcanfly-club/pretix" "pretix" 2
+        get_repo "highcanfly-club/helm-roundecubemail" "roundcube" 1
+        get_repo "highcanfly-club/hcf-coder" "hcf-coder" 2
+        get_repo "highcanfly-club/odoo-bitnami-custom" "odoo" 2
+        get_repo "highcanfly-club/gitea-bitnami-custom" "gitea" 2
+        get_repo "eltorio/minio-prometheus-chart" "minio" 2
+        get_repo "eltorio/whois-rest" "whois-rest" 2
+        get_repo "highcanfly-club/docker-smtp-relay" "flex-smtpd" 2
+fi
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
 # needs to install repo-html plugin;
 # helm plugin install https://github.com/halkeye/helm-repo-html
