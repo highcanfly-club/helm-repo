@@ -5,6 +5,7 @@ else
         TAR_WILDCARDS="--wildcards"
 fi
 
+
 get_repo() {
     repo=$1
     path=$2
@@ -15,6 +16,9 @@ get_repo() {
     helm package charts/${_name}
     mv ${_name}-*.tgz repo/
 }
+
+# clean up before sync
+find charts -mindepth 1 -type d -exec rm -rf {} +
 
 if [[ -n $1 && -n $2 && -n $3 ]]; then
         get_repo $1 $2 $3
