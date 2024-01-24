@@ -12,7 +12,6 @@ jobs:
           submodules: true
       - name: synchronize
         run: |
-          find charts -mindepth 1 -type d -exec rm -rf {} +
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
           helm plugin install https://github.com/halkeye/helm-repo-html
           ./sync-charts.sh
@@ -27,3 +26,9 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/repo" # App source code path
           ###### End of Repository/Build Configurations ######
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'Auto commit'
+          git config --global user.email 'action@highcanfly.club'
+          git add repo charts
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update repo and charts directories"; git push)
