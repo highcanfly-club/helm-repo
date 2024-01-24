@@ -12,6 +12,7 @@ jobs:
           submodules: true
       - name: synchronize
         run: |
+          find charts -mindepth 1 -type d -exec rm -rf {} +
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
           helm plugin install https://github.com/halkeye/helm-repo-html
           ./sync-charts.sh
