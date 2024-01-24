@@ -31,4 +31,4 @@ jobs:
           git config --global user.name 'Auto commit'
           git config --global user.email 'action@highcanfly.club'
           git add repo charts
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update repo and charts directories"; git push)
+          git diff --quiet && git diff --staged --quiet || (git add -A ; git commit -m "Update repo and charts directories"; git push)
