@@ -26,7 +26,7 @@ else
         get_repo "eltorio/minio-prometheus-chart" "helm/minio" 2
         get_repo "eltorio/whois-rest" "helm/whois-rest" 2
         get_repo "highcanfly-club/cert-manager-webhook-oci" "cert-manager-webhook-oci" 2
-        get_repo "highcanfly-club/crontab-ui" "helm/crontab-ui" 3
+        get_repo "highcanfly-club/crontab-ui" "helm/crontab-ui" 2
         get_repo "highcanfly-club/docker-smtp-relay" "helm/flex-smtpd" 2
         get_repo "highcanfly-club/easyappointments-k8s" "helm/easyappointments" 2
         get_repo "highcanfly-club/gitea-bitnami-custom" "helm/gitea" 2
@@ -44,4 +44,8 @@ fi
 helm repo index repo/ --url=https://helm-repo.highcanfly.club
 # needs to install repo-html plugin;
 # helm plugin install https://github.com/halkeye/helm-repo-html
+if ! helm plugin list | grep -q repo-html; then
+  helm plugin install https://github.com/halkeye/helm-repo-html
+fi
+
 helm repo-html -i repo/index.yaml -o repo/index.html -t index.tpl
