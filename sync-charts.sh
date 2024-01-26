@@ -81,6 +81,7 @@ else
         get_repo "highcanfly-club/helm-roundecubemail" "roundcube" 1
         get_repo "highcanfly-club/odoo-bitnami-custom" "helm/odoo" 2
         get_repo "highcanfly-club/pretix" "helm/pretix" 2
+        get_repo "highcanfly-club/ubuntu-net-tools-image" "helm/cloudflared" 2
         get_repo "highcanfly-club/ubuntu-w64build" "helm/ubuntu-w64build" 2
         get_repo "ismogroup/dolidock" "helm/dolidock" 2
 fi
