@@ -67,6 +67,7 @@ else
         # clean up before sync
         find charts -mindepth 1 -type d -exec rm -rf {} +
         get_repo "eltorio/minio-prometheus-chart" "helm/minio" 2
+        et_repo "eltorio/cert-manager-webhook-cloudns" "deploy/cert-manager-webhook-cloudns" 2
         get_repo "eltorio/whois-rest" "helm/whois-rest" 2
         get_repo "highcanfly-club/cert-manager-webhook-oci" "cert-manager-webhook-oci" 2
         get_repo "highcanfly-club/crontab-ui" "helm/crontab-ui" 2
