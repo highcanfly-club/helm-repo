@@ -16,7 +16,11 @@ roundcube:
   smtpPort: 587
 
 hostNetwork: false
-
+# hostAliases:
+#   - ip: "1.2.3.4"
+#     hostnames:
+#       - "foo.local"
+#       - "bar.local"
 replicaCount: 1
 
 memcached:
