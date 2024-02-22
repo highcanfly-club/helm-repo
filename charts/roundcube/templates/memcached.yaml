@@ -15,7 +15,7 @@ spec:
       labels:
         {{- include "roundcube.selectorLabels" . | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}-memcached
           image: "{{ .Values.memcached.image.repository }}:{{ .Values.memcached.image.tag }}"
           imagePullPolicy: {{ .Values.memcached.image.pullPolicy }}
           resources:
