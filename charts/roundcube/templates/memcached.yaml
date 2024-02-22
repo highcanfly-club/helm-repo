@@ -9,11 +9,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-     {{- include "roundcube.selectorLabels" . | nindent 6 }}
+     {{- include "roundcube.selectorLabels" . | nindent 6 }}-memcached
   template:
     metadata:
       labels:
-        {{- include "roundcube.selectorLabels" . | nindent 8 }}
+        {{- include "roundcube.selectorLabels" . | nindent 8 }}-memcached
     spec:
       containers:
         - name: {{ .Chart.Name }}-memcached
@@ -42,5 +42,5 @@ spec:
     - port: {{ .Values.memcached.service.port }}
       targetPort: {{ .Values.memcached.service.port }}
   selector:
-    {{- include "roundcube.selectorLabels" . | nindent 4 }}
+    {{- include "roundcube.selectorLabels" . | nindent 4 }}-memcached
 {{- end }}
