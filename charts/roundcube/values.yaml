@@ -15,6 +15,8 @@ roundcube:
   smtpUseImapAuth: false
   smtpPort: 587
 
+hostNetwork: false
+
 replicaCount: 1
 
 memcached:
