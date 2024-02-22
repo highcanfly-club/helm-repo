@@ -94,6 +94,10 @@ spec:
             - name: ROUNDCUBEMAIL_MEMCACHED_HOST
               value: "{{ include "roundcube.fullname" . }}-memcached"
             {{- end}}
+            {{- if .Values.roundcube.desKey }}
+            - name: ROUNDCUBEMAIL_DES_KEY
+              value: {{ quote .Values.roundcube.desKey }}
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

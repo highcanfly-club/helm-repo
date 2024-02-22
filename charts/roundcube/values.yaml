@@ -14,6 +14,9 @@ roundcube:
   dbName: roundcubemail
   smtpUseImapAuth: false
   smtpPort: 587
+  # for HA you need to enable memcached and manually set the desKey
+  # it is not a DES key ! but rouncube calls it historically like that
+  desKey: "averylongrandomstring..." # head /dev/urandom | base64 | head -c 24
 
 hostNetwork: false
 # hostAliases:
