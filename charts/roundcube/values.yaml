@@ -17,11 +17,22 @@ roundcube:
 
 replicaCount: 1
 
+memcached:
+  enabled: fale
+  image:
+    repository: memcached
+    tag: "1.6.23"
+    pullPolicy: IfNotPresent
+  service:
+    port: 11211
+    type: ClusterIP
+  resources: {}
+
 image:
   repository: highcanfly/roundcubemail
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "1.6.6"
 
 imagePullSecrets: []
 nameOverride: ""

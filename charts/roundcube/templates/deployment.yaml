@@ -80,6 +80,12 @@ spec:
             - name: ROUNDCUBEMAIL_FORWARD_AUTH
               value: "1"
             {{ end }}
+            {{- if .Values.memcached.enabled }}
+            - name: ROUNDCUBEMAIL_MEMCACHED_SESSION
+              value: "1"
+            - name: ROUNDCUBEMAIL_MEMCACHED_HOST
+              value: "{{ include "roundcube.fullname" . }}-memcached"
+            {{- end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
