@@ -86,6 +86,7 @@ else
         get_repo "highcanfly-club/ubuntu-w64build" "helm/ubuntu-w64build" 2
         get_repo "ismogroup/dolidock" "helm/dolidock" 2
         get_repo "sctg-development/sctgdesk" "helm/sctgdesk" 2
+        get_repo "sctg-development/web-smtp-relay" "helm/web-smtp-relay" 2
 fi
 
 # clean up
