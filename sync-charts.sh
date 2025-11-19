@@ -89,6 +89,7 @@ else
         get_repo "sctg-development/web-smtp-relay" "helm/web-smtp-relay" 2
         get_repo "sctg-development/nginx-ad-auth" "helm/nginx-ad-auth" 2
         get_repo "sctg-development/rallly" "helm/rallly" 2
+        get_repo "sctg-development/tokeisrv" "helm/tokeisrv" 2
 fi
 
 # clean up
