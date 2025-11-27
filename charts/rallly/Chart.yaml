@@ -1,6 +1,6 @@
 name: rallly
 apiVersion: v2
-version: 0.1.9
+version: 0.1.10
 description: A Helm chart for deploying the Rallly application with PostgreSQL support.
 maintainers:
   - name: Ronan Le Meillat
@@ -15,7 +15,7 @@ sources:
   - https://github.com/sctg-development/rallly
 dependencies:
   - name: postgresql
-    version: 16.x.x
+    version: 18.x.x
     repository: https://charts.bitnami.com/bitnami
     condition: postgres.enabled
     tags:
