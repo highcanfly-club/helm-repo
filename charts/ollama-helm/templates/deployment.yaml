@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ollama.fullname" . }}
+  labels:
+    {{- include "ollama.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ include "ollama.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "ollama.name" . }}
+      annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+    spec:
+      serviceAccountName: {{ if .Values.serviceAccount.create }}{{ default (include "ollama.name" .) .Values.serviceAccount.name }}{{ else }}{{ .Values.serviceAccount.name }}{{ end }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      tolerations: {{ toYaml .Values.tolerations | nindent 8 }}
+      affinity: {{ toYaml .Values.affinity | nindent 8 }}
+      containers:
+        - name: {{ include "ollama.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+              name: http
+          env:
+            - name: OLLAMA_HOST
+              value: "0.0.0.0:{{ .Values.service.port | toString }}"
+            - name: OLLAMA_MODEL
+              value: {{ .Values.ollamaModel | quote }}
+            {{- if .Values.proxy.enabled }}
+            - name: OLLAMA_ORIGINS
+              value: "http://{{ include "ollama.fullname" . }}-proxy:{{ .Values.proxy.service.port }}"
+            {{- end }}
+          command: ["/bin/sh", "-c", "env && exec ollama serve & sleep 5 && echo \"Pulling OLLAMA_MODEL $OLLAMA_MODEL...\" && ollama pull $OLLAMA_MODEL ; sleep infinity"]
+          #command: ["/bin/sh", "-c", "sleep infinity"]
+          {{- if .Values.resources }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /api/version
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /api/version
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+          {{- end }}

@@ -1,0 +1,154 @@
+# MIT License
+# Copyright (c) 2026 Ronan Le Meillat - SCTG Development
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Default values for ollama
+# Change these values when you install the chart
+
+replicaCount: 1
+
+image:
+  repository: ollama/ollama
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+# Ollama model to use (default is all-minilm:l6-v2)
+ollamaModel: "all-minilm:l6-v2"
+
+# Pod resource configuration
+resources: {}
+
+# Liveness/readiness probes - HTTP GET probe on /api/version (expect HTTP 200)
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 3
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 3
+
+# Optional cloudflared (tunnel) support
+#
+# NOTES - Creating a Cloudflare Tunnel - 3 ways
+# 1) Run cloudflared inside a Docker container (open an interactive shell)
+#    - Example (run locally):
+#        docker run -it --rm --name cloudflared highcanfly/net-tools:latest /bin/bash
+#    - Inside the container, use `cloudflared` to login and create a tunnel:
+#        cloudflared tunnel login
+#        # follow the authentication link and log in
+#        cloudflared tunnel create ollama-tunnel
+#        # This will create a JSON credentials file in /root/.cloudflared/<UUID>.json
+#        cat /root/.cloudflared/<CREDS_FILE>.json
+#    - Copy the JSON contents into a Kubernetes Secret or use Helm's `--set-file` to pass it into `cloudflared.credentials`.
+#      For example:
+#        kubectl -n <namespace> create secret generic cloudflared-creds --from-file=creds.json=./credentials.json
+#      Or install via Helm with:
+#        helm install ollama helm/ollama --set-file cloudflared.credentials=./credentials.json --set cloudflared.TunnelID=<TUNNEL_ID>
+#
+# 2) Use `cloudflared` locally installed on your workstation
+#    - Install `cloudflared` via your OS package manager or Cloudflare's release.
+#    - Log in and create the tunnel from your workstation:
+#        cloudflared tunnel login
+#        cloudflared tunnel create ollama-tunnel
+#    - Securely transfer the produced credentials JSON to a secret in the cluster or pass into Helm via `--set-file`.
+#
+# 3) Use the chart to create a pod and `exec` into it (sleep approach)
+#    - Edit values to keep the cloudflared pod alive so you can open a terminal into it:
+#        cloudflared:
+#          enabled: true
+#          command: ["/usr/bin/sleep"]
+#          args: ["infinity"]
+#    - Deploy the chart, find the created cloudflared pod and exec in:
+#        kubectl exec -it <pod-name> -- /bin/bash
+#      then run `cloudflared tunnel login` and `cloudflared tunnel create` from inside.
+#    - After obtaining the credentials, store them as a Kubernetes Secret and update the chart values to remove the `sleep` override and enable the real tunnel.
+#
+# SECURITY NOTES
+#  - Never commit the credentials JSON or private tokens to your git repository.
+#  - Prefer storing the credentials as a Kubernetes Secret and mounting the file into /etc/cloudflared/creds/credentials.json.
+#  - Always replace placeholder values with your real tunnel ID and credential content in a secure manner (secret or Helm --set-file).
+#
+cloudflared:
+  enabled: true
+  # If enabled, you can configure local tunnel values to expose the service
+  image:
+    tag: "1.3.1"
+  # Example config: set TunnelID, credentials, and ingress
+  #
+  # For testing, you can override the command/args to keep the container running
+  # command: ["/usr/bin/sleep"]
+  # args: ["infinity"]
+  TunnelID: "12345678-90ab-cdef-1234-567890abcdef"
+  credentials:
+    {
+      "AccountTag": "1234567890abcdef1234567890abcdef",
+      "TunnelSecret": "abcdefghijklmnopqrstuvwxyz0123456789abcdef",
+      "TunnelID": "12345678-90ab-cdef-1234-567890abcdef",
+      "Endpoint": ""
+    }
+  config: |-
+    # Example ingress configuration adjusted by ollama chart
+    tunnel: ollama-tunnel
+    credentials-file: /etc/cloudflared/creds/credentials.json
+    ingress:
+      - hostname: ollama.example.com
+        service: http://{{ .Release.Name }}-ollama-proxy:8080
+      - service: http_status:404
+
+# Service account creation
+serviceAccount:
+  create: true
+  name: ""
+
+# Pod annotations & labels
+podAnnotations: {}
+podLabels: {}
+
+# Node scheduling helpers
+nodeSelector: {}
+
+# Tolerations, affinity
+tolerations: []
+affinity: {}
+
+# Ollama Proxy configuration
+proxy:
+  enabled: true
+  image:
+    repository: sctg/ollama-proxy
+    tag: "latest"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8080
+  # API keys for authentication (will be generated as a secret)
+  apiKeys: []
+  # Example: apiKeys: ["key1-secret", "key2-secret"]
+  # Ban timeout in seconds after 10 failed attempts
+  banTimeout: 60
+  # Target Ollama service (internal DNS name)
+  targetService: "{{ .Release.Name }}-ollama:8000"
+  # Optional: Use a specific header for IP banning (useful behind Cloudflare)
+  # banSourceHeader: "Cf-Connecting-Ip"

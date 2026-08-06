@@ -90,6 +90,7 @@ else
         get_repo "sctg-development/nginx-ad-auth" "helm/nginx-ad-auth" 2
         get_repo "sctg-development/rallly" "helm/rallly" 2
         get_repo "sctg-development/tokeisrv" "helm/tokeisrv" 2
+        get_repo "sctg-development/ollama-k8s" "ollama-helm" 1
 fi
 
 # clean up
@@ -99,7 +100,7 @@ helm repo index repo/ --url=https://helm-repo.highcanfly.club
 
 if ! helm plugin list | grep -q repo-html; then
         echo "Installing helm-repo-html plugin"
-        helm plugin install https://github.com/halkeye/helm-repo-html
+        helm plugin install --verify=false https://github.com/halkeye/helm-repo-html
 fi
 
 helm repo-html -i repo/index.yaml -o repo/index.html -t index.tpl

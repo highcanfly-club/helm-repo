@@ -1,0 +1,57 @@
+{{- if .Values.proxy.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ollama.fullname" . }}-proxy
+  labels:
+    {{- include "ollama.labels" . | nindent 4 }}
+    app: {{ include "ollama.name" . }}-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "ollama.name" . }}-proxy
+  template:
+    metadata:
+      labels:
+        app: {{ include "ollama.name" . }}-proxy
+      annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+    spec:
+      serviceAccountName: {{ if .Values.serviceAccount.create }}{{ default (include "ollama.name" .) .Values.serviceAccount.name }}{{ else }}{{ .Values.serviceAccount.name }}{{ end }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      tolerations: {{ toYaml .Values.tolerations | nindent 8 }}
+      affinity: {{ toYaml .Values.affinity | nindent 8 }}
+      containers:
+        - name: proxy
+          image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag }}"
+          imagePullPolicy: {{ .Values.proxy.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.proxy.service.port }}
+              name: http
+           args:
+            - "--listen"
+            - ":{{ .Values.proxy.service.port }}"
+            - "--to"
+            - {{ .Values.proxy.targetService | quote }}
+            - "--keys"
+            - "/etc/proxy/keys.txt"
+            - "--banTimeout"
+            - {{ .Values.proxy.banTimeout | quote }}
+            {{- if .Values.proxy.banSourceHeader }}
+            - "--ban-source-header"
+            - {{ .Values.proxy.banSourceHeader | quote }}
+            {{- end }}
+          volumeMounts:
+            - name: api-keys
+              mountPath: /etc/proxy
+              readOnly: true
+          {{- if .Values.resources }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: api-keys
+          secret:
+            secretName: {{ include "ollama.fullname" . }}-proxy-keys
+{{- end -}}
