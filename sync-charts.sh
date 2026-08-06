@@ -32,6 +32,7 @@ fi
 #   - path: The path within the repository to download.
 #   - strip: The number of leading components from file names to strip. This is passed to the '--strip' option of 'tar'.
 #   - branch: The branch of the repository to download. If not provided, it defaults to 'HEAD'.
+#   - custom_name: An optional parameter to specify a custom name for the packaged Helm chart. If not provided, the base name of the path is used.
 #
 # The function first checks if the 'branch' parameter is provided. If not, it sets 'branch' to 'HEAD'.
 # It then downloads the specified path from the repository and extracts it into the 'charts' directory.
@@ -44,12 +45,17 @@ get_repo() {
         if [[ ! -n $branch ]]; then
                 branch="HEAD"
         fi
+        custom_name=$5
         _name=$(basename $path)
         echo $_name
         echo "Downloading https://github.com/${repo}/archive/${branch}.tar.gz"
         curl -J -L https://github.com/${repo}/archive/${branch}.tar.gz | tar xvz -C charts --strip ${strip} $TAR_WILDCARDS "*${path}*"
         helm package charts/${_name}
-        mv ${_name}-*.tgz repo/
+        if [[ -n $custom_name ]]; then
+                mv ${custom_name}-*.tgz repo/
+        else
+                mv ${_name}-*.tgz repo/
+        fi      
 }
 
 if [[ -n $1 && -n $2 && -n $3 ]]; then
@@ -67,7 +73,7 @@ else
         # clean up before sync
         find charts -mindepth 1 -type d -exec rm -rf {} +
         get_repo "eltorio/minio-prometheus-chart" "helm/minio" 2
-        et_repo "eltorio/cert-manager-webhook-cloudns" "deploy/cert-manager-webhook-cloudns" 2
+        get_repo "eltorio/cert-manager-webhook-cloudns" "deploy/cert-manager-webhook-cloudns" 2
         get_repo "eltorio/whois-rest" "helm/whois-rest" 2
         get_repo "highcanfly-club/cert-manager-webhook-oci" "cert-manager-webhook-oci" 2
         get_repo "highcanfly-club/crontab-ui" "helm/crontab-ui" 2
@@ -90,7 +96,7 @@ else
         get_repo "sctg-development/nginx-ad-auth" "helm/nginx-ad-auth" 2
         get_repo "sctg-development/rallly" "helm/rallly" 2
         get_repo "sctg-development/tokeisrv" "helm/tokeisrv" 2
-        get_repo "sctg-development/ollama-k8s" "ollama-helm" 1
+        get_repo "sctg-development/ollama-k8s" "ollama-helm" 1 HEAD ollama
 fi
 
 # clean up
