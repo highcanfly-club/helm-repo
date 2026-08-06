@@ -29,7 +29,7 @@ spec:
           ports:
             - containerPort: {{ .Values.proxy.service.port }}
               name: http
-           args:
+          args:
             - "--listen"
             - ":{{ .Values.proxy.service.port }}"
             - "--to"
