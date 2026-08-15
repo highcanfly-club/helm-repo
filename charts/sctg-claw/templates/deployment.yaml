@@ -1,0 +1,133 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "claw.fullname" . }}
+  labels:
+    {{- include "claw.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "claw.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        {{- include "claw.labels" . | nindent 8 }}
+      annotations:
+        checksum/openclaw-config: {{ include (print $.Template.BasePath "/openclaw-config.yaml") . | sha256sum }}
+        {{- if .Values.openclaw.secret.create }}
+        checksum/openclaw-secret: {{ include (print $.Template.BasePath "/openclaw-secret.yaml") . | sha256sum }}
+        {{- end }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ if .Values.serviceAccount.create }}{{ default (include "claw.fullname" .) .Values.serviceAccount.name }}{{ else }}{{ required "serviceAccount.name must be set when serviceAccount.create is false" .Values.serviceAccount.name }}{{ end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.openclaw.workspaceFiles }}
+      initContainers:
+        - name: init-workspace
+          image: {{ .Values.openclaw.initContainer.image | default "busybox:1.37" }}
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              set -e
+              mkdir -p {{ $.Values.persistence.mountPath }}/workspace
+              {{- range $filename, $content := .Values.openclaw.workspaceFiles }}
+              [ -f {{ $.Values.persistence.mountPath }}/workspace/{{ $filename }} ] || cp /openclaw-config/{{ $filename }} {{ $.Values.persistence.mountPath }}/workspace/{{ $filename }}
+              {{- end }}
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          resources:
+            {{- toYaml .Values.openclaw.initContainer.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: {{ .Values.persistence.mountPath }}
+            - name: openclaw-config
+              mountPath: /openclaw-config
+              readOnly: true
+      {{- end }}
+      containers:
+        - name: gateway
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+              name: gateway
+          {{- if include "claw.openclawSecretName" . }}
+          env:
+            - name: OPENCLAW_DEBUG
+              value: "0"
+          envFrom:
+            - secretRef:
+                name: {{ include "claw.openclawSecretName" . }}
+          {{- end }}
+          securityContext:
+            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: {{ .Values.persistence.mountPath }}
+            - name: openclaw-config-subpath
+              mountPath: {{ .Values.persistence.mountPath }}/openclaw.json
+              subPath: openclaw.json
+              readOnly: true
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: gateway
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: gateway
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+          {{- end }}
+      volumes:
+        - name: data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "claw.fullname" . }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        - name: openclaw-config
+          configMap:
+            name: {{ include "claw.openclawConfigMapName" . }}
+        - name: openclaw-config-subpath
+          configMap:
+            name: {{ include "claw.openclawConfigMapName" . }}
+            items:
+              - key: openclaw.json
+                path: openclaw.json
