@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -33,15 +34,19 @@ func NewWebSocketProxy(cfg *config.Config, database *db.DB) *WebSocketProxy {
 }
 
 func (p *WebSocketProxy) HandleWebSocket(w http.ResponseWriter, r *http.Request) {
+	remote := clientIP(r)
+
 	// Extract and validate bearer token
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
+		log.Printf("WARN: WebSocket rejected remote=%s reason=missing_authorization_header", remote)
 		http.Error(w, "Unauthorized: Missing Authorization header", http.StatusUnauthorized)
 		return
 	}
 
 	parts := strings.Split(authHeader, " ")
 	if len(parts) != 2 || parts[0] != "Bearer" {
+		log.Printf("WARN: WebSocket rejected remote=%s reason=invalid_authorization_header", remote)
 		http.Error(w, "Unauthorized: Invalid Authorization header", http.StatusUnauthorized)
 		return
 	}
@@ -58,18 +63,22 @@ func (p *WebSocketProxy) HandleWebSocket(w http.ResponseWriter, r *http.Request)
 	}
 
 	if accessSession == nil {
+		log.Printf("WARN: WebSocket rejected remote=%s reason=invalid_access_token", remote)
 		http.Error(w, "Unauthorized: Invalid access token", http.StatusUnauthorized)
 		return
 	}
 
 	// Check if token is revoked
 	if accessSession.RevokedAt != nil {
+		log.Printf("WARN: WebSocket rejected remote=%s reason=token_revoked device=%s", remote, accessSession.DeviceID)
 		http.Error(w, "Unauthorized: Token revoked", http.StatusUnauthorized)
 		return
 	}
 
 	// Check if token is expired
 	if time.Now().After(accessSession.ExpiresAt) {
+		log.Printf("WARN: WebSocket rejected remote=%s reason=token_expired device=%s expiredAt=%s",
+			remote, accessSession.DeviceID, accessSession.ExpiresAt.Format(time.RFC3339))
 		http.Error(w, "Unauthorized: Token expired", http.StatusUnauthorized)
 		return
 	}
@@ -83,6 +92,8 @@ func (p *WebSocketProxy) HandleWebSocket(w http.ResponseWriter, r *http.Request)
 	}
 
 	if device == nil || device.RevokedAt != nil {
+		log.Printf("WARN: WebSocket rejected remote=%s reason=device_not_found_or_revoked device=%s",
+			remote, accessSession.DeviceID)
 		http.Error(w, "Unauthorized: Device not found or revoked", http.StatusUnauthorized)
 		return
 	}
@@ -101,6 +112,7 @@ func (p *WebSocketProxy) HandleWebSocket(w http.ResponseWriter, r *http.Request)
 			"Email no longer in allow list",
 		)
 
+		log.Printf("WARN: WebSocket rejected remote=%s reason=email_not_allowed device=%s", remote, device.ID)
 		http.Error(w, "Unauthorized: Email not authorized", http.StatusUnauthorized)
 		return
 	}
@@ -170,15 +182,21 @@ func (p *WebSocketProxy) HandleWebSocket(w http.ResponseWriter, r *http.Request)
 		return nil
 	})
 
-	// Start bidirectional proxy
+	// Start bidirectional proxy. Both directions signal the same done channel
+	// on exit, so closing it must be idempotent -- whichever side the peer
+	// closes first still lets the other goroutine's blocked Read unblock and
+	// return, and it would otherwise double-close done and panic the process.
 	done := make(chan struct{})
+	var closeDoneOnce sync.Once
+	closeDone := func() { closeDoneOnce.Do(func() { close(done) }) }
 
 	go func() {
-		defer close(done)
+		defer closeDone()
 		for {
 			messageType, message, err := conn.ReadMessage()
 			if err != nil {
 				log.Printf("DEBUG: Client read error: %v", err)
+				forwardCloseCode(gatewayConn, err)
 				return
 			}
 
@@ -190,11 +208,12 @@ func (p *WebSocketProxy) HandleWebSocket(w http.ResponseWriter, r *http.Request)
 	}()
 
 	go func() {
-		defer close(done)
+		defer closeDone()
 		for {
 			messageType, message, err := gatewayConn.ReadMessage()
 			if err != nil {
 				log.Printf("DEBUG: Gateway read error: %v", err)
+				forwardCloseCode(conn, err)
 				return
 			}
 
@@ -217,4 +236,37 @@ func (p *WebSocketProxy) HandleWebSocket(w http.ResponseWriter, r *http.Request)
 		"completed",
 		"WebSocket connection closed",
 	)
+}
+
+// forwardCloseCode relays a peer's real WebSocket close code/reason onto the
+// other leg before the connection tears down. Without this, every close --
+// including a clean 1001 "going away" from a client backgrounding the app --
+// reaches the other side as a raw TCP drop (1006 "abnormal closure"), which
+// looks like the connection was hijacked or lost rather than a normal
+// lifecycle event. Only forwards when readErr is a genuine close frame from
+// the peer (*websocket.CloseError); other read errors (timeouts, broken
+// pipes) get no synthesized close code, so a real abnormal drop still reads
+// as abnormal on the other side.
+func forwardCloseCode(dst *websocket.Conn, readErr error) {
+	closeErr, ok := readErr.(*websocket.CloseError)
+	if !ok {
+		return
+	}
+	_ = dst.WriteControl(
+		websocket.CloseMessage,
+		websocket.FormatCloseMessage(closeErr.Code, closeErr.Text),
+		time.Now().Add(time.Second))
+}
+
+// clientIP mirrors handler.getClientIP (different package, same logic):
+// prefer the original client from X-Forwarded-For (set by Cloudflare), fall
+// back to the raw connection's remote address.
+func clientIP(r *http.Request) string {
+	if xff := r.Header.Get("X-Forwarded-For"); xff != "" {
+		ips := strings.Split(xff, ",")
+		if len(ips) > 0 {
+			return strings.TrimSpace(ips[0])
+		}
+	}
+	return r.RemoteAddr
 }
