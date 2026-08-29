@@ -70,13 +70,27 @@
                         "exaApiKeys": { "type": "string" },
                         "firecrawlApiKeys": { "type": "string" },
                         "googlePlacesApiKeys": { "type": "string" },
-                        "elevenlabsApiKeys": { "type": "string" }
+                        "elevenlabsApiKeys": { "type": "string" },
+                        "ghToken": { "type": "string" },
+                        "garminEmail": { "type": "string" },
+                        "garminPassword": { "type": "string" }
                     }
                 },
                 "config": {
                     "type": "object",
                     "description": "Freeform, rendered as-is into /home/node/.openclaw/openclaw.json. See the OpenClaw configuration reference for supported keys (gateway, agents, models, etc.).",
                     "additionalProperties": true
+                },
+                "vnc": {
+                    "type": "object",
+                    "description": "VNC server (x11vnc) settings for browser automation debugging. macOS Finder/Screen Sharing requires a password; the default -nopw configuration causes the client to disconnect during ClientInit.",
+                    "properties": {
+                        "password": {
+                            "type": "string",
+                            "description": "Password for the x11vnc VNC server (RFB auth). Max 8 characters for -passwd; use a longer password with -passwdfile via a custom overrideCommand.",
+                            "default": "openclaw"
+                        }
+                    }
                 },
                 "workspaceFiles": {
                     "type": "object",

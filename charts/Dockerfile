@@ -329,7 +329,7 @@ RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,shar
 # Adds ~300MB but eliminates the 60-90s Playwright install on every container start.
 # Must run after node_modules COPY so playwright-core is available.
 ARG OPENCLAW_INSTALL_BROWSER="1"
-ENV PLAYWRIGHT_BROWSERS_PATH=/home/node/.cache/ms-playwright
+ENV PLAYWRIGHT_BROWSERS_PATH=/app/ms-playwright
 RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked \
     if [ -n "$OPENCLAW_INSTALL_BROWSER" ]; then \
@@ -390,7 +390,7 @@ ARG WACLI_VERSION=0.16.0
 RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tar pandoc librsvg2-bin imagemagick jq ffmpeg gh && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tar pandoc librsvg2-bin imagemagick jq ffmpeg gh gnupg vim bzip2 ssh x11vnc xvfb && \
     case "${TARGETARCH}" in amd64|arm64) ;; *) echo "Unsupported architecture: ${TARGETARCH}" >&2; exit 1 ;; esac && \
     curl -fsSL "https://github.com/steipete/gogcli/releases/download/v${GOGCLI_VERSION}/gogcli_${GOGCLI_VERSION}_linux_${TARGETARCH}.tar.gz" -o /tmp/gogcli.tar.gz && \
     tar -xzf /tmp/gogcli.tar.gz -O ./gog > /usr/local/bin/gog && \
@@ -399,7 +399,29 @@ RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,shar
     curl -fsSL "https://github.com/steipete/wacli/releases/download/v${WACLI_VERSION}/wacli_${WACLI_VERSION}_linux_${TARGETARCH}.tar.gz" -o /tmp/wacli.tar.gz && \
     tar -xzf /tmp/wacli.tar.gz -O ./wacli > /usr/local/bin/wacli && \
     chmod +x /usr/local/bin/gog /usr/local/bin/goplaces /usr/local/bin/wacli && \
-    rm -f /tmp/gogcli.tar.gz /tmp/goplaces.tar.gz /tmp/wacli.tar.gz
+    rm -f /tmp/gogcli.tar.gz /tmp/goplaces.tar.gz /tmp/wacli.tar.gz && \
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+    gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | tee /etc/apt/sources.list.d/1password.list && \
+    mkdir -p /etc/debsig/policies/AC2D62742012EA22/ && \
+    curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | tee /etc/debsig/policies/AC2D62742012EA22/1password.pol && \
+    mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 && \
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg && \
+    apt update && apt install 1password-cli && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \ 
+    apt-get update && apt-get install google-cloud-cli && \
+    if [ "${TARGETARCH}" = "amd64" ]; then \
+      curl -fsSL https://github.com/voydz/garmin-cli/releases/download/v0.3.1/garmin-cli-0.3.1-linux-x86_64.tar.gz -o /tmp/garmin-cli.tar.gz && \
+      tar -xzf /tmp/garmin-cli.tar.gz -O gc > /usr/local/bin/gc && \ 
+      chmod +x /usr/local/bin/gc && \
+      rm -f /tmp/garmin-cli.tar.gz; \
+    else \
+      curl -fsSL https://github.com/voydz/garmin-cli/releases/download/v0.3.1/garmin-cli-0.3.1-linux-aarch64.tar.gz -o /tmp/garmin-cli.tar.gz && \  
+    tar -xzf /tmp/garmin-cli.tar.gz -O gc > /usr/local/bin/gc && \
+    chmod +x /usr/local/bin/gc && \
+    rm -f /tmp/garmin-cli.tar.gz; \
+    fi
 
 # Expose the CLI binary without requiring npm global writes as non-root.
 RUN ln -sf /app/openclaw.mjs /usr/local/bin/openclaw \
@@ -421,6 +443,7 @@ RUN install -d -m 0755 -o node -g node /home/node/.config && \
     stat -c '%U:%G %a' /home/node/.config/openclaw | grep -qx 'node:node 700'
 
 ENV NODE_ENV=production
+ENV VNC_PASSWORD="openclaw"
 
 # Security hardening: Run as non-root user
 # The node:24-bookworm image includes a 'node' user (uid 1000)
@@ -442,4 +465,4 @@ USER node
 HEALTHCHECK --interval=3m --timeout=10s --start-period=15s --retries=3 \
   CMD ["node", "dist/docker-healthcheck.js"]
 ENTRYPOINT ["tini", "-s", "--"]
-CMD ["node", "openclaw.mjs", "gateway"]
+CMD ["sh", "-c", "Xvfb :99 -screen 0 1920x1080x24 & x11vnc -display :99 -forever -passwd ${VNC_PASSWORD} -rfbport 5900 & node openclaw.mjs gateway"]

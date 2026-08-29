@@ -54,9 +54,9 @@ spec:
             - -c
             - |
               set -e
-              mkdir -p {{ $.Values.persistence.mountPath }}/workspace
+              mkdir -p {{ $.Values.persistence.mountPath }}/.openclaw/workspace
               {{- range $filename, $content := .Values.openclaw.workspaceFiles }}
-              [ -f {{ $.Values.persistence.mountPath }}/workspace/{{ $filename }} ] || cp /openclaw-config/{{ $filename }} {{ $.Values.persistence.mountPath }}/workspace/{{ $filename }}
+              [ -f {{ $.Values.persistence.mountPath }}/.openclaw/workspace/{{ $filename }} ] || cp /openclaw-config/{{ $filename }} {{ $.Values.persistence.mountPath }}/.openclaw/workspace/{{ $filename }}
               {{- end }}
           securityContext:
             runAsUser: 1000
@@ -75,18 +75,43 @@ spec:
           lifecycle:
             preStop:
               exec:
-                command: ["/bin/sh", "-c", "/usr/local/bin/openclaw gateway stop"]
+                command: ["/bin/sh", "-c", "'mkdir -p /tmp/openclaw-compile-cache && /usr/local/bin/openclaw gateway stop'"]
+          {{- if .Values.openclaw.overrideCommand }}
+          command: {{ .Values.openclaw.overrideCommand | toYaml | nindent 10 }}
+          {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
               name: gateway
-          {{- if include "claw.openclawSecretName" . }}
+            - containerPort: 5900
+              name: vnc
           env:
+            {{- if .Values.openclaw.vnc.password }}
+            - name: VNC_PASSWORD
+              value: {{ .Values.openclaw.vnc.password | quote }}
+            {{- end }}
+            {{- if include "claw.openclawSecretName" . }}
+            - name: NODE_COMPILE_CACHE
+              value: /tmp/openclaw-compile-cache
             - name: OPENCLAW_DEBUG
               value: "0"
             - name: AGGRESSIVE_ROTATION
               value: {{ .Values.openclaw.aggressiveRotation | quote }}
+            {{- if .Values.openclaw.secret.ghToken }}
+            - name: GH_TOKEN
+              value: {{ .Values.openclaw.secret.ghToken | quote }}  
+            {{- end }}
+            {{- if .Values.openclaw.secret.garminEmail }}
+            - name: GARMIN_EMAIL
+              value: {{ .Values.openclaw.secret.garminEmail | quote }}
+            {{- end }}
+            {{- if .Values.openclaw.secret.garminPassword }}
+            - name: GARMIN_PASSWORD
+              value: {{ .Values.openclaw.secret.garminPassword | quote }}
+            {{- end }}
+            {{- end }}
+          {{- if include "claw.openclawSecretName" . }}
           envFrom:
             - secretRef:
                 name: {{ include "claw.openclawSecretName" . }}
