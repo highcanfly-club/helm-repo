@@ -33,6 +33,10 @@ imagePullSecrets: []
 service:
   type: ClusterIP
   port: 18789
+  # MCP Apps / dashboard widget sandbox listener (gateway port + 1 by default in
+  # OpenClaw). Must stay a distinct, unauthenticated origin from `port` above -
+  # see openclaw.config.mcp.apps in values docs.
+  sandboxPort: 18790
 
 # Name of a pre-existing secret containing OpenClaw and provider environment variables.
 # Example keys: MISTRAL_API_KEYS, COHERE_API_KEYS, POOLSIDE_API_KEYS.
@@ -74,6 +78,26 @@ openclaw:
     ghToken: ""
     garminEmail: ""
     garminPassword: ""
+    openaiApiKeys: ""
+    # Overrides the default https://api.openai.com/v1 endpoint for the openai
+    # provider -- e.g. to route through a private/self-hosted OpenAI-API-
+    # compatible cloud instead. Already supported upstream (OPENAI_BASE_URL),
+    # no fork changes needed. Leave empty to use the real OpenAI API.
+    openaiBaseUrl: ""
+    # KeypoolLive vault (git@github.com:sctg-development/ai-proxy-cloudflare.git):
+    # when both are set, the container resolves mistralApiKeys/cohereApiKeys/
+    # poolsideApiKeys/firecrawlApiKeys/exaApiKeys above from this encrypted
+    # vault at startup instead of the hardcoded values, falling back to
+    # whichever of those hardcoded values are still set for any provider the
+    # vault doesn't cover. See scripts/resolve-keypool-vault.mjs.
+    keypoolVaultUrl: ""
+    keypoolLiveSecret: ""
+    # 1Password Service Account token for the `op` CLI installed by the Dockerfile.
+    # Create one at https://my.1password.com/service-accounts (or your Business
+    # account) and grant it read access to only the vaults this gateway needs.
+    # Once set, `op read op://vault/item/field` and `op run -- <cmd>` work
+    # non-interactively inside the container -- no `op signin` needed.
+    onePasswordServiceAccountToken: ""
   # This map is rendered as /home/node/.openclaw/openclaw.json.
   # Add any supported OpenClaw configuration section here. Use SecretRef objects
   # for sensitive values, for example: { source: env, provider: default, id: TOKEN }.

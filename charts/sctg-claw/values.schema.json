@@ -71,9 +71,26 @@
                         "firecrawlApiKeys": { "type": "string" },
                         "googlePlacesApiKeys": { "type": "string" },
                         "elevenlabsApiKeys": { "type": "string" },
+                        "openaiApiKeys": { "type": "string" },
+                        "openaiBaseUrl": {
+                            "type": "string",
+                            "description": "Overrides the default https://api.openai.com/v1 endpoint (OPENAI_BASE_URL) for the openai provider, e.g. to route through a private/self-hosted OpenAI-API-compatible cloud. Already supported upstream; leave empty to use the real OpenAI API."
+                        },
                         "ghToken": { "type": "string" },
                         "garminEmail": { "type": "string" },
-                        "garminPassword": { "type": "string" }
+                        "garminPassword": { "type": "string" },
+                        "onePasswordServiceAccountToken": {
+                            "type": "string",
+                            "description": "1Password Service Account token (OP_SERVICE_ACCOUNT_TOKEN) for the op CLI installed by the Dockerfile; enables non-interactive `op read`/`op run` inside the container."
+                        },
+                        "keypoolVaultUrl": {
+                            "type": "string",
+                            "description": "KeypoolLive vault URL (KEYPOOL_VAULT_URL). When set with keypoolLiveSecret, provider *ApiKeys above are resolved from this encrypted vault at container startup instead of the hardcoded values."
+                        },
+                        "keypoolLiveSecret": {
+                            "type": "string",
+                            "description": "KeypoolLive vault bearer token / decryption secret (KEYPOOL_LIVE_SECRET). Required alongside keypoolVaultUrl."
+                        }
                     }
                 },
                 "config": {

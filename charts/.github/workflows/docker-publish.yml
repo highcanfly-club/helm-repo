@@ -6,12 +6,16 @@ on:
     paths:
       - Dockerfile
       - openclaw
-      - .github/workflows/docker-publish.yml  
+      - garmin-cli
+      - openclaw-coach
+      - .github/workflows/docker-publish.yml
   pull_request:
     branches: [ main ]
     paths:
       - Dockerfile
       - openclaw
+      - garmin-cli
+      - openclaw-coach  
       - .github/workflows/docker-publish.yml
 
 env:
@@ -64,6 +68,14 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./openclaw
+          # garmin-cli's own submodule is a sibling of openclaw/, not inside
+          # it (the main context), so the gc-build stage source is passed in
+          # as an extra named context - mirrors docker-build.sh's
+          # `--build-context garmin-cli=./garmin-cli`.
+          build-contexts: |
+            garmin-cli=./garmin-cli
+            openclaw-coach=./openclaw-coach
+            sctg-scripts=./scripts
           file: ./Dockerfile
           platforms: ${{ matrix.platform }}
           outputs: ${{ github.event_name != 'pull_request' && format('type=image,name={0}/{1},push-by-digest=true,name-canonical=true,push=true', env.REGISTRY, env.IMAGE_NAME) || 'type=cacheonly' }}
