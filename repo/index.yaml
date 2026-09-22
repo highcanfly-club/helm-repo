@@ -3,7 +3,7 @@ entries:
   cert-manager-webhook-cloudns:
   - apiVersion: v1
     appVersion: 1.0.4
-    created: "2026-09-21T14:41:17.603025773Z"
+    created: "2026-09-22T16:46:31.601859743Z"
     description: A helm chart for cert-manager-webhook-cloudns
     digest: af4b4d9357f0dfe5b6712946f7c479fbcffa8f7cbb172bf5e88f4bc526080c83
     name: cert-manager-webhook-cloudns
@@ -13,10 +13,10 @@ entries:
   cert-manager-webhook-oci:
   - apiVersion: v1
     appVersion: 1.3.1
-    created: "2026-09-21T14:41:17.604867661Z"
+    created: "2026-09-22T16:46:31.602432114Z"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
-    digest: c742aa1c509c0158e8f921336a27897fcc9e2c42461ffbfb805d004942f37cc4
+    digest: 1469a49ec85e5284943e85734976faf7dfd470fa1b68242dda0f067d5ef8e624
     icon: https://www.oracle.com/asset/web/favicons/favicon-32.png
     name: cert-manager-webhook-oci
     urls:
@@ -24,7 +24,7 @@ entries:
     version: 1.3.1
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2026-09-21T14:41:17.604133Z"
+    created: "2026-09-22T16:46:31.602256356Z"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
     digest: 6634e78ad2f43f84a781c5496c292ff19af38739194cbfc3b9d87e1ad95cf77b
@@ -35,7 +35,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: 1.2.0
-    created: "2026-09-21T14:41:17.603609723Z"
+    created: "2026-09-22T16:46:31.6020645Z"
     description: Allow cert-manager to solve DNS challenges using Oracle Cloud Infrastructure
       DNS
     digest: 368c97cd6f6f7fff4911728035dca14df27bc2dcea873908114ba35ff2cd6920
@@ -47,7 +47,7 @@ entries:
   claw:
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.740084955Z"
+    created: "2026-09-22T16:46:31.693562523Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -59,7 +59,7 @@ entries:
       version: 6.20.0
     description: Helm chart to deploy OpenClaw Gateway with optional mobile authentication
       broker
-    digest: 9a7ec2597eeb8ceaaaae726624137550183dc7f4112d02766d719b488c902bed
+    digest: 00ed8a890597bafa85e06a7be4120c46c9d4a837014b8dd83fa939356106e2c6
     name: claw
     type: application
     urls:
@@ -67,7 +67,7 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.73202774Z"
+    created: "2026-09-22T16:46:31.687477048Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -87,7 +87,7 @@ entries:
     version: 0.5.9
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.724188265Z"
+    created: "2026-09-22T16:46:31.682132016Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -107,7 +107,7 @@ entries:
     version: 0.5.8
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.716407073Z"
+    created: "2026-09-22T16:46:31.677402553Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -127,7 +127,7 @@ entries:
     version: 0.5.7
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.708614565Z"
+    created: "2026-09-22T16:46:31.671954877Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -147,7 +147,7 @@ entries:
     version: 0.5.6
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.700221518Z"
+    created: "2026-09-22T16:46:31.666442591Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -167,7 +167,7 @@ entries:
     version: 0.5.5
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.691804375Z"
+    created: "2026-09-22T16:46:31.660891928Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -187,7 +187,7 @@ entries:
     version: 0.5.4
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.683607334Z"
+    created: "2026-09-22T16:46:31.655471204Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -207,7 +207,7 @@ entries:
     version: 0.5.3
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.674419364Z"
+    created: "2026-09-22T16:46:31.649898591Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -227,7 +227,7 @@ entries:
     version: 0.5.1
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.667111283Z"
+    created: "2026-09-22T16:46:31.644395415Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -247,7 +247,7 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.658069721Z"
+    created: "2026-09-22T16:46:31.638939079Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -266,7 +266,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.650463508Z"
+    created: "2026-09-22T16:46:31.633650504Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -285,7 +285,7 @@ entries:
     version: 0.3.4
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.642774606Z"
+    created: "2026-09-22T16:46:31.628464487Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -304,7 +304,7 @@ entries:
     version: 0.3.3
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.636203551Z"
+    created: "2026-09-22T16:46:31.623258037Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -323,7 +323,7 @@ entries:
     version: 0.3.2
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.628451525Z"
+    created: "2026-09-22T16:46:31.61808934Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -342,7 +342,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.620748564Z"
+    created: "2026-09-22T16:46:31.612921637Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -361,7 +361,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 2026.8.1
-    created: "2026-09-21T14:41:17.612921276Z"
+    created: "2026-09-22T16:46:31.607836146Z"
     dependencies:
     - condition: cloudflared.enabled
       name: cloudflared
@@ -381,7 +381,18 @@ entries:
   cloudflared:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-09-21T14:41:17.743127575Z"
+    created: "2026-09-22T16:46:31.695162185Z"
+    description: A Helm chart for deploying Highcanfly's cloudflared in net-tools
+      container.
+    digest: 01cc7c1e8d351ab64ec31f1965d018c54e244965607f86f7a3186e0e3e55f194
+    name: cloudflared
+    type: application
+    urls:
+    - https://helm-repo.highcanfly.club/cloudflared-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2026-09-22T16:46:31.694909831Z"
     description: A Helm chart for deploying Highcanfly's cloudflared in net-tools
       container.
     digest: 900bd966ba15fcb3197584601a98d64faf1d64ccdffdeb2c0739b4d4a1ace9b1
@@ -392,7 +403,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-09-21T14:41:17.742704645Z"
+    created: "2026-09-22T16:46:31.694634445Z"
     description: A Helm chart for deploying Highcanfly's cloudflared in net-tools
       container.
     digest: deb5ffbc057901ac3274df1ffa43e042c014d23d11a295a2b032e8efaa927101
@@ -403,7 +414,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-09-21T14:41:17.742260637Z"
+    created: "2026-09-22T16:46:31.694387795Z"
     description: A Helm chart for deploying Highcanfly's cloudflared in net-tools
       container.
     digest: 503cdeb8786e02b74eeeeb0e1dc5eef58652d89756db2b679395e3e298fbded5
@@ -414,7 +425,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-09-21T14:41:17.741343156Z"
+    created: "2026-09-22T16:46:31.69415244Z"
     description: A Helm chart for deploying Highcanfly's cloudflared in net-tools
       container.
     digest: e81f6346b77632706dbc1ea15f8545874be9d1652cfff8744a29d25e04f685d9
@@ -425,7 +436,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-09-21T14:41:17.740519667Z"
+    created: "2026-09-22T16:46:31.69389283Z"
     description: A Helm chart for deploying Highcanfly's cloudflared in net-tools
       container.
     digest: 601b9d752251febe8a0769f3244ef1fc1b285f03c1eed191a0f8f4bf44358a3f
@@ -437,10 +448,10 @@ entries:
   crontab-ui:
   - apiVersion: v2
     appVersion: 0.3.16.2
-    created: "2026-09-21T14:41:17.743340653Z"
+    created: "2026-09-22T16:46:31.69528909Z"
     description: A modified version of https://github.com/alseambusher/crontab-ui
       with Cloud commander
-    digest: ccc3434739762ba97c612a1a28fbc6c683d57c05de5c3eccad8f2182a29eaf2b
+    digest: 758748a1243ecc033033764f394c0a1dfa1c75d44c06dc4a224f99ea6acc5c93
     name: crontab-ui
     type: application
     urls:
@@ -449,13 +460,13 @@ entries:
   dolidock:
   - apiVersion: v2
     appVersion: 22.0.2.4
-    created: "2026-09-21T14:41:17.757109328Z"
+    created: "2026-09-22T16:46:31.703719781Z"
     dependencies:
     - name: flex-smtpd
       repository: https://helm-repo.highcanfly.club
       version: 0.1.6
     description: A Helm chart for deploying a full Dolibarr stack
-    digest: 354ef0d0846fca9ad190e6a30cf01db0a4970aa36d3f1defd95a1a676685c574
+    digest: 79eaf9fc73f76ef0eeb602c009f987300355a118c11245222ca4262255ae12a3
     name: dolidock
     type: application
     urls:
@@ -463,7 +474,7 @@ entries:
     version: 0.11.6
   - apiVersion: v2
     appVersion: 20.0.0.0
-    created: "2026-09-21T14:41:17.754818379Z"
+    created: "2026-09-22T16:46:31.702910639Z"
     dependencies:
     - name: flex-smtpd
       repository: https://helm-repo.highcanfly.club
@@ -477,7 +488,7 @@ entries:
     version: 0.11.5
   - apiVersion: v2
     appVersion: 19.0.0.0
-    created: "2026-09-21T14:41:17.753657712Z"
+    created: "2026-09-22T16:46:31.702213592Z"
     dependencies:
     - name: flex-smtpd
       repository: https://helm-repo.highcanfly.club
@@ -491,7 +502,7 @@ entries:
     version: 0.11.4
   - apiVersion: v2
     appVersion: 18.0.5.0
-    created: "2026-09-21T14:41:17.752559643Z"
+    created: "2026-09-22T16:46:31.701527576Z"
     dependencies:
     - name: flex-smtpd
       repository: https://helm-repo.highcanfly.club
@@ -505,7 +516,7 @@ entries:
     version: 0.11.3
   - apiVersion: v2
     appVersion: 18.0.5.0
-    created: "2026-09-21T14:41:17.751447887Z"
+    created: "2026-09-22T16:46:31.700799797Z"
     dependencies:
     - name: flex-smtpd
       repository: https://helm-repo.highcanfly.club
@@ -519,7 +530,7 @@ entries:
     version: 0.11.1
   - apiVersion: v2
     appVersion: 18.0.4.0
-    created: "2026-09-21T14:41:17.750394311Z"
+    created: "2026-09-22T16:46:31.700085637Z"
     dependencies:
     - name: flex-smtpd
       repository: https://helm-repo.highcanfly.club
@@ -533,7 +544,7 @@ entries:
     version: 0.10.4
   - apiVersion: v2
     appVersion: 18.0.4.0
-    created: "2026-09-21T14:41:17.749438857Z"
+    created: "2026-09-22T16:46:31.698719193Z"
     dependencies:
     - name: flex-smtpd
       repository: https://helm-repo.highcanfly.club
@@ -547,7 +558,7 @@ entries:
     version: 0.10.3
   - apiVersion: v2
     appVersion: 18.0.4
-    created: "2026-09-21T14:41:17.746946713Z"
+    created: "2026-09-22T16:46:31.697725607Z"
     dependencies:
     - name: flex-smtpd
       repository: https://helm-repo.highcanfly.club
@@ -561,7 +572,7 @@ entries:
     version: 0.10.1
   - apiVersion: v2
     appVersion: 18.0.4
-    created: "2026-09-21T14:41:17.745986281Z"
+    created: "2026-09-22T16:46:31.69703942Z"
     dependencies:
     - name: flex-smtpd
       repository: https://helm-repo.highcanfly.club
@@ -575,7 +586,7 @@ entries:
     version: 0.10.0
   - apiVersion: v2
     appVersion: 18.0.4
-    created: "2026-09-21T14:41:17.764011627Z"
+    created: "2026-09-22T16:46:31.708179808Z"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: ca8c59eaca363d46cb48f2fb925631810b3002e310febd8b8424fd89254db98b
     name: dolidock
@@ -585,7 +596,7 @@ entries:
     version: 0.9.16
   - apiVersion: v2
     appVersion: 18.0.4
-    created: "2026-09-21T14:41:17.763294178Z"
+    created: "2026-09-22T16:46:31.707754086Z"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: a4bd4023e07c02f6a091abcc31685f4ea0ab66990da944cc0a2df6951cfcf707
     name: dolidock
@@ -595,7 +606,7 @@ entries:
     version: 0.9.15
   - apiVersion: v2
     appVersion: 18.0.4
-    created: "2026-09-21T14:41:17.762117245Z"
+    created: "2026-09-22T16:46:31.707346645Z"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 92317e9f6a48c3c834b22d47f175726b9ae63dda308694a3d9118f5e9a6fb3c1
     name: dolidock
@@ -605,7 +616,7 @@ entries:
     version: 0.9.14
   - apiVersion: v2
     appVersion: 18.0.2.1
-    created: "2026-09-21T14:41:17.76116594Z"
+    created: "2026-09-22T16:46:31.706951304Z"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 11be3b87eca193bd2547dc668716649e71ad6b1a21bfd3570c1c1cd178d4e2b5
     name: dolidock
@@ -615,7 +626,7 @@ entries:
     version: 0.9.13
   - apiVersion: v2
     appVersion: 18.0.1.11
-    created: "2026-09-21T14:41:17.760521517Z"
+    created: "2026-09-22T16:46:31.706542807Z"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 631856cc4dd9bf9874f61fa0ec7966f086c18b22eedb1764f8e700f3d82b5835
     name: dolidock
@@ -625,7 +636,7 @@ entries:
     version: 0.9.12
   - apiVersion: v2
     appVersion: 18.0.1.10
-    created: "2026-09-21T14:41:17.759876002Z"
+    created: "2026-09-22T16:46:31.70614826Z"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: be811a6e8ea47a7157bc07a845832dfd506f42828e878e35890bcb981111d715
     name: dolidock
@@ -635,7 +646,7 @@ entries:
     version: 0.9.11
   - apiVersion: v2
     appVersion: 18.0.1.10
-    created: "2026-09-21T14:41:17.759211381Z"
+    created: "2026-09-22T16:46:31.705719058Z"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 53e473aff06ebe817c233771c985acfa366fcb4c49e034754b146293a5c83b67
     name: dolidock
@@ -645,7 +656,7 @@ entries:
     version: 0.9.10
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2026-09-21T14:41:17.770336265Z"
+    created: "2026-09-22T16:46:31.712046634Z"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 812a5fa0423717f8c56faf7f1f6d1046b4bd9b8ba1ef849808b9708a3c5e31a0
     name: dolidock
@@ -655,7 +666,7 @@ entries:
     version: 0.9.9
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2026-09-21T14:41:17.768624287Z"
+    created: "2026-09-22T16:46:31.711649069Z"
     description: A Helm chart for deploying a full Dolibarr stack
     digest: 63ff45407aa534ab8a4d179f6d1acfe30f1ab8626cd58073eb996853a9f35d7b
     name: dolidock
@@ -665,7 +676,7 @@ entries:
     version: 0.9.8
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2026-09-21T14:41:17.767887331Z"
+    created: "2026-09-22T16:46:31.711248685Z"
     description: A Helm chart for Kubernetes
     digest: 73f073a955c29f9ec6bf3023b0e556f53ad2200a44484f08e9ef4c88bba1c719
     name: dolidock
@@ -675,7 +686,7 @@ entries:
     version: 0.9.7
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2026-09-21T14:41:17.767212121Z"
+    created: "2026-09-22T16:46:31.710857681Z"
     description: A Helm chart for Kubernetes
     digest: 4c43c3dc067fac2321b10d8a44a41c4b9c3b303838ec2aa545f8ba9e915f09aa
     name: dolidock
@@ -685,7 +696,7 @@ entries:
     version: 0.9.6
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2026-09-21T14:41:17.7665633Z"
+    created: "2026-09-22T16:46:31.710479537Z"
     description: A Helm chart for Kubernetes
     digest: 1ef397d6decf83bc70a4984879754db4f3f38a38025f8cc0107a827764f7e48b
     name: dolidock
@@ -695,7 +706,7 @@ entries:
     version: 0.9.5
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2026-09-21T14:41:17.765827176Z"
+    created: "2026-09-22T16:46:31.710104976Z"
     description: A Helm chart for Kubernetes
     digest: 91be13b19a6ee319c32758e0899ba61accac93211e4ab57143708f1fc726fb7d
     name: dolidock
@@ -705,7 +716,7 @@ entries:
     version: 0.9.4
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2026-09-21T14:41:17.765203531Z"
+    created: "2026-09-22T16:46:31.709666182Z"
     description: A Helm chart for Kubernetes
     digest: 86a66f3d6a68adc9ce6b748518ab14dce5a6d43b5f93589f67b2a00c5ef6ac2f
     name: dolidock
@@ -715,7 +726,7 @@ entries:
     version: 0.9.3
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2026-09-21T14:41:17.764619712Z"
+    created: "2026-09-22T16:46:31.709241898Z"
     description: A Helm chart for Kubernetes
     digest: 2da381f19d967cb0fb73e61db3c5cbc3f655e891dd2e4e8911e3be933e24e364
     name: dolidock
@@ -725,7 +736,7 @@ entries:
     version: 0.9.2
   - apiVersion: v2
     appVersion: 18.0.1
-    created: "2026-09-21T14:41:17.758532084Z"
+    created: "2026-09-22T16:46:31.705116057Z"
     description: A Helm chart for Kubernetes
     digest: 723bb70e86e3de5519898cd8b5fe04e00c9c60744103f9d7ec0042f513fc4b0f
     name: dolidock
@@ -735,7 +746,7 @@ entries:
     version: 0.9.1
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2026-09-21T14:41:17.757862333Z"
+    created: "2026-09-22T16:46:31.704684225Z"
     description: A Helm chart for Kubernetes
     digest: 9b6799ce0c5e47d88f30b3b93d7adc0f89536994227eb1f75feeb94586e54ab3
     name: dolidock
@@ -745,7 +756,7 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2026-09-21T14:41:17.745065061Z"
+    created: "2026-09-22T16:46:31.69638258Z"
     description: A Helm chart for Kubernetes
     digest: a03d9fc5d6a9bcf7deb0b4a52ea3945a2d849209df11980e36adb24275c1a909
     name: dolidock
@@ -755,7 +766,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2026-09-21T14:41:17.74451264Z"
+    created: "2026-09-22T16:46:31.696041141Z"
     description: A Helm chart for Kubernetes
     digest: e3149fc159905a78c4ee546be73bd228e19d6ce0d6c833ff761f0f105380e07d
     name: dolidock
@@ -765,7 +776,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-09-21T14:41:17.743942476Z"
+    created: "2026-09-22T16:46:31.695674387Z"
     description: A Helm chart for Kubernetes
     digest: c9bfafdc6c8f2c110abf3cabccabe4f1c719d48667ec4303fda586d52311cfa3
     name: dolidock
@@ -776,9 +787,9 @@ entries:
   easyappointments:
   - apiVersion: v2
     appVersion: 1.5.0-dev.3
-    created: "2026-09-21T14:41:17.771226897Z"
+    created: "2026-09-22T16:46:31.71254763Z"
     description: A Helm chart for deploying Easyappointments on Kubernetes
-    digest: 01abd7979798ab14454154c121afae5df7e6f593690b64aedaaa2e6249efcbc8
+    digest: b3af0ceecd7a31966c83282cec2dd03f9507f94f4fc16322f203fa471ad8818f
     name: easyappointments
     type: application
     urls:
@@ -786,7 +797,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.5.0-dev.3
-    created: "2026-09-21T14:41:17.770726373Z"
+    created: "2026-09-22T16:46:31.712253855Z"
     description: A Helm chart for deploying Easyappointments on Kubernetes
     digest: dc2e8929c448181b8d3d6892ab3b31783ed0b3c4712906b9bed4de48ab45749b
     name: easyappointments
@@ -796,16 +807,16 @@ entries:
     version: 0.1.0
   flex-smtpd:
   - apiVersion: v2
-    created: "2026-09-21T14:41:17.773456429Z"
+    created: "2026-09-22T16:46:31.7145047Z"
     description: A Helm chart deploying a SMTP relay server https://github.com/highcanfly-club/docker-smtp-relay
-    digest: 38ef43deafe2f8e4b1242435ef7ad222e69b76d8623c1147571b4112ba5208ee
+    digest: b6d766cafa5848d9f668f7a04490c46b76bc8c49bf222a11e5edb02771af5098
     name: flex-smtpd
     type: application
     urls:
     - https://helm-repo.highcanfly.club/flex-smtpd-0.1.7.tgz
     version: 0.1.7
   - apiVersion: v2
-    created: "2026-09-21T14:41:17.773182327Z"
+    created: "2026-09-22T16:46:31.714340915Z"
     description: A Helm chart deploying a SMTP relay server https://github.com/highcanfly-club/docker-smtp-relay
     digest: 2d36cdb9c354964fea149ebcd25e4da343b80284091ea062a5c8925f3705c617
     name: flex-smtpd
@@ -814,7 +825,7 @@ entries:
     - https://helm-repo.highcanfly.club/flex-smtpd-0.1.6.tgz
     version: 0.1.6
   - apiVersion: v2
-    created: "2026-09-21T14:41:17.772916231Z"
+    created: "2026-09-22T16:46:31.714177858Z"
     description: A Helm chart deploying a SMTP relay server https://github.com/highcanfly-club/docker-smtp-relay
     digest: 46156160026005e51f18df1226d0395a8483dd67bd141dae305957c0cb972c7f
     name: flex-smtpd
@@ -823,7 +834,7 @@ entries:
     - https://helm-repo.highcanfly.club/flex-smtpd-0.1.5.tgz
     version: 0.1.5
   - apiVersion: v2
-    created: "2026-09-21T14:41:17.772633883Z"
+    created: "2026-09-22T16:46:31.714005703Z"
     description: A Helm chart deploying a SMTP relay server https://github.com/highcanfly-club/docker-smtp-relay
     digest: 5e6a059a430f993ed3f5b843ffef7104deb588a07561a93a231f21fc2aa41b43
     name: flex-smtpd
@@ -832,7 +843,7 @@ entries:
     - https://helm-repo.highcanfly.club/flex-smtpd-0.1.4.tgz
     version: 0.1.4
   - apiVersion: v2
-    created: "2026-09-21T14:41:17.77233182Z"
+    created: "2026-09-22T16:46:31.713791772Z"
     description: A Helm chart deploying a SMTP relay server https://github.com/highcanfly-club/docker-smtp-relay
     digest: bc85017d5fb95fcacedef5cffad9eb6258b5064608a082ec36280444fe5fcc29
     name: flex-smtpd
@@ -841,7 +852,7 @@ entries:
     - https://helm-repo.highcanfly.club/flex-smtpd-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v2
-    created: "2026-09-21T14:41:17.772062246Z"
+    created: "2026-09-22T16:46:31.713312198Z"
     description: A Helm chart deploying a SMTP relay server https://github.com/highcanfly-club/docker-smtp-relay
     digest: 20663f55f1d07022b58d30488f25e9b543765e87ff6eac5d2a2c984c001ef081
     name: flex-smtpd
@@ -850,7 +861,7 @@ entries:
     - https://helm-repo.highcanfly.club/flex-smtpd-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
-    created: "2026-09-21T14:41:17.771804124Z"
+    created: "2026-09-22T16:46:31.712916861Z"
     description: A Helm chart deploying a SMTP relay server https://github.com/highcanfly-club/docker-smtp-relay
     digest: 94e47699446a55672d797cfe995c35abda04a4d9d2d4f911c2f92604093d7d16
     name: flex-smtpd
@@ -859,7 +870,7 @@ entries:
     - https://helm-repo.highcanfly.club/flex-smtpd-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
-    created: "2026-09-21T14:41:17.771538649Z"
+    created: "2026-09-22T16:46:31.71269301Z"
     description: A Helm chart for Kubernetes
     digest: e428757e560b031da33c490ea41362eed9445cb29ae70358011534ab61708aae
     name: flex-smtpd
@@ -870,7 +881,7 @@ entries:
   gitea:
   - apiVersion: v2
     appVersion: 1.21.6
-    created: "2026-09-21T14:41:18.052445402Z"
+    created: "2026-09-22T16:46:31.902582659Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -883,7 +894,7 @@ entries:
       repository: https://helm-repo.highcanfly.club
       version: 0.1.6
     description: A Helm chart for deploying Gitea for Highcanfly
-    digest: d0a103885a127ca3eca15b724ec69abdd7889b8c9692a500c8b15492d4c9c6b7
+    digest: ab3724c53009adc739c2db12d18c3b1cdecaa05d0d86a348da48a0a43bff865b
     name: gitea
     sources:
     - https://github.com/highcanfly-club/helm-repo/tree/main/charts/gitea
@@ -893,7 +904,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 1.21.4a
-    created: "2026-09-21T14:41:18.03817788Z"
+    created: "2026-09-22T16:46:31.892998966Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -916,7 +927,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 1.21.4
-    created: "2026-09-21T14:41:18.02553045Z"
+    created: "2026-09-22T16:46:31.884554658Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -939,7 +950,7 @@ entries:
     version: 1.0.0
   - apiVersion: v2
     appVersion: 1.21.3
-    created: "2026-09-21T14:41:18.012749212Z"
+    created: "2026-09-22T16:46:31.876114216Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -958,7 +969,7 @@ entries:
     version: 0.9.1
   - apiVersion: v2
     appVersion: 1.21.3
-    created: "2026-09-21T14:41:17.998899981Z"
+    created: "2026-09-22T16:46:31.866892377Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -977,7 +988,7 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: 1.21.3
-    created: "2026-09-21T14:41:17.977195217Z"
+    created: "2026-09-22T16:46:31.851393171Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -996,7 +1007,7 @@ entries:
     version: 0.7.8
   - apiVersion: v2
     appVersion: 1.21.1
-    created: "2026-09-21T14:41:17.954027961Z"
+    created: "2026-09-22T16:46:31.836309822Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -1015,7 +1026,7 @@ entries:
     version: 0.7.1
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2026-09-21T14:41:17.93126179Z"
+    created: "2026-09-22T16:46:31.819908743Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -1034,7 +1045,7 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2026-09-21T14:41:17.908070051Z"
+    created: "2026-09-22T16:46:31.804483412Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -1053,7 +1064,7 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2026-09-21T14:41:17.884864192Z"
+    created: "2026-09-22T16:46:31.789343142Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -1072,7 +1083,7 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2026-09-21T14:41:17.861112285Z"
+    created: "2026-09-22T16:46:31.772996594Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -1091,7 +1102,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2026-09-21T14:41:17.839272514Z"
+    created: "2026-09-22T16:46:31.75782941Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -1110,7 +1121,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2026-09-21T14:41:17.815588532Z"
+    created: "2026-09-22T16:46:31.743046816Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -1129,7 +1140,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2026-09-21T14:41:17.793449991Z"
+    created: "2026-09-22T16:46:31.727685186Z"
     dependencies:
     - name: gitea
       repository: https://charts.bitnami.com/bitnami
@@ -1148,7 +1159,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.20.5
-    created: "2026-09-21T14:41:17.78121972Z"
+    created: "2026-09-22T16:46:31.719694776Z"
     dependencies:
     - name: gitea
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1165,7 +1176,7 @@ entries:
   hcf-coder:
   - apiVersion: v2
     appVersion: 1.5.15
-    created: "2026-09-21T14:41:18.097678043Z"
+    created: "2026-09-22T16:46:31.933064537Z"
     dependencies:
     - condition: oauth2-proxy.enabled
       name: oauth2-proxy
@@ -1176,7 +1187,7 @@ entries:
       repository: https://helm-repo.highcanfly.club
       version: 0.1.3
     description: A Helm chart for deploying hcf-coder on Kubernetes
-    digest: 0817b8f06d9b5587320bb91daa1691d706ff11b805414869489df5e45ac852e5
+    digest: c7b1b51ee2fb48d5e31263a715f3720b69422c8a94948642ca7acfd15d8549a8
     name: hcf-coder
     sources:
     - https://github.com/highcanfly-club/hcf-coder
@@ -1186,7 +1197,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 1.5.15
-    created: "2026-09-21T14:41:18.090298175Z"
+    created: "2026-09-22T16:46:31.928282293Z"
     dependencies:
     - condition: oauth2-proxy.enabled
       name: oauth2-proxy
@@ -1207,7 +1218,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: 1.5.15
-    created: "2026-09-21T14:41:18.083127821Z"
+    created: "2026-09-22T16:46:31.923272926Z"
     dependencies:
     - condition: oauth2-proxy.enabled
       name: oauth2-proxy
@@ -1228,7 +1239,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 1.5.14
-    created: "2026-09-21T14:41:18.076838281Z"
+    created: "2026-09-22T16:46:31.919068342Z"
     dependencies:
     - condition: oauth2-proxy.enabled
       name: oauth2-proxy
@@ -1245,7 +1256,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 1.5.11
-    created: "2026-09-21T14:41:18.069824211Z"
+    created: "2026-09-22T16:46:31.914137885Z"
     dependencies:
     - condition: oauth2-proxy.enabled
       name: oauth2-proxy
@@ -1262,7 +1273,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 1.5.7
-    created: "2026-09-21T14:41:18.062700183Z"
+    created: "2026-09-22T16:46:31.909392902Z"
     dependencies:
     - condition: oauth2-proxy.enabled
       name: oauth2-proxy
@@ -1279,7 +1290,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.5.7
-    created: "2026-09-21T14:41:18.055519279Z"
+    created: "2026-09-22T16:46:31.904465784Z"
     description: A Helm chart for deploying hcf-coder on Kubernetes
     digest: 7216cfd228fd2eeae592c3dba32e2216d87f5a0fc1a724bec0e3406a4f07d570
     name: hcf-coder
@@ -1289,7 +1300,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 1.5.7
-    created: "2026-09-21T14:41:18.055136024Z"
+    created: "2026-09-22T16:46:31.904233418Z"
     description: A Helm chart for deploying hcf-coder on Kubernetes
     digest: e98fed47a605d53c661919f7b6f70a2dbbfa41ea23b6f7502e7d5264794e320a
     name: hcf-coder
@@ -1299,7 +1310,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 1.5.3
-    created: "2026-09-21T14:41:18.05476405Z"
+    created: "2026-09-22T16:46:31.903994807Z"
     description: A Helm chart for deploying hcf-coder on Kubernetes
     digest: 47fa886d142682651dd7e159f1492ab4be1fbe37575ca1c7e4399f2e80dcf589
     name: hcf-coder
@@ -1309,7 +1320,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-09-21T14:41:18.054373691Z"
+    created: "2026-09-22T16:46:31.903742384Z"
     description: A Helm chart for Kubernetes
     digest: e2039064b07a4d912e6c9a0d6ca82c5c0c0a51988761d75f92623e415d368926
     name: hcf-coder
@@ -1319,7 +1330,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-09-21T14:41:18.054015121Z"
+    created: "2026-09-22T16:46:31.903502389Z"
     description: A Helm chart for Kubernetes
     digest: e4f322e0f1040910bd6f5d46a5c2c4d574bde8cd96ab87e78de0102ddbd1b360
     name: hcf-coder
@@ -1329,7 +1340,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-09-21T14:41:18.053634551Z"
+    created: "2026-09-22T16:46:31.903290417Z"
     description: A Helm chart for Kubernetes
     digest: d41101f911c04877d6b018128444e78841085f1ccdf102e7e71126f442c2cee5
     name: hcf-coder
@@ -1339,7 +1350,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-09-21T14:41:18.053257668Z"
+    created: "2026-09-22T16:46:31.903065928Z"
     description: A Helm chart for Kubernetes
     digest: 117060bbf4ee3ce1b41cc28749b3258a12920ff472bc39cf9eff46670f03a951
     name: hcf-coder
@@ -1349,7 +1360,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-09-21T14:41:18.052895672Z"
+    created: "2026-09-22T16:46:31.902820682Z"
     description: A Helm chart for Kubernetes
     digest: 3496d9795d0eba973fdc8d405b06c71ae9056234887a5626fe8345e77cc89eb8
     name: hcf-coder
@@ -1360,9 +1371,9 @@ entries:
   hcfmailer:
   - apiVersion: v2
     appVersion: 2.3.9.9
-    created: "2026-09-21T14:41:18.098188365Z"
+    created: "2026-09-22T16:46:31.933404502Z"
     description: An adapted version of Listmonk
-    digest: 3c1c4a69e2849cd9a3955e830d4332b2e410d2e09e3c91f1b36b2850e6b17b2b
+    digest: 78c3cce1a30960553a3a2e8b0acefab361e6b7a805b1db61e146d401e69f07b6
     name: hcfmailer
     type: application
     urls:
@@ -1371,9 +1382,9 @@ entries:
   hcfmailerplus:
   - apiVersion: v2
     appVersion: v20250107
-    created: "2026-09-21T14:41:18.108528336Z"
+    created: "2026-09-22T16:46:31.93983541Z"
     description: A Helm chart for HighCanFly HCFMailer+
-    digest: 5c9608516649d077edc77ec4764812c353f25d4c270b06b86fe7acdff2506966
+    digest: ad9c4247d9945c9fdb5c20357e619536fdd2a87c47a2f9deca596ad0812da869
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
     name: hcfmailerplus
     type: application
@@ -1382,7 +1393,7 @@ entries:
     version: 0.4.4
   - apiVersion: v2
     appVersion: v20250107
-    created: "2026-09-21T14:41:18.106856215Z"
+    created: "2026-09-22T16:46:31.938998973Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: 6a26414f9eef615ff3f4e5f6485e5cf761f79f4b39a0487bd6a355ac6e9f7208
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1393,7 +1404,7 @@ entries:
     version: 0.4.3
   - apiVersion: v2
     appVersion: v20240301
-    created: "2026-09-21T14:41:18.106078463Z"
+    created: "2026-09-22T16:46:31.938497962Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: a1bcad2ac29a03b4fa90ab5f640f8ffaa7fc510041b0c7cbacb486a917802928
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1404,7 +1415,7 @@ entries:
     version: 0.4.2
   - apiVersion: v2
     appVersion: v20240301
-    created: "2026-09-21T14:41:18.105292175Z"
+    created: "2026-09-22T16:46:31.937957993Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: 2d9872cbeff71d254c02163da98c1a0cb8b58d340484b96492c980d845d95bcf
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1415,7 +1426,7 @@ entries:
     version: 0.4.1
   - apiVersion: v2
     appVersion: v20240301
-    created: "2026-09-21T14:41:18.104528199Z"
+    created: "2026-09-22T16:46:31.937389379Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: ab04e1bbccf3e0517f449196c766433410834799fbbc64b0c04278ec035924f8
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1426,7 +1437,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: v20240120
-    created: "2026-09-21T14:41:18.103733947Z"
+    created: "2026-09-22T16:46:31.936819622Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: 9e528c93b5a925ad76f4dff03aec47c95c06795a5d89ed5141e2c6e5ffa4f06d
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1437,7 +1448,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: v20240120
-    created: "2026-09-21T14:41:18.102893678Z"
+    created: "2026-09-22T16:46:31.936347794Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: b685d69bdb4cafa0f552c81d37436ca0d3d510460c92eef2adb65f1eacdb6164
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1448,7 +1459,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: v20231216.2
-    created: "2026-09-21T14:41:18.10211771Z"
+    created: "2026-09-22T16:46:31.935828562Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: f3696525c2124c367d7d1659cbb371a75592b06ad8709d723a5de97119f33ddb
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1459,7 +1470,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: v20230910.1
-    created: "2026-09-21T14:41:18.101307508Z"
+    created: "2026-09-22T16:46:31.935272805Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: 64010454c4793dcd33e2bbdd82f58883d3e460cc5a5d1c82ec657be70cccd579
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1470,7 +1481,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: v20230511.1
-    created: "2026-09-21T14:41:18.1002495Z"
+    created: "2026-09-22T16:46:31.934382417Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: 12ea58315df8bc8a4eae6e46adc0b456cb95be833f2d4ba0128fd5ccfd814771
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1481,7 +1492,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: v20230509.3
-    created: "2026-09-21T14:41:18.099143067Z"
+    created: "2026-09-22T16:46:31.933987534Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: 81774bf7b92c85d4a506c1cd7d65ef12adebb3a2fb9a7627a03b375310a40d44
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1492,7 +1503,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: v20230501.2
-    created: "2026-09-21T14:41:18.09867836Z"
+    created: "2026-09-22T16:46:31.93368757Z"
     description: A Helm chart for HighCanFly HCFMailer+
     digest: b2161df2974afe426eea69889817cb9a6710727bf120c5ec7250ad4eaae86130
     icon: https://raw.githubusercontent.com/highcanfly-club/hcfmailer-plus/hcf/client/static/hcfmailer%2B.svg
@@ -1504,9 +1515,9 @@ entries:
   hcfschedule:
   - apiVersion: v2
     appVersion: 1.5.0-dev.3
-    created: "2026-09-21T14:41:18.109377168Z"
+    created: "2026-09-22T16:46:31.940572565Z"
     description: A Helm chart for deploying HCF!Shedule on Kubernetes
-    digest: 8597a5bdfaac98b150c62e948b7f6ca652ff12de905bae35a60e8e1be352ceb7
+    digest: 8240916384544a09bf4cfd70aff5a2c64c22927995d5eee93ad400a60cba81af
     name: hcfschedule
     type: application
     urls:
@@ -1515,9 +1526,9 @@ entries:
   helm-dashboard:
   - apiVersion: v2
     appVersion: 1.3.1a
-    created: "2026-09-21T14:41:18.110292446Z"
+    created: "2026-09-22T16:46:31.941205574Z"
     description: A GUI Dashboard for Helm by Komodor
-    digest: f10f4616f71f77d22f2315882620e1f83c0200c5350930ea9fd2444868c7db92
+    digest: 3f50bbca44c5a4938ea1aeb538f7720efee304fca1839101717b5d65effc9772
     icon: https://raw.githubusercontent.com/highcanfly-club/helm-dashboard/main/pkg/dashboard/static/logo.svg
     name: helm-dashboard
     type: application
@@ -1526,7 +1537,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 1.3.1
-    created: "2026-09-21T14:41:18.109879656Z"
+    created: "2026-09-22T16:46:31.940924272Z"
     description: A GUI Dashboard for Helm by Komodor
     digest: 045eb618fe71d27ad07e194963040116d188ed871b072ae3a28172f3aaac0ff5
     icon: https://raw.githubusercontent.com/highcanfly-club/helm-dashboard/main/pkg/dashboard/static/logo.svg
@@ -1538,13 +1549,13 @@ entries:
   minio:
   - apiVersion: v2
     appVersion: v2.47.2
-    created: "2026-09-21T14:41:18.117966753Z"
+    created: "2026-09-22T16:46:31.946442838Z"
     dependencies:
     - name: minio
       repository: https://charts.min.io/
       version: 5.0.14
     description: A Helm chart for Kubernetes
-    digest: 55c14d37b5b4bb47209200438b3a5dd682f62dfae982dc02d53dc27a651f06f9
+    digest: be0debbe307005e6c4769991b2d04ade2fdcc0a81dd0f4c0a49058078459b6b5
     name: minio
     sources:
     - https://github.com/eltorio/minio-prometheus-chart.git
@@ -1554,7 +1565,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: v2.47.2
-    created: "2026-09-21T14:41:18.115602398Z"
+    created: "2026-09-22T16:46:31.944914063Z"
     dependencies:
     - name: minio
       repository: https://charts.min.io/
@@ -1570,7 +1581,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: v2.47.2
-    created: "2026-09-21T14:41:18.113532785Z"
+    created: "2026-09-22T16:46:31.943377628Z"
     dependencies:
     - name: minio
       repository: https://charts.min.io/
@@ -1586,7 +1597,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: v2.47.2
-    created: "2026-09-21T14:41:18.11192858Z"
+    created: "2026-09-22T16:46:31.94232344Z"
     dependencies:
     - name: minio
       repository: https://charts.min.io/
@@ -1603,9 +1614,9 @@ entries:
   nginx-ad-auth:
   - apiVersion: v2
     appVersion: 1.2.1
-    created: "2026-09-21T14:41:18.118185051Z"
+    created: "2026-09-22T16:46:31.946579597Z"
     description: A Helm chart for deploying nginx-ad-auth
-    digest: 273991468c31e9de01b5c97da712b627d32925abf86708ae047fce16a976732f
+    digest: b73bca451876c62102a97b71ca9b2d303460bbbe519250bc608e7093340eb637
     icon: https://avatars.githubusercontent.com/u/165936401?v=4
     name: nginx-ad-auth
     urls:
@@ -1614,7 +1625,7 @@ entries:
   odoo:
   - apiVersion: v2
     appVersion: 16.0.0.28
-    created: "2026-09-21T14:41:18.236876488Z"
+    created: "2026-09-22T16:46:32.027171609Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1623,7 +1634,7 @@ entries:
       repository: https://helm-repo.highcanfly.club
       version: 0.1.6
     description: A Helm chart for deploying our custom Odoo
-    digest: ac88822555ffc72ba9f1501713ac30cacb9a7f6f846fd94ff471167ac1ff6f33
+    digest: 7dc971e0196d1deeeb324d48af5fc6f49fd30f919e1594dfb1bc2392f6d2a4b5
     name: odoo
     type: application
     urls:
@@ -1631,7 +1642,7 @@ entries:
     version: 0.4.1
   - apiVersion: v2
     appVersion: 16.0.0.22
-    created: "2026-09-21T14:41:18.229248089Z"
+    created: "2026-09-22T16:46:32.022314711Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1648,7 +1659,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 16.0.0.22
-    created: "2026-09-21T14:41:18.221870039Z"
+    created: "2026-09-22T16:46:32.017199578Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1665,7 +1676,7 @@ entries:
     version: 0.3.8
   - apiVersion: v2
     appVersion: 16.0.0.24
-    created: "2026-09-21T14:41:18.214675668Z"
+    created: "2026-09-22T16:46:32.01244448Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1682,7 +1693,7 @@ entries:
     version: 0.3.7
   - apiVersion: v2
     appVersion: 16.0.0.22
-    created: "2026-09-21T14:41:18.207731659Z"
+    created: "2026-09-22T16:46:32.008329191Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1696,7 +1707,7 @@ entries:
     version: 0.3.6
   - apiVersion: v2
     appVersion: 16.0.0.22
-    created: "2026-09-21T14:41:18.201917286Z"
+    created: "2026-09-22T16:46:32.003491389Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1710,7 +1721,7 @@ entries:
     version: 0.3.5
   - apiVersion: v2
     appVersion: 16.0.0.21
-    created: "2026-09-21T14:41:18.195080905Z"
+    created: "2026-09-22T16:46:31.998610361Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1724,7 +1735,7 @@ entries:
     version: 0.3.4
   - apiVersion: v2
     appVersion: 16.0.0.18
-    created: "2026-09-21T14:41:18.188284278Z"
+    created: "2026-09-22T16:46:31.994444612Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1738,7 +1749,7 @@ entries:
     version: 0.3.3
   - apiVersion: v2
     appVersion: 16.0.0.17
-    created: "2026-09-21T14:41:18.176503846Z"
+    created: "2026-09-22T16:46:31.98560462Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1752,7 +1763,7 @@ entries:
     version: 0.3.2
   - apiVersion: v2
     appVersion: 16.0.0.13
-    created: "2026-09-21T14:41:18.163698616Z"
+    created: "2026-09-22T16:46:31.977146876Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1766,7 +1777,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: 16.0.0.13
-    created: "2026-09-21T14:41:18.150026877Z"
+    created: "2026-09-22T16:46:31.968170303Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1780,7 +1791,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 16.0.0.13
-    created: "2026-09-21T14:41:18.137518749Z"
+    created: "2026-09-22T16:46:31.959786126Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1794,7 +1805,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 16.0.0.1
-    created: "2026-09-21T14:41:18.125039072Z"
+    created: "2026-09-22T16:46:31.951396231Z"
     dependencies:
     - name: odoo
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -1809,14 +1820,14 @@ entries:
   ollama:
   - apiVersion: v2
     appVersion: 0.3.5
-    created: "2026-09-21T14:41:18.23852774Z"
+    created: "2026-09-22T16:46:32.028167907Z"
     dependencies:
     - name: cloudflared
       repository: https://helm-repo.highcanfly.club
       version: 0.1.3
     description: Helm chart to deploy ollama with allminilm:l6-v2 and optionally expose
       it via cloudflared
-    digest: 2147c0502e8c05bb81fbb70b7b69f3b4b697c0029e94734de29f33e351928651
+    digest: 4b59c6387266f458c4141f1ec6141f4f70f1c60338d548aadcdfc926b268c764
     name: ollama
     type: application
     urls:
@@ -1824,7 +1835,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.3.5
-    created: "2026-09-21T14:41:18.2377189Z"
+    created: "2026-09-22T16:46:32.027668218Z"
     dependencies:
     - name: cloudflared
       repository: https://helm-repo.highcanfly.club
@@ -1840,9 +1851,9 @@ entries:
   pretix:
   - apiVersion: v2
     appVersion: 4.21.21
-    created: "2026-09-21T14:41:18.241604343Z"
+    created: "2026-09-22T16:46:32.030626628Z"
     description: A Helm chart for deploying Pretix on Kubernetes
-    digest: 0f58ed19ba79993b3ca23ada4085bcd3f0191ac75db4422b642e5a85db6e72e0
+    digest: 47e8bca695995d8c1239b65b69911d276df447a6d08e4552abb396c828379126
     name: pretix
     type: application
     urls:
@@ -1850,7 +1861,7 @@ entries:
     version: 0.3.5
   - apiVersion: v2
     appVersion: 4.21.21
-    created: "2026-09-21T14:41:18.241068513Z"
+    created: "2026-09-22T16:46:32.030321279Z"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: 0b9f9c1fdc8e86f400a720b3b798c23b5b81e42c3f0da145483f8ff43f6efd96
     name: pretix
@@ -1860,7 +1871,7 @@ entries:
     version: 0.3.4
   - apiVersion: v2
     appVersion: 4.21.21
-    created: "2026-09-21T14:41:18.240374357Z"
+    created: "2026-09-22T16:46:32.030024441Z"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: af0484cc485293dc9aa9e5b236379a62726d7445b32d4db1fd86d9d42293a4b4
     name: pretix
@@ -1870,7 +1881,7 @@ entries:
     version: 0.3.3
   - apiVersion: v2
     appVersion: 4.21.21
-    created: "2026-09-21T14:41:18.239911072Z"
+    created: "2026-09-22T16:46:32.029692234Z"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: ad7880ae3c9b105e3dfed5d564a96bb6dd094dd378af2ce25489734828c801c4
     name: pretix
@@ -1880,7 +1891,7 @@ entries:
     version: 0.3.2
   - apiVersion: v2
     appVersion: 4.21.19
-    created: "2026-09-21T14:41:18.239408334Z"
+    created: "2026-09-22T16:46:32.02933007Z"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: 1ca68b1c334076fe4bcb3ed5eff06e8121140f7cddf1c93524f44dbf66433a24
     name: pretix
@@ -1890,7 +1901,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 4.21.0
-    created: "2026-09-21T14:41:18.238947774Z"
+    created: "2026-09-22T16:46:32.028469698Z"
     description: A Helm chart for deploying Pretix on Kubernetes
     digest: 1f6356abe30774658a165c692333198acc07125158a11080b5cb716786378cbf
     name: pretix
@@ -1900,7 +1911,7 @@ entries:
     version: 0.1.0
   rallly:
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.272047228Z"
+    created: "2026-09-22T16:46:32.0516321Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -1913,7 +1924,7 @@ entries:
       version: 0.1.x
     description: A Helm chart for deploying the Rallly application with PostgreSQL
       support.
-    digest: 9ec7186399b434023d4336af6986aafee0bd88a2f69c64339bb76ed535687069
+    digest: 390a640b0bbc7ee81c5c9833c2386df7dd745a059f8b9ef9c3c7a96ca2a9a799
     home: https://example.com
     keywords:
     - rallly
@@ -1930,7 +1941,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.12.tgz
     version: 0.1.12
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.265644238Z"
+    created: "2026-09-22T16:46:32.047132201Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -1960,7 +1971,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.11.tgz
     version: 0.1.11
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.260351889Z"
+    created: "2026-09-22T16:46:32.042908596Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -1990,7 +2001,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.10.tgz
     version: 0.1.10
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.312996002Z"
+    created: "2026-09-22T16:46:32.078473273Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -2020,7 +2031,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.9.tgz
     version: 0.1.9
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.307272662Z"
+    created: "2026-09-22T16:46:32.0748738Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -2050,7 +2061,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.7.tgz
     version: 0.1.7
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.301779325Z"
+    created: "2026-09-22T16:46:32.070897281Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -2080,7 +2091,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.6.tgz
     version: 0.1.6
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.295764167Z"
+    created: "2026-09-22T16:46:32.06683902Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -2110,7 +2121,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.5.tgz
     version: 0.1.5
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.28941167Z"
+    created: "2026-09-22T16:46:32.063271214Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -2140,7 +2151,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.4.tgz
     version: 0.1.4
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.284373205Z"
+    created: "2026-09-22T16:46:32.059209105Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -2170,7 +2181,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.278016031Z"
+    created: "2026-09-22T16:46:32.055176149Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -2200,7 +2211,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.253914734Z"
+    created: "2026-09-22T16:46:32.038639849Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -2230,7 +2241,7 @@ entries:
     - https://helm-repo.highcanfly.club/rallly-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
-    created: "2026-09-21T14:41:18.2477573Z"
+    created: "2026-09-22T16:46:32.035064882Z"
     dependencies:
     - condition: postgres.enabled
       name: postgresql
@@ -2262,9 +2273,9 @@ entries:
   roundcube:
   - apiVersion: v2
     appVersion: 1.6.6e
-    created: "2026-09-21T14:41:18.317725322Z"
+    created: "2026-09-22T16:46:32.081144206Z"
     description: Our Helm chart for our roundcube needs
-    digest: 61fee02e97589e269acf834d14890b04acc4892e49a3a75dabeacb15eb34d579
+    digest: e5d0964cf56d03fe4bc30f158c01b6ae5913d88d19008e956e584bbe61215636
     name: roundcube
     type: application
     urls:
@@ -2272,7 +2283,7 @@ entries:
     version: 0.2.7
   - apiVersion: v2
     appVersion: 1.6.6e
-    created: "2026-09-21T14:41:18.317312472Z"
+    created: "2026-09-22T16:46:32.080911538Z"
     description: Our Helm chart for our roundcube needs
     digest: d313a7eabc61ce1081504f5ab323454fa67d024b3ae5f2d8fb58a83adda2c1cd
     name: roundcube
@@ -2282,7 +2293,7 @@ entries:
     version: 0.2.5
   - apiVersion: v2
     appVersion: 1.6.6e
-    created: "2026-09-21T14:41:18.3169257Z"
+    created: "2026-09-22T16:46:32.080674153Z"
     description: Our Helm chart for our roundcube needs
     digest: 4f0df8c90fbb0fa69bc0f3bd86d0d4aaaa9ea76ecdf59c50a49c16a36cdd8cc1
     name: roundcube
@@ -2292,7 +2303,7 @@ entries:
     version: 0.2.4
   - apiVersion: v2
     appVersion: 1.6.6e
-    created: "2026-09-21T14:41:18.316479187Z"
+    created: "2026-09-22T16:46:32.080450082Z"
     description: Our Helm chart for our roundcube needs
     digest: ea43acd13348377bebb36da4140d939359dd52e7105c73acebce9320cdb2cfa1
     name: roundcube
@@ -2302,7 +2313,7 @@ entries:
     version: 0.2.3
   - apiVersion: v2
     appVersion: 1.6.6e
-    created: "2026-09-21T14:41:18.31555019Z"
+    created: "2026-09-22T16:46:32.080221176Z"
     description: Our Helm chart for our roundcube needs
     digest: 72a5835322e86c53b8d95d23341ca87f95bcb3a9104982d764a4b3c1d8606980
     name: roundcube
@@ -2312,7 +2323,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 1.6.6e
-    created: "2026-09-21T14:41:18.314541156Z"
+    created: "2026-09-22T16:46:32.079988736Z"
     description: Our Helm chart for our roundcube needs
     digest: 3b49636e1eae19fbf2409bfee3e220931487155ee814cf8b6eaf5cd307aa3878
     name: roundcube
@@ -2322,7 +2333,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 1.6.6
-    created: "2026-09-21T14:41:18.314138645Z"
+    created: "2026-09-22T16:46:32.079733639Z"
     description: Our Helm chart for our roundcube needs
     digest: f96ef488d605d87989353f498e1df3d78ecd9bac9797ce1d184057c5f2e9607a
     name: roundcube
@@ -2332,7 +2343,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.6.2
-    created: "2026-09-21T14:41:18.313761551Z"
+    created: "2026-09-22T16:46:32.079468313Z"
     description: Our Helm chart for our roundcube needs
     digest: 42c5a97c8d9e0910c1720f2d8d653800887f9ce5be2ee73617aecba5f459efe4
     name: roundcube
@@ -2342,7 +2353,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.6.2-apache
-    created: "2026-09-21T14:41:18.313390118Z"
+    created: "2026-09-22T16:46:32.079045218Z"
     description: Our Helm chart for our roundcube needs
     digest: dfe969a4f44099d88734ce5aecdb7a1b115c9949e663a632b78d89e533eaf987
     name: roundcube
@@ -2353,9 +2364,9 @@ entries:
   sctgdesk:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-09-21T14:41:18.318827139Z"
+    created: "2026-09-22T16:46:32.081780256Z"
     description: A Helm chart for deploying the backend of the SCTGDesk application
-    digest: 29af56f82aafff250657059b5f3f3ef39b7cfb3fcea82b8db41e9da60ab2d8f7
+    digest: b4e56e471f536430d446b8a3c825c1bffe5cd457315c0450bf75eaddcf4177e3
     name: sctgdesk
     type: application
     urls:
@@ -2363,7 +2374,7 @@ entries:
     version: 1.0.7
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-09-21T14:41:18.318556304Z"
+    created: "2026-09-22T16:46:32.081620708Z"
     description: A Helm chart for deploying the backend of the SCTGDesk application
     digest: cf3317ab903092c953f17733abcba5f6f6c270fff457fdf3ead3090714532daf
     name: sctgdesk
@@ -2373,7 +2384,7 @@ entries:
     version: 1.0.6
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-09-21T14:41:18.318264058Z"
+    created: "2026-09-22T16:46:32.081460351Z"
     description: A Helm chart for deploying the backend of the SCTGDesk application
     digest: 3ac1d49a62093206fbe4cc0341faeba02bec8b063294a6042057add0d551c1b7
     name: sctgdesk
@@ -2383,7 +2394,7 @@ entries:
     version: 1.0.5
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-09-21T14:41:18.317994745Z"
+    created: "2026-09-22T16:46:32.081291843Z"
     description: A Helm chart for deploying the backend of the SCTGDesk application
     digest: ad19662609f9216360067d5203398ca4819e68be0cb7d3917112e8c3f9d3fca7
     name: sctgdesk
@@ -2394,13 +2405,13 @@ entries:
   tokeisrv:
   - apiVersion: v2
     appVersion: 0.3.5
-    created: "2026-09-21T14:41:18.324963791Z"
+    created: "2026-09-22T16:46:32.085562136Z"
     dependencies:
     - name: cloudflared
       repository: https://helm-repo.highcanfly.club
       version: 0.1.3
     description: Helm chart to deploy tokeisrv and optionally expose it via cloudflared
-    digest: 7664c8e156957f8c4178f3504b2d4a6e72394f0f1eadf45ec8be05f6576ff288
+    digest: 278ac2564cbce20ef4fbe4e390d24a971b25f0812181490ff7f3a8140cf14e4f
     name: tokeisrv
     type: application
     urls:
@@ -2408,7 +2419,7 @@ entries:
     version: 0.2.5
   - apiVersion: v2
     appVersion: 0.3.5
-    created: "2026-09-21T14:41:18.32419685Z"
+    created: "2026-09-22T16:46:32.085096417Z"
     dependencies:
     - name: cloudflared
       repository: https://helm-repo.highcanfly.club
@@ -2422,7 +2433,7 @@ entries:
     version: 0.2.4
   - apiVersion: v2
     appVersion: 0.3.4
-    created: "2026-09-21T14:41:18.322909559Z"
+    created: "2026-09-22T16:46:32.084606527Z"
     dependencies:
     - name: cloudflared
       repository: https://helm-repo.highcanfly.club
@@ -2436,7 +2447,7 @@ entries:
     version: 0.2.3
   - apiVersion: v2
     appVersion: 0.3.1
-    created: "2026-09-21T14:41:18.321517962Z"
+    created: "2026-09-22T16:46:32.083478509Z"
     dependencies:
     - name: cloudflared
       repository: https://helm-repo.highcanfly.club
@@ -2450,7 +2461,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2026-09-21T14:41:18.320823275Z"
+    created: "2026-09-22T16:46:32.083061024Z"
     dependencies:
     - name: cloudflared
       repository: https://helm-repo.highcanfly.club
@@ -2464,7 +2475,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2026-09-21T14:41:18.320149578Z"
+    created: "2026-09-22T16:46:32.082630358Z"
     dependencies:
     - name: cloudflared
       repository: https://helm-repo.highcanfly.club
@@ -2478,7 +2489,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-09-21T14:41:18.319480058Z"
+    created: "2026-09-22T16:46:32.082213738Z"
     dependencies:
     - name: cloudflared
       repository: https://helm-repo.highcanfly.club
@@ -2493,9 +2504,9 @@ entries:
   ubuntu-w64build:
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2026-09-21T14:41:18.325585011Z"
+    created: "2026-09-22T16:46:32.085861614Z"
     description: A Helm chart for Kubernetes
-    digest: c7a71728aa0d4a2683d84ecedc0a84405f5b3d2e5df6fb88c54c5a6688502615
+    digest: a77ad44782a9d73c793469db0d8cd4d175dfaa11284301af1a133cec33f8dad4
     name: ubuntu-w64build
     type: application
     urls:
@@ -2503,7 +2514,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-09-21T14:41:18.325287035Z"
+    created: "2026-09-22T16:46:32.085722189Z"
     description: A Helm chart for Kubernetes
     digest: b660a4c85a63e4f3a5d59c979513f73b6788491f0117fee18b2687b069334a75
     name: ubuntu-w64build
@@ -2514,9 +2525,9 @@ entries:
   web-smtp-relay:
   - apiVersion: v2
     appVersion: 1.2.0
-    created: "2026-09-21T14:41:18.326268777Z"
+    created: "2026-09-22T16:46:32.0862634Z"
     description: A Helm chart for Web-SMTP Relay
-    digest: 42a4c7bab4439bf3253c38e8ea11894387e35de73f6c25dff99855a82f3b5bec
+    digest: a3b0c90e358487fad5da4fb2bc5cee5acf05d00de7037864ae8a22eb6d794ffe
     icon: https://avatars.githubusercontent.com/u/165936401?v=4
     name: web-smtp-relay
     sources:
@@ -2527,7 +2538,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 1.2.0
-    created: "2026-09-21T14:41:18.326039089Z"
+    created: "2026-09-22T16:46:32.086130675Z"
     description: A Helm chart for Web-SMTP Relay
     digest: cf8dc3ada4808767d74aed65b1c1e5d865bbe55745ae9e8002d689d086696d12
     icon: https://avatars.githubusercontent.com/u/165936401?v=4
@@ -2540,7 +2551,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2026-09-21T14:41:18.325814309Z"
+    created: "2026-09-22T16:46:32.086002972Z"
     description: A Helm chart for Web-SMTP Relay
     digest: f59b3ccb54fa882b49208af80a5f67fcda82b08e533c256f2e5dcdcc3d3cdb73
     icon: https://avatars.githubusercontent.com/u/165936401?v=4
@@ -2554,9 +2565,9 @@ entries:
   whois-rest:
   - apiVersion: v2
     appVersion: 0.9.0
-    created: "2026-09-21T14:41:18.326664606Z"
+    created: "2026-09-22T16:46:32.086464495Z"
     description: A Helm chart for the Whois REST service
-    digest: ed9e4339d9d306958b7eec3796cf1ccf510bea05ccb36b10589e4a0aef261a15
+    digest: 373c02d7d7a0aba4d9627167f7d86ddbac64e708fed39aba52ac1eeffd55e46e
     name: whois-rest
     type: application
     urls:
@@ -2564,7 +2575,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 0.9.0
-    created: "2026-09-21T14:41:18.326446118Z"
+    created: "2026-09-22T16:46:32.086365974Z"
     description: A Helm chart for the Whois REST service
     digest: 4aa0608111b0a2b61066352ffb534a5915baaaf1eabdc462941f2d16761bf9f5
     name: whois-rest
@@ -2572,4 +2583,4 @@ entries:
     urls:
     - https://helm-repo.highcanfly.club/whois-rest-1.0.0.tgz
     version: 1.0.0
-generated: "2026-09-21T14:41:17.602502226Z"
+generated: "2026-09-22T16:46:31.601559099Z"
