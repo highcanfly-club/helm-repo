@@ -2,7 +2,10 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
+	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
@@ -15,6 +18,7 @@ import (
 	"github.com/sctg-development/sctg-claw/mobile-auth-broker/internal/db"
 	"github.com/sctg-development/sctg-claw/mobile-auth-broker/internal/handler"
 	"github.com/sctg-development/sctg-claw/mobile-auth-broker/internal/proxy"
+	"github.com/sctg-development/sctg-claw/mobile-auth-broker/internal/tlscert"
 )
 
 func main() {
@@ -82,9 +86,11 @@ func main() {
 		wsProxy.HandleHTTP(w, r)
 	})
 
-	// Create server
+	// Create server. One *http.Server, one listener per configured port --
+	// Serve() can be called concurrently on the same server for as many
+	// listeners as needed, and a single Shutdown() call below drains all of
+	// them together.
 	srv := &http.Server{
-		Addr:    cfg.ListenAddr,
 		Handler: r,
 		// Timeouts
 		ReadTimeout:  30 * time.Second,
@@ -92,17 +98,65 @@ func main() {
 		IdleTimeout:  120 * time.Second,
 	}
 
-	// Start server
-	log.Printf("Starting mobile-auth-broker on %s", cfg.ListenAddr)
 	log.Printf("Hostname: %s", cfg.Hostname)
 	log.Printf("Gateway Service URL: %s", cfg.GatewayServiceURL)
 	log.Printf("Allowed Emails: %v", cfg.AllowedEmails)
 
-	go func() {
-		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("Server error: %v", err)
+	// Bind every port up front so a bad port (e.g. 80 without
+	// CAP_NET_BIND_SERVICE) fails startup immediately instead of silently
+	// running on a subset of the configured ports.
+	listeners := make([]net.Listener, 0, len(cfg.ListenPorts))
+	for _, port := range cfg.ListenPorts {
+		addr := fmt.Sprintf(":%d", port)
+		ln, err := net.Listen("tcp", addr)
+		if err != nil {
+			log.Fatalf("Failed to listen on %s: %v", addr, err)
 		}
-	}()
+		listeners = append(listeners, ln)
+		log.Printf("Listening on %s", addr)
+	}
+
+	for _, ln := range listeners {
+		ln := ln
+		go func() {
+			if err := srv.Serve(ln); err != nil && err != http.ErrServerClosed {
+				log.Fatalf("Server error on %s: %v", ln.Addr(), err)
+			}
+		}()
+	}
+
+	// TLS listeners, for native clients whose sign-in flow requires
+	// https:// (see internal/tlscert's package doc). Manager.Start obtains
+	// the certificate synchronously before any TLS listener opens -- there
+	// is nothing useful to serve otherwise -- then renews it in the
+	// background for the life of the process.
+	if cfg.TLSEnabled {
+		certManager := tlscert.NewManager(
+			cfg.TLSDomain, cfg.TLSEmail, cfg.TLSCloudflareToken, cfg.TLSCertCacheDir, cfg.TLSACMEStaging)
+		if err := certManager.Start(); err != nil {
+			log.Fatalf("Failed to start TLS certificate manager: %v", err)
+		}
+
+		tlsConfig := &tls.Config{GetCertificate: certManager.GetCertificate}
+		tlsListeners := make([]net.Listener, 0, len(cfg.TLSPorts))
+		for _, port := range cfg.TLSPorts {
+			addr := fmt.Sprintf(":%d", port)
+			ln, err := net.Listen("tcp", addr)
+			if err != nil {
+				log.Fatalf("Failed to listen on %s: %v", addr, err)
+			}
+			tlsListeners = append(tlsListeners, tls.NewListener(ln, tlsConfig))
+			log.Printf("Listening on %s (TLS, %s)", addr, cfg.TLSDomain)
+		}
+		for _, ln := range tlsListeners {
+			ln := ln
+			go func() {
+				if err := srv.Serve(ln); err != nil && err != http.ErrServerClosed {
+					log.Fatalf("Server error on %s: %v", ln.Addr(), err)
+				}
+			}()
+		}
+	}
 
 	// Wait for interrupt signal
 	quit := make(chan os.Signal, 1)
@@ -129,11 +183,11 @@ func isWebSocketUpgrade(r *http.Request) bool {
 	if strings.ToLower(r.Header.Get("Upgrade")) != "websocket" {
 		return false
 	}
-	
+
 	// Check for Connection: Upgrade
 	if strings.ToLower(r.Header.Get("Connection")) != "upgrade" {
 		return false
 	}
-	
+
 	return true
 }

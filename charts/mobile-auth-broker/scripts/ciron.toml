@@ -1,0 +1,59 @@
+# cirond config for the mobile-auth-broker runtime image (see Dockerfile).
+# mobile-auth-broker always runs; tailscaled/tailscale only do anything
+# useful once TAILNET_AUTHKEY is set (mobileAuthBroker.tailnet.enabled in the
+# Helm chart) -- with it unset, `tailscale up` simply fails and retries,
+# which the Helm chart avoids entirely by overriding the image command to
+# skip cirond (and this file) when the bypass is disabled.
+#
+# All programs inherit cirond's own environment - no [program.*.env] table
+# needed unless a value must be overridden.
+
+[transport]
+enable_unix = true
+
+[program.mobile-auth-broker]
+command = "/app/mobile-auth-broker"
+autostart = true
+restart = "always"
+log_forward = true
+
+# Real TUN ("-tun tailscale0"), not userspace-networking: the tailnet bypass
+# (internal/tailnet) needs the peer's genuine source address on
+# r.RemoteAddr, which userspace-networking's loopback NAT would hide.
+#
+# --state lives under /data (the broker's existing persistent volume, same
+# one the SQLite DB and internal/tlscert's certificate cache already use),
+# not /var/lib/tailscale: that used to be an emptyDir, wiped on every pod
+# restart, so tailscaled re-registered as a brand new tailnet node each time
+# (new node key, likely a new tailnet IP, and Headscale gaining a fresh
+# duplicate node every restart instead of reusing the last one). tailscaled
+# creates this directory itself on first run, as this container's own UID --
+# unlike the old emptyDir (created root-owned by kubelet, needing the
+# privileged init container's chown before tailscaled's own chmod on it
+# would succeed) there's nothing here for that init container to fix up.
+[program.tailscaled]
+command = 'bash -c "/usr/sbin/tailscaled --socket=/run/tailscale/tailscaled.sock --port=41641 --state=/data/tailscale-state/tailscaled.state --encrypt-state=false -tun ${TAILNET_TUN_MODE:-tailscale0}"'
+autostart = true
+restart = "always"
+log_forward = true
+
+# --netfilter-mode=off: this container runs as a non-root UID with only
+# NET_ADMIN/NET_RAW (see the Helm chart's containerSecurityContext), not full
+# root. tailscaled's default netfilter mode manages iptables/nftables rules
+# for subnet-router/exit-node NAT, and the nft backend's rule-set-generation
+# lookup hard-checks effective UID 0 regardless of capabilities held ("you
+# must be root"), which otherwise fills the log with "Permission denied (you
+# must be root)" on every start. This node is a plain tailnet peer (no
+# subnet routes, no exit node advertised), so it has no NAT rules to manage
+# in the first place -- routing tailnet traffic to/from the app only needs
+# the TUN device and the kernel routing table, both already covered by
+# NET_ADMIN. --netfilter-mode is a `tailscale up`/`set` flag, not a
+# `tailscaled` one -- passing it to tailscaled itself fails argument parsing
+# ("flag provided but not defined") and the daemon never starts.
+[program.tailscale]
+command = 'bash -c "tailscale --socket=/run/tailscale/tailscaled.sock up --netfilter-mode=off --authkey=${TAILNET_AUTHKEY} --hostname=${TAILNET_HOSTNAME:-mobile-claw-broker} --login-server=${TAILNET_LOGIN_SERVER:-https://login.tailscale.com}"'
+autostart = true
+restart = "on-failure"
+log_forward = true
+wants = ["tailscaled"]
+after = ["tailscaled"]

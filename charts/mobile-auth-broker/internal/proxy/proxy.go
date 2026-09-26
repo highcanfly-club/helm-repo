@@ -14,6 +14,17 @@ import (
 	"github.com/sctg-development/sctg-claw/mobile-auth-broker/internal/config"
 	"github.com/sctg-development/sctg-claw/mobile-auth-broker/internal/db"
 	"github.com/sctg-development/sctg-claw/mobile-auth-broker/internal/models"
+	"github.com/sctg-development/sctg-claw/mobile-auth-broker/internal/tailnet"
+)
+
+// tailnetDeviceID/tailnetSessionID mark the synthetic device/session
+// returned for a tailnet-authenticated request. They never correspond to a
+// database row -- audit_events has no foreign key on device_id/session_id,
+// so writing these sentinel values is safe and keeps the audit trail able to
+// distinguish this path from a real paired device.
+const (
+	tailnetDeviceID  = "tailnet"
+	tailnetSessionID = "tailnet"
 )
 
 // httpProxyDeniedPathPrefixes are Gateway namespaces HandleHTTP never
@@ -96,12 +107,28 @@ func (p *WebSocketProxy) HandleWebSocket(w http.ResponseWriter, r *http.Request)
 	// without it, attribution fails closed with 403 even though the peer is
 	// trusted. HandleHTTP gets this for free from httputil.ReverseProxy;
 	// the hand-rolled WebSocket dial here does not, so it must set it explicitly.
+	//
+	// Origin is equally load-bearing and was previously dropped entirely:
+	// the Gateway's Control UI auth rejects WebSocket upgrades with no
+	// Origin ("origin missing or invalid") once gateway.controlUi.allowedOrigins
+	// is configured, regardless of X-Forwarded-Email/-For being valid. The
+	// dial below only sends the headers listed here -- unlike HandleHTTP's
+	// httputil.ReverseProxy, it does not start from a copy of the client's
+	// original request headers, so Origin (and User-Agent, forwarded here
+	// too for useful Gateway-side client identification/audit logging) must
+	// be copied through explicitly or the Gateway never sees them.
 	gatewayHeaders := http.Header{
 		"X-Forwarded-Email": []string{device.Email},
 		"X-Forwarded-For":   []string{remote},
 		"X-Forwarded-Proto": []string{"https"},
 		"X-Forwarded-Host":  []string{p.config.Hostname},
 		"Host":              []string{p.config.Hostname},
+	}
+	if origin := r.Header.Get("Origin"); origin != "" {
+		gatewayHeaders.Set("Origin", origin)
+	}
+	if ua := r.Header.Get("User-Agent"); ua != "" {
+		gatewayHeaders.Set("User-Agent", ua)
 	}
 
 	// Connect to Gateway
@@ -227,6 +254,16 @@ func (p *WebSocketProxy) authenticateDevice(
 	w http.ResponseWriter,
 	r *http.Request,
 	remote string) (*models.MobileDevice, *models.AccessSession, bool) {
+	// Tailnet bypass: any peer the local tailscaled control socket vouches
+	// for is trusted outright and forwarded as the single configured
+	// identity, no GitHub Device Flow and no per-user allowlist. Tailnet
+	// membership (Headscale ACLs) is the security boundary for this path.
+	if p.config.TailnetEnabled && tailnet.IsPeer(p.config.TailnetSocket, remote) {
+		log.Printf("INFO: tailnet-authenticated request remote=%s identity=%s", remote, p.config.TailnetIdentity)
+		return &models.MobileDevice{ID: tailnetDeviceID, Email: p.config.TailnetIdentity},
+			&models.AccessSession{ID: tailnetSessionID}, true
+	}
+
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
 		log.Printf("WARN: Request rejected remote=%s reason=missing_authorization_header", remote)
