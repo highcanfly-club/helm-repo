@@ -20,11 +20,14 @@
 #   ./docker-build.sh                     # local build
 #   ./docker-build.sh --push              # multi-arch buildx build + push
 # ...or invoke docker directly with the explicit context, plus the extra
-# named build contexts for the `garmin-cli` submodule (used by the `gc-build`
-# stage) and this repo's own `scripts/` directory — both siblings of
-# `openclaw/`, not inside it:
+# named build contexts for the `garmin-cli`, `openclaw-coach`, and
+# `k8s-infra` submodules (used by the `gc-build` stage and the coach/k8s-ops
+# plugin build steps) and this repo's own `scripts/` directory — all
+# siblings of `openclaw/`, not inside it:
 #   docker build -f Dockerfile -t sctg/claw:latest \
 #     --build-context garmin-cli=./garmin-cli \
+#     --build-context openclaw-coach=./openclaw-coach \
+#     --build-context k8s-infra=./k8s-infra \
 #     --build-context sctg-scripts=./scripts ./openclaw
 #
 # ---------------------------------------------------------------------------
@@ -50,7 +53,7 @@
 # only a built dist/index.js from a private source repo, MIT-licensed; see
 # that directory's README), patched for API-key rotation the same as the
 # other 4, and bundled here like any other extension.
-ARG OPENCLAW_EXTENSIONS="cohere,exa,firecrawl,mistral,parallel,poolside,whatsapp,signal"
+ARG OPENCLAW_EXTENSIONS="cohere,exa,firecrawl,mistral,parallel,poolside,whatsapp,signal,acpx"
 ARG OPENCLAW_BUNDLED_PLUGIN_DIR=extensions
 ARG OPENCLAW_DOCKER_BUILD_NODE_OPTIONS="--max-old-space-size=8192"
 ARG OPENCLAW_DOCKER_BUILD_TSDOWN_MAX_OLD_SPACE_MB=""
@@ -68,6 +71,10 @@ ARG OPENCLAW_BUN_IMAGE="docker.io/oven/bun:1.4.0@sha256:5ff609364c049b54eb0ff560
 # To update, run: docker buildx imagetools inspect docker.io/library/node:24-bookworm and
 # docker.io/library/node:24-bookworm-slim (or podman) and replace the digests below with the
 # current multi-arch manifest list entries.
+
+# Build custom gocli binary from https://github.com/sctg-development/gogcli.git
+FROM golang:bookworm AS gogcli_builder
+RUN cd / && git clone --branch main https://github.com/sctg-development/gogcli.git && cd /gogcli && make build 
 
 # Cirond is a small fast process manager for running multiple long-running processes in a single container. It is used to run cirond and cironctl in the sctg-claw image.
 FROM ${OPENCLAW_NODE_BOOKWORM_IMAGE} AS ciron_builder
@@ -518,22 +525,30 @@ RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,shar
 # sctg-claw additions start here (everything above is upstream openclaw/Dockerfile)
 # ---------------------------------------------------------------------------
 
-ARG GOGCLI_VERSION=0.40.0
+# ARG GOGCLI_VERSION=0.40.0
 ARG GOPLACES_VERSION=0.4.11
 ARG WACLI_VERSION=0.16.0
+# kubectl/argocd: used by the k8s-ops plugin (see COPY --from=k8s-infra below)
+# via the mounted kubeconfig -- no other cluster tooling (tofu, ansible) is
+# installed here, since no v1 tool needs it (see k8s-infra/openclaw-plugin).
+ARG KUBECTL_VERSION=1.31.2
+ARG ARGOCD_VERSION=2.13.2
+ARG KILOCODE_PREVIEW_DATE="2026-09-29T20-01-31Z"
+ARG KILOCODE_PREVIEW_VERSION="0.1.0"
 RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tar pandoc librsvg2-bin imagemagick jq ffmpeg gh gnupg vim bzip2 ssh x11vnc xvfb && \
     # OpenClaw's additional system packages \
     case "${TARGETARCH}" in amd64|arm64) ;; *) echo "Unsupported architecture: ${TARGETARCH}" >&2; exit 1 ;; esac && \
-    curl -fsSL "https://github.com/openclaw/gogcli/releases/download/v${GOGCLI_VERSION}/gogcli_${GOGCLI_VERSION}_linux_${TARGETARCH}.tar.gz" -o /tmp/gogcli.tar.gz && \
-    tar -xzf /tmp/gogcli.tar.gz -O ./gog > /usr/local/bin/gog && \
     curl -fsSL "https://github.com/openclaw/goplaces/releases/download/v${GOPLACES_VERSION}/goplaces_${GOPLACES_VERSION}_linux_${TARGETARCH}.tar.gz" -o /tmp/goplaces.tar.gz && \
     tar -xzf /tmp/goplaces.tar.gz -O goplaces > /usr/local/bin/goplaces && \
     curl -fsSL "https://github.com/openclaw/wacli/releases/download/v${WACLI_VERSION}/wacli_${WACLI_VERSION}_linux_${TARGETARCH}.tar.gz" -o /tmp/wacli.tar.gz && \
     tar -xzf /tmp/wacli.tar.gz -O ./wacli > /usr/local/bin/wacli && \
-    chmod +x /usr/local/bin/gog /usr/local/bin/goplaces /usr/local/bin/wacli && \
+    curl -fsSL "https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl" -o /usr/local/bin/kubectl && \
+    curl -fsSL "https://github.com/argoproj/argo-cd/releases/download/v${ARGOCD_VERSION}/argocd-linux-${TARGETARCH}" -o /usr/local/bin/argocd && \
+    curl -fsSL "https://github.com/TEA-ching/kilocode/releases/download/preview%2F${KILOCODE_PREVIEW_DATE}/kilocode-download_linux-bookworm_${TARGETARCH}_${KILOCODE_PREVIEW_VERSION}" -o /usr/local/bin/kilocode-download && \
+    chmod +x /usr/local/bin/goplaces /usr/local/bin/wacli /usr/local/bin/kubectl /usr/local/bin/argocd /usr/local/bin/kilocode-download && \
     rm -f /tmp/gogcli.tar.gz /tmp/goplaces.tar.gz /tmp/wacli.tar.gz && \
     # Install 1Password CLI \
     curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
@@ -563,7 +578,9 @@ RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,shar
     # Add the tailscale repository \
     curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list && \
     # Install Tailscale \
-    apt-get update -y && apt-get install -y tailscale
+    apt-get update -y && apt-get install -y tailscale   
+    # Install KiloCode CLI \
+RUN /usr/local/bin/kilocode-download --cli --out-file /usr/local/bin/kilocode
 # install MinIO client (mc) for S3-compatible object storage access.
 RUN curl -L https://dl.min.io/aistor/mc/release/linux-$(dpkg --print-architecture)/mc > /usr/local/bin/mc && chmod +x /usr/local/bin/mc
 # Install BusyBox for lightweight Unix utilities (e.g. `sendmail`).  
@@ -583,6 +600,9 @@ COPY --from=ciron_builder /ciron/target/release/cironctl /usr/sbin/cironctl
 # A sibling of openclaw/, so it comes from its own named build context (see
 # header comment above).
 COPY --from=sctg-scripts ciron.toml /etc/ciron/ciron.toml
+# Install gogcli
+COPY --from=gogcli_builder /gogcli/bin/gog /usr/local/bin/gog
+RUN chmod +x /usr/local/bin/gog
 
 # KeypoolLive vault resolver (see scripts/resolve-keypool-vault.mjs): populates
 # MISTRAL_API_KEYS/COHERE_API_KEYS/POOLSIDE_API_KEYS/FIRECRAWL_API_KEYS/EXA_API_KEYS
@@ -620,10 +640,10 @@ RUN install -d -m 0755 -o node -g node /home/node/.config && \
     stat -c '%U:%G %a' /home/node/.config | grep -qx 'node:node 755' && \
     stat -c '%U:%G %a' /home/node/.config/openclaw | grep -qx 'node:node 700'
 
-# /opt is root-owned; pre-create the coach plugin's target directory here
-# (still root) so the node-owned RUN below -- after USER node -- can write
-# into it instead of failing with "Permission denied".
-RUN install -d -m 0755 -o node -g node /opt/openclaw-coach
+# /opt is root-owned; pre-create the coach and k8s-ops plugins' target
+# directories here (still root) so the node-owned RUN below -- after USER
+# node -- can write into them instead of failing with "Permission denied".
+RUN install -d -m 0755 -o node -g node /opt/openclaw-coach /opt/k8s-ops
 
 ENV NODE_ENV=production
 ENV VNC_PASSWORD="openclaw"
@@ -666,6 +686,33 @@ RUN cd /tmp/openclaw-coach && \
     chown -R node:node /opt/openclaw-coach && \
     rm -rf /tmp/openclaw-coach
 
+# k8s-ops plugin (k8s-infra/openclaw-plugin in the k8s-infra submodule):
+# day-to-day ArgoCD/kubectl cluster operation. Built here for the same reason
+# as the coach plugin above (own named build context, sibling of openclaw/,
+# see header comment) and NOT installed here either -- same
+# /home/node/.openclaw PVC-shadowing reason, see the coach plugin comment
+# above. The k8s-infra submodule root is the build context (not just the
+# plugin subdirectory) so this stage can also be reused for other
+# cluster-facing tooling later without renaming the context.
+COPY --from=k8s-infra --chown=node:node openclaw-plugin /tmp/k8s-ops
+RUN cd /tmp/k8s-ops && \
+    npm ci --include=dev && \
+    npm run build && \
+    npm ci --omit=dev && \
+    cd /app && \
+    cp -a /tmp/k8s-ops/. /opt/k8s-ops/ && \
+    chown -R node:node /opt/k8s-ops && \
+    rm -rf /tmp/k8s-ops
+
+# Resolver for the k8s-ops plugin's secrets (see
+# scripts/resolve-k8s-infra-secrets.mjs): writes K8S_INFRA_KUBECONFIG to
+# ~/.kube/config, and clones/pulls the k8s-infra GitOps repo itself (using a
+# read-only deploy key from K8S_INFRA_GIT_SSH_KEY) into the OpenClaw
+# workspace, at container start -- never baking either into the image. A
+# sibling of openclaw/, so it comes from its own named build context (see
+# header comment above), same as the keypool vault resolver.
+COPY --from=sctg-scripts --chown=node:node resolve-k8s-infra-secrets.mjs ./scripts/resolve-k8s-infra-secrets.mjs
+
 # Verify the shipped toolchain needs no privileged writes or first-run downloads.
 RUN COREPACK_ENABLE_NETWORK=0 PNPM_CONFIG_OFFLINE=true pnpm --version
 
@@ -705,4 +752,4 @@ ENTRYPOINT ["tini", "-s", "--"]
 # in /etc/ciron/ciron.toml (see scripts/ciron.toml) and supervised by cirond,
 # which restarts any of them if they die. `exec` replaces this shell with
 # cirond so tini manages it directly as the container's main process.
-CMD ["sh", "-c", "umask 077; eval \"$(node scripts/resolve-keypool-vault.mjs)\"; node scripts/populate-openrouter-free-models.mjs; openclaw plugins install /opt/openclaw-coach --force --accept-capabilities; exec /usr/sbin/cirond -c /etc/ciron/ciron.toml"]
+CMD ["sh", "-c", "umask 077; eval \"$(node scripts/resolve-keypool-vault.mjs)\"; node scripts/populate-openrouter-free-models.mjs; node scripts/resolve-k8s-infra-secrets.mjs; openclaw plugins install /opt/openclaw-coach --force --accept-capabilities; openclaw plugins install /opt/k8s-ops --force --accept-capabilities; exec /usr/sbin/cirond -c /etc/ciron/ciron.toml"]
