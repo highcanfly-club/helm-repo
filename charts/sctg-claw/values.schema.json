@@ -77,9 +77,14 @@
                         "elevenlabsApiKeys": { "type": "string" },
                         "openrouterApiKeys": { "type": "string" }, 
                         "openaiApiKeys": { "type": "string" },
+                        "vibeApiKeys": { "type": "string" },
                         "openaiBaseUrl": {
                             "type": "string",
                             "description": "Overrides the default https://api.openai.com/v1 endpoint (OPENAI_BASE_URL) for the openai provider, e.g. to route through a private/self-hosted OpenAI-API-compatible cloud. Already supported upstream; leave empty to use the real OpenAI API."
+                        },
+                        "claudeCodeOauthToken": {
+                            "type": "string",
+                            "description": "Claude Code OAuth token (CLAUDE_CODE_OAUTH_TOKEN, from `claude setup-token`) used by the claude-cli agent runtime. Leave empty to log in manually inside the pod."
                         },
                         "ghToken": { "type": "string" },
                         "garminEmail": { "type": "string" },
@@ -96,6 +101,14 @@
                             "type": "string",
                             "description": "KeypoolLive vault bearer token / decryption secret (KEYPOOL_LIVE_SECRET). Required alongside keypoolVaultUrl."
                         },
+                        "keypoolUsageDbDir": {
+                            "type": "string",
+                            "description": "Directory path (KEYPOOL_USAGE_DB_DIR) for the keypool usage database. Required alongside keypoolVaultUrl and keypoolLiveSecret."
+                        },
+                        "keypoolLiveRemoteStorageUrl": {
+                            "type": "string",
+                            "description": "Remote storage URL (KEYPOOL_LIVE_REMOTE_STORAGE_URL) for the keypool usage database. Required alongside keypoolVaultUrl, keypoolLiveSecret, and keypoolUsageDbDir."
+                        } ,
                         "k8sInfraKubeconfig": {
                             "type": "string",
                             "description": "Kubeconfig (K8S_INFRA_KUBECONFIG) for the k8s-ops plugin's scoped ServiceAccount -- see k8s-infra/argocd/addons/k8s-ops-rbac/README.md. Written to ~/.kube/config at container start; never baked into the image."
