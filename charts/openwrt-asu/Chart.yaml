@@ -1,0 +1,13 @@
+apiVersion: v2
+name: openwrt-asu
+description: OpenWrt Attended Sysupgrade (ASU) server with a rootful Podman sidecar, for Kubernetes
+type: application
+version: 0.1.0
+appVersion: "v0.8.0"
+home: https://github.com/sctg-development/openwrt-asu
+sources:
+  - https://github.com/openwrt/asu
+  - https://github.com/sctg-development/openwrt-asu
+keywords: [openwrt, asu, sysupgrade, imagebuilder]
+maintainers:
+  - name: SCTG Development

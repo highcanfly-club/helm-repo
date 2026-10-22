@@ -1,0 +1,131 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "asu.fullname" . }}
+  labels: {{- include "asu.labels" . | nindent 4 }}
+    app.kubernetes.io/component: asu
+spec:
+  # One pod only: server, worker and Podman share a volume and a socket (scale by adding workers, not replicas).
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels: {{- include "asu.selector" . | nindent 6 }}
+      app.kubernetes.io/component: asu
+  template:
+    metadata:
+      labels: {{- include "asu.selector" . | nindent 8 }}
+        app.kubernetes.io/component: asu
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}{{ toYaml . | nindent 8 }}{{- end }}
+    spec:
+      nodeSelector: {{- toYaml .Values.nodeSelector | nindent 8 }}
+      tolerations: {{- toYaml .Values.tolerations | nindent 8 }}
+      {{- with .Values.affinity }}
+      affinity: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: podman
+          image: "{{ .Values.podman.image.repository }}:{{ .Values.podman.image.tag }}"
+          imagePullPolicy: {{ .Values.podman.image.pullPolicy }}
+          # Rootful Podman: the ImageBuilder containers it starts are the isolation boundary of each build
+          # (no capabilities, no new privileges, a dedicated network without access to Redis).
+          securityContext:
+            privileged: true
+          command:
+            - sh
+            - -c
+            - |
+              set -e
+              podman network exists {{ .Values.podman.buildNetwork }} || podman network create {{ .Values.podman.buildNetwork }}
+              exec podman system service --time=0 unix:///run/podman-sock/podman.sock
+          startupProbe:
+            exec:
+              command: [test, -S, /run/podman-sock/podman.sock]
+            periodSeconds: 3
+            failureThreshold: 60
+          volumeMounts:
+            - name: podman-sock
+              mountPath: /run/podman-sock
+            - name: containers
+              mountPath: /var/lib/containers
+          resources: {{- toYaml .Values.podman.resources | nindent 12 }}
+        - name: worker
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # ASU looks for its Podman socket at /var/podman.sock.
+          command:
+            - sh
+            - -c
+            - |
+              until [ -S /run/podman-sock/podman.sock ]; do sleep 2; done
+              ln -sf /run/podman-sock/podman.sock /var/podman.sock
+              exec uv run rqworker --logging_level INFO
+          env:
+            - name: REDIS_URL
+              value: redis://{{ include "asu.fullname" . }}-redis:6379/0
+          volumeMounts:
+            - name: config
+              mountPath: /app/asu.toml
+              subPath: asu.toml
+              readOnly: true
+            - name: public
+              mountPath: /public
+            - name: podman-sock
+              mountPath: /run/podman-sock
+          resources: {{- toYaml .Values.worker.resources | nindent 12 }}
+        - name: server
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: [uv, run, uvicorn, --host, 0.0.0.0, --port, "8000", --proxy-headers, --forwarded-allow-ips, "*", "asu.main:app"]
+          env:
+            - name: REDIS_URL
+              value: redis://{{ include "asu.fullname" . }}-redis:6379/0
+          ports:
+            - name: http
+              containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /api/v1/latest
+              port: http
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v1/latest
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          volumeMounts:
+            - name: config
+              mountPath: /app/asu.toml
+              subPath: asu.toml
+              readOnly: true
+            - name: public
+              mountPath: /public
+              readOnly: true
+          resources: {{- toYaml .Values.server.resources | nindent 12 }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "asu.fullname" . }}
+        - name: podman-sock
+          emptyDir: {}
+        - name: public
+          {{- if eq .Values.persistence.type "pvc" }}
+          persistentVolumeClaim:
+            claimName: {{ include "asu.fullname" . }}-public
+          {{- else }}
+          hostPath:
+            path: {{ .Values.persistence.hostPath.publicDir }}
+            type: DirectoryOrCreate
+          {{- end }}
+        - name: containers
+          {{- if eq .Values.persistence.type "pvc" }}
+          persistentVolumeClaim:
+            claimName: {{ include "asu.fullname" . }}-containers
+          {{- else }}
+          hostPath:
+            path: {{ .Values.persistence.hostPath.podmanDir }}
+            type: DirectoryOrCreate
+          {{- end }}

@@ -98,6 +98,8 @@ else
         get_repo "sctg-development/tokeisrv" "helm/tokeisrv" 2
         get_repo "sctg-development/ollama-k8s" "ollama-helm" 1 HEAD ollama
         get_repo "sctg-development/sctg-claw" "sctg-claw" 1 HEAD claw
+        get_repo "sctg-development/openwrt-asu" "helm/openwrt-asu" 2
+
 fi
 
 # clean up

@@ -1,0 +1,85 @@
+# Default values for openwrt-asu.
+#
+# One pod runs three containers sharing a volume and a Unix socket:
+#   server  - FastAPI API (port 8000)
+#   worker  - rq worker that asks Podman to run an ImageBuilder container per build
+#   podman  - rootful Podman service (PRIVILEGED), the sandbox the builds run in
+# Redis runs in its own Deployment. The pod is pinned to the build node.
+
+image:
+  # ASU publishes its images on Docker Hub; pin a digest or a release tag for production.
+  repository: docker.io/openwrt/asu
+  tag: latest
+  pullPolicy: IfNotPresent
+
+podman:
+  image:
+    repository: quay.io/podman/stable
+    tag: v5
+    pullPolicy: IfNotPresent
+  # Name of the isolated network the builds run in (ASU expects "asu-build").
+  buildNetwork: asu-build
+  resources: {}
+
+redis:
+  image:
+    repository: docker.io/redis/redis-stack-server
+    tag: latest
+    pullPolicy: IfNotPresent
+  resources: {}
+
+server:
+  resources: {}
+
+worker:
+  resources: {}
+
+# Content of asu.toml, rendered as TOML. See https://github.com/openwrt/asu/blob/main/asu.example.toml
+# (redis_url is injected through the REDIS_URL environment variable).
+config:
+  upstream_url: https://downloads.openwrt.org
+  allow_defaults: false
+  log_level: INFO
+  job_timeout: 10m
+  max_pending_jobs: 200
+  # Extra package repositories a client may request (URL prefixes), e.g. a lab apk repository.
+  repository_allow_list: []
+
+# Where the built images (/public) and the Podman image storage live.
+persistence:
+  # hostPath: data stays on the build node's data disk (the pod is pinned to that node).
+  # pvc: use a PersistentVolumeClaim instead (set pvc.storageClassName / size).
+  type: hostPath
+  hostPath:
+    publicDir: /srv/build-data/asu/public
+    podmanDir: /srv/build-data/asu/containers
+  pvc:
+    storageClassName: ""
+    publicSize: 20Gi
+    podmanSize: 60Gi
+
+service:
+  type: ClusterIP
+  port: 8000
+
+# PRIVATE access only. haproxy-ingress listens on every node (hostNetwork), including nodes with a public IP,
+# so the ingress itself restricts the source addresses (allowList) to the Tailscale/Headscale mesh.
+ingress:
+  enabled: true
+  className: haproxy
+  host: openwrt-asu.ts.sctg.eu.org
+  allowList: 100.64.0.0/10,fd7a:115c:a1e0::/48
+  annotations: {}
+  tls: []
+
+# The build node carries the NoExecute taint workload=build.
+nodeSelector:
+  workload: build
+tolerations:
+  - key: workload
+    operator: Equal
+    value: build
+    effect: NoExecute
+affinity: {}
+
+podAnnotations: {}
