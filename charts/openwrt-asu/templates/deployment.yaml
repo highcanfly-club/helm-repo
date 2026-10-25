@@ -101,9 +101,9 @@ spec:
               mountPath: /app/asu.toml
               subPath: asu.toml
               readOnly: true
+            # not read-only: asu.main creates /public/store at startup
             - name: public
               mountPath: /public
-              readOnly: true
           resources: {{- toYaml .Values.server.resources | nindent 12 }}
       volumes:
         - name: config

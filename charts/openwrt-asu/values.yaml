@@ -58,6 +58,16 @@ persistence:
     publicSize: 20Gi
     podmanSize: 60Gi
 
+# Optional static server for a signed apk repository of custom packages (see openwrt-lab/make-lab-repo.sh in k8s-infra).
+# Listens on the node address, port 8080 (hostNetwork). Add its URL prefix to config.repository_allow_list.
+labRepo:
+  enabled: false
+  image:
+    repository: docker.io/nginxinc/nginx-unprivileged
+    tag: stable-alpine
+    pullPolicy: IfNotPresent
+  hostPath: /srv/build-data/openwrt/lab/repo
+
 service:
   type: ClusterIP
   port: 8000
@@ -68,6 +78,8 @@ ingress:
   enabled: true
   className: haproxy
   host: openwrt-asu.ts.sctg.eu.org
+  # additional host names served by the same Ingress (e.g. a name resolving to a LAN address of an ingress node)
+  extraHosts: []
   allowList: 100.64.0.0/10,fd7a:115c:a1e0::/48
   annotations: {}
   tls: []

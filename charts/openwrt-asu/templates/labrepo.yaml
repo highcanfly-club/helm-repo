@@ -1,0 +1,46 @@
+{{- if .Values.labRepo.enabled }}
+# Static file server for a signed apk repository of custom ("lab") packages.
+# hostNetwork: the ImageBuilder containers run in Podman on the node, outside the cluster network; they reach it through the node address.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "asu.fullname" . }}-labrepo
+  labels: {{- include "asu.labels" . | nindent 4 }}
+    app.kubernetes.io/component: labrepo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels: {{- include "asu.selector" . | nindent 6 }}
+      app.kubernetes.io/component: labrepo
+  template:
+    metadata:
+      labels: {{- include "asu.selector" . | nindent 8 }}
+        app.kubernetes.io/component: labrepo
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      nodeSelector: {{- toYaml .Values.nodeSelector | nindent 8 }}
+      tolerations: {{- toYaml .Values.tolerations | nindent 8 }}
+      containers:
+        - name: nginx
+          image: "{{ .Values.labRepo.image.repository }}:{{ .Values.labRepo.image.tag }}"
+          imagePullPolicy: {{ .Values.labRepo.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              hostPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: http
+          volumeMounts:
+            - name: repo
+              mountPath: /usr/share/nginx/html
+              readOnly: true
+      volumes:
+        - name: repo
+          hostPath:
+            path: {{ .Values.labRepo.hostPath }}
+            type: DirectoryOrCreate
+{{- end }}
