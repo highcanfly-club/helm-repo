@@ -99,6 +99,7 @@ else
         get_repo "sctg-development/ollama-k8s" "ollama-helm" 1 HEAD ollama
         get_repo "sctg-development/sctg-claw" "sctg-claw" 1 HEAD claw
         get_repo "sctg-development/openwrt-asu" "helm/openwrt-asu" 2
+        get_repo "sctg-development/stepca-ui" "chart/step-certificates" 2
 
 fi
 
