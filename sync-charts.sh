@@ -57,7 +57,6 @@ FORCE=0
 # goes to charts/<basename of path>, the package name comes from Chart.yaml.
 CHARTS=(
         "eltorio/minio-prometheus-chart|helm/minio|"
-        "eltorio/cert-manager-webhook-cloudns|deploy/cert-manager-webhook-cloudns|"
         "eltorio/whois-rest|helm/whois-rest|"
         "highcanfly-club/cert-manager-webhook-oci|cert-manager-webhook-oci|"
         "highcanfly-club/crontab-ui|helm/crontab-ui|"
