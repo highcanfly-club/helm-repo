@@ -98,7 +98,7 @@ while [[ $# -gt 0 ]]; do
         case $1 in
         -f | --force) FORCE=1; shift ;;
         -j | --jobs) JOBS=${2:?-j needs a number}; shift 2 ;;
-        -h | --help) sed -n '3,/^$/p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+        -h | --help) sed -n '/^# sync-charts.sh/,/^set -E/p' "$0" | sed '$d; s/^# \{0,1\}//'; exit 0 ;;
         *) ONLY+=("$1"); shift ;;
         esac
 done
