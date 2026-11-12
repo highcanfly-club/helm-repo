@@ -39,21 +39,55 @@ service:
   sandboxPort: 18790
 
 # Name of a pre-existing secret containing OpenClaw and provider environment variables.
-# Example keys: MISTRAL_API_KEYS, COHERE_API_KEYS, POOLSIDE_API_KEYS.
+# Example keys: MISTRAL_API_KEYS, COHERE_API_KEYS, VIBE_API_KEYS.
 #
 # Create a secret with one key per provider:
 # kubectl -n claw create secret generic claw-provider-keys \
 #   --from-literal=MISTRAL_API_KEYS='mistral-api-key' \
 #   --from-literal=COHERE_API_KEYS='cohere-api-key' \
-#   --from-literal=POOLSIDE_API_KEYS='poolside-api-key'
+#   --from-literal=VIBE_API_KEYS='vibe-api-key'
 #
 # Create a secret with multiple keys per provider (comma-separated):
 # kubectl -n claw create secret generic claw-provider-keys \
 #   --from-literal=MISTRAL_API_KEYS='mistral-api-key-1,mistral-api-key-2' \
 #   --from-literal=COHERE_API_KEYS='cohere-api-key-1,cohere-api-key-2' \
-#   --from-literal=POOLSIDE_API_KEYS='poolside-api-key-1,poolside-api-key-2'
+#   --from-literal=VIBE_API_KEYS='vibe-api-key-1,vibe-api-key-2'
 openclaw:
   gogKeyringPassword: ""
+  # Settings merged over ~/.openclaw/openclaw.json at EVERY start (scripts/reconcile-openclaw-config.mjs).
+  # `config:` below is only seeded on first boot; use this for what must reach an existing volume.
+  # Objects merge, arrays and scalars are replaced, and these keys are managed: a UI edit to them is
+  # reverted at the next restart. Do not put secrets here (use SecretRef objects). Example:
+  #   configOverrides:
+  #     plugins:
+  #       entries:
+  #         sctg-mail:
+  #           config:
+  #             defaultAccount: sender@example.org
+  #             allowedAccounts: [sender@example.org]
+  configOverrides: {}
+  # E-mail alerts: the delivery path is gog (Gmail API), then SMTP Gmail, then Cloudflare Email Sending.
+  # The two fallbacks only ever send to `fallbackRecipients`, and every fallback message says that gog
+  # failed. A fallback is disabled until its group is complete (see secret.alertSmtpPassword and
+  # secret.cloudflareEmailApiToken for the credentials).
+  alert:
+    # Comma-separated allow-list for the fallbacks. Empty disables them.
+    fallbackRecipients: ""
+    # Default sender account for the sctg-mail command line (SCTG_MAIL_ACCOUNT).
+    account: ""
+    smtp:
+      host: smtp.gmail.com
+      port: 587
+      user: ""   # Gmail account that owns the app password
+      from: ""   # defaults to user (Gmail rewrites From to the authenticated account)
+    cloudflare:
+      accountId: ""
+      from: ""   # on a domain of the Cloudflare account, e.g. alerts@alerts.example.org
+      fromName: ""
+  # k8s-ops talks to argocd-server. If argocd-server serves plain HTTP (configs.params server.insecure: true),
+  # the argocd CLI needs --plaintext: set this to true. (--insecure only skips certificate verification.)
+  argocd:
+    plaintext: false
   tailnet:
     enabled: false
     authKey: ""
@@ -83,7 +117,6 @@ openclaw:
     # Vibe API keys are distinct from the Mistral API keys above, but the Vibe runtime in the image
     vibeApiKeys: ""
     cohereApiKeys: ""
-    poolsideApiKeys: ""
     exaApiKeys: ""
     firecrawlApiKeys: ""
     googlePlacesApiKeys: ""
@@ -106,7 +139,7 @@ openclaw:
     claudeCodeOauthToken: ""
     # KeypoolLive vault (git@github.com:sctg-development/ai-proxy-cloudflare.git):
     # when both are set, the container resolves mistralApiKeys/cohereApiKeys/
-    # poolsideApiKeys/firecrawlApiKeys/exaApiKeys above from this encrypted
+    # vibeApiKeys/firecrawlApiKeys/exaApiKeys above from this encrypted
     # vault at startup instead of the hardcoded values, falling back to
     # whichever of those hardcoded values are still set for any provider the
     # vault doesn't cover. See scripts/resolve-keypool-vault.mjs.
@@ -149,6 +182,12 @@ openclaw:
     # Application manages). See k8s-infra/openclaw-plugin/README.md for how
     # to create this account and mint its token.
     k8sArgocdAuthToken: ""
+    # Alert delivery fallbacks (scripts/sctg-mail), used only when gog (Google OAuth) fails. Put these in
+    # your private encrypted values, never in a public chart. Gmail app password for alert.smtp.user
+    # (needs 2-Step Verification, and the app password must be allowed by the domain admin):
+    alertSmtpPassword: ""
+    # Cloudflare API token restricted to the "Email Sending: Write" account permission. NOT a global token.
+    cloudflareEmailApiToken: ""
   # This map is rendered as /home/node/.openclaw/openclaw.json.
   # Add any supported OpenClaw configuration section here. Use SecretRef objects
   # for sensitive values, for example: { source: env, provider: default, id: TOKEN }.
@@ -166,6 +205,18 @@ openclaw:
           id: OPENCLAW_GATEWAY_TOKEN
       controlUi:
         enabled: true
+    # sctg-mail plugin: the send_email tool (gog, send-only). Sender must be an account
+    # authorized in gog. Fresh installs only (config is seeded once): on an existing PVC run
+    #   openclaw config set plugins.entries.sctg-mail.config.defaultAccount <email>
+    plugins:
+      entries:
+        sctg-mail:
+          enabled: true
+          config:
+            # Set these in your own values (a gog-authorized sender), not in this public chart:
+            # defaultAccount: sender@example.org
+            # allowedAccounts: [sender@example.org]
+            maxRecipients: 20
     # Claude through the local Claude Code CLI (`claude-cli` runtime, baked into
     # the image). Auth comes from openclaw.secret.claudeCodeOauthToken or a
     # manual `claude login`. Like the rest of this map, it is only seeded into

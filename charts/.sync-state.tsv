@@ -21,8 +21,8 @@ sctg-development/nginx-ad-auth|helm/nginx-ad-auth|	5a86eb872b3f4aee6a32bb4e1f967
 sctg-development/ollama-k8s|ollama-helm|	d6dfbe51dc5e513926d5d9427d5c811f944e1ac7	ollama-0.1.1.tgz
 sctg-development/openwrt-asu|helm/openwrt-asu|	11153a2d5feca03a9632d9aa4d9551e616d117e7	openwrt-asu-0.1.0.tgz
 sctg-development/rallly|helm/rallly|	ef5bc21acb5d9f3954da6690b57d1a395b2dee8b	rallly-0.1.12.tgz
-sctg-development/sctg-claw|sctg-claw|	3d4d2d3d36372326c2f9c9c0f7dde4967b1ff1e7	claw-1.0.2.tgz
-sctg-development/sctgdesk|helm/sctgdesk|	41ca00aac1ec89fda02e9a5a209e99288e53df92	sctgdesk-1.0.7.tgz
+sctg-development/sctg-claw|sctg-claw|	3de2360f184dffa9683cf0db9f74d74d9b7ddd73	claw-1.0.3.tgz
+sctg-development/sctgdesk|helm/sctgdesk|	c93a3d2af367b0b28f448381f90f5a7cd0ba396e	sctgdesk-1.0.7.tgz
 sctg-development/stepca-ui|chart/step-certificates|	0058e9a1022a2f522bed02a78e8a0727c53b39db	step-certificates-1.31.1.tgz
 sctg-development/tokeisrv|helm/tokeisrv|	fef0a7f61b5137f168f45bebbe31408c9c0a561c	tokeisrv-0.2.5.tgz
 sctg-development/web-smtp-relay|helm/web-smtp-relay|	5e7ff89422cc06c3cfe31fd309f86a538f0a4f45	web-smtp-relay-0.2.1.tgz
