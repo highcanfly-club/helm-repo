@@ -6,7 +6,7 @@ highcanfly-club/crontab-ui|helm/crontab-ui|	99b99d87e877012e9474b61574309d42903c
 highcanfly-club/docker-smtp-relay|helm/flex-smtpd|	8edd6395def126bf1b26a99b440d49adcfe008b9	flex-smtpd-0.1.7.tgz
 highcanfly-club/easyappointments-k8s|helm/easyappointments|	faec1ed34624501b45a974ae38f9788a0db7ea24	easyappointments-0.2.0.tgz
 highcanfly-club/gitea-bitnami-custom|helm/gitea|	e3a068b013f43d264860b2a96164d425a91f5055	gitea-1.0.2.tgz
-highcanfly-club/hcf-coder|helm/hcf-coder|	59c5ef68057fd5dd3dd2c49d676ab835eb4568b8	hcf-coder-0.4.10.tgz
+highcanfly-club/hcf-coder|helm/hcf-coder|	52ce35b15c79d40a6a4123f6358b9a20155de272	hcf-coder-0.4.10.tgz
 highcanfly-club/hcfmailer-plus|helm/hcfmailerplus|	9aeb3dc061b92956b468e2c49e3413f6e1c63c24	hcfmailerplus-0.4.5.tgz
 highcanfly-club/hcfmailer|helm/hcfmailer|	c09812af261c254baf1025e22a437f55e22cbf54	hcfmailer-1.0.0.tgz
 highcanfly-club/hcfschedule|helm/hcfschedule|hcf	13affc94d93353efd500676ab998b9b8f4f4df35	hcfschedule-0.1.0.tgz
@@ -21,7 +21,7 @@ sctg-development/nginx-ad-auth|helm/nginx-ad-auth|	5a86eb872b3f4aee6a32bb4e1f967
 sctg-development/ollama-k8s|ollama-helm|	d6dfbe51dc5e513926d5d9427d5c811f944e1ac7	ollama-0.1.1.tgz
 sctg-development/openwrt-asu|helm/openwrt-asu|	11153a2d5feca03a9632d9aa4d9551e616d117e7	openwrt-asu-0.1.0.tgz
 sctg-development/rallly|helm/rallly|	ef5bc21acb5d9f3954da6690b57d1a395b2dee8b	rallly-0.1.12.tgz
-sctg-development/sctg-claw|sctg-claw|	6862cedf1f758c0099a73a678e82072b21e4f000	claw-1.0.4.tgz
+sctg-development/sctg-claw|sctg-claw|	b181b2c919fa0a2dc5496b19bed41ea4fb5fc31c	claw-1.0.5.tgz
 sctg-development/sctgdesk|helm/sctgdesk|	c93a3d2af367b0b28f448381f90f5a7cd0ba396e	sctgdesk-1.0.7.tgz
 sctg-development/stepca-ui|chart/step-certificates|	0058e9a1022a2f522bed02a78e8a0727c53b39db	step-certificates-1.31.1.tgz
 sctg-development/tokeisrv|helm/tokeisrv|	fef0a7f61b5137f168f45bebbe31408c9c0a561c	tokeisrv-0.2.5.tgz
