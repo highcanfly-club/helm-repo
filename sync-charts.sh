@@ -86,6 +86,7 @@ CHARTS=(
         # Fork carrying https://github.com/semaphoreui/charts/pull/32 (sqlite dialect accepted by values.schema.json).
         # Drop it for upstream "semaphoreui/charts|stable/semaphore|" once the PR is merged and released.
         "fabiofilz/semaphore-charts-fork|stable/semaphore|fix/sqlite-database-type"
+        "sctg-development/entangle|deploy/helm/wormhole-server|"
 )
 
 log() { printf '%s\n' "$*"; }
