@@ -17,7 +17,7 @@ highcanfly-club/pretix|helm/pretix|	f631fd6175352d1ec642fc40975d0fc064253c08	pre
 highcanfly-club/ubuntu-net-tools-image|helm/cloudflared|	83ff4b37676543fe90df7d9fbf66fdf3749aef8b	cloudflared-0.2.4.tgz
 highcanfly-club/ubuntu-w64build|helm/ubuntu-w64build|	f7c2aeff868780e5ece324ab2f80c3ccf17ca84f	ubuntu-w64build-0.1.2.tgz
 ismogroup/dolidock|helm/dolidock|	01d5bf256753bc84a336834672815da6423df8c6	dolidock-0.11.7.tgz
-sctg-development/entangle|deploy/helm/wormhole-server|	fe2a7c268a08abc6eee2e2304e37b2f1f493a9d8	wormhole-server-0.1.0.tgz
+sctg-development/entangle|deploy/helm/wormhole-server|	03cd4d2ab7ee64f1d2bdd54a060281e95c5dee14	wormhole-server-0.2.0.tgz
 sctg-development/nginx-ad-auth|helm/nginx-ad-auth|	5a86eb872b3f4aee6a32bb4e1f967a390de0fb21	nginx-ad-auth-0.1.0.tgz
 sctg-development/ollama-k8s|ollama-helm|	d6dfbe51dc5e513926d5d9427d5c811f944e1ac7	ollama-0.1.1.tgz
 sctg-development/openwrt-asu|helm/openwrt-asu|	11153a2d5feca03a9632d9aa4d9551e616d117e7	openwrt-asu-0.1.0.tgz
