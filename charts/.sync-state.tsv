@@ -17,11 +17,12 @@ highcanfly-club/pretix|helm/pretix|	f631fd6175352d1ec642fc40975d0fc064253c08	pre
 highcanfly-club/ubuntu-net-tools-image|helm/cloudflared|	83ff4b37676543fe90df7d9fbf66fdf3749aef8b	cloudflared-0.2.4.tgz
 highcanfly-club/ubuntu-w64build|helm/ubuntu-w64build|	f7c2aeff868780e5ece324ab2f80c3ccf17ca84f	ubuntu-w64build-0.1.2.tgz
 ismogroup/dolidock|helm/dolidock|	01d5bf256753bc84a336834672815da6423df8c6	dolidock-0.11.7.tgz
+sctg-development/entangle|deploy/helm/wormhole-server|	fe2a7c268a08abc6eee2e2304e37b2f1f493a9d8	wormhole-server-0.1.0.tgz
 sctg-development/nginx-ad-auth|helm/nginx-ad-auth|	5a86eb872b3f4aee6a32bb4e1f967a390de0fb21	nginx-ad-auth-0.1.0.tgz
 sctg-development/ollama-k8s|ollama-helm|	d6dfbe51dc5e513926d5d9427d5c811f944e1ac7	ollama-0.1.1.tgz
 sctg-development/openwrt-asu|helm/openwrt-asu|	11153a2d5feca03a9632d9aa4d9551e616d117e7	openwrt-asu-0.1.0.tgz
 sctg-development/rallly|helm/rallly|	ef5bc21acb5d9f3954da6690b57d1a395b2dee8b	rallly-0.1.12.tgz
-sctg-development/sctg-claw|sctg-claw|	6d0606a320ec7a7decf4a690606a482152a04a97	claw-1.0.6.tgz
+sctg-development/sctg-claw|sctg-claw|	0f1f4617381a50a373f302a7ebc505ff594d6bd2	claw-1.0.6.tgz
 sctg-development/sctgdesk|helm/sctgdesk|	c93a3d2af367b0b28f448381f90f5a7cd0ba396e	sctgdesk-1.0.7.tgz
 sctg-development/stepca-ui|chart/step-certificates|	0058e9a1022a2f522bed02a78e8a0727c53b39db	step-certificates-1.31.1.tgz
 sctg-development/tokeisrv|helm/tokeisrv|	fef0a7f61b5137f168f45bebbe31408c9c0a561c	tokeisrv-0.2.5.tgz
