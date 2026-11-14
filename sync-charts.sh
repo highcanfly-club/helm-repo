@@ -79,7 +79,7 @@ CHARTS=(
         "highcanfly-club/hcfschedule|helm/hcfschedule|hcf"
         "highcanfly-club/helm-dashboard|helm/helm-dashboard|"
         "highcanfly-club/helm-roundecubemail|roundcube|"
-        # "highcanfly-club/odoo-bitnami-custom|helm/odoo|"
+        "highcanfly-club/odoo-bitnami-custom|helm/odoo|"
         "highcanfly-club/pretix|helm/pretix|"
         "highcanfly-club/ubuntu-net-tools-image|helm/cloudflared|"
         "highcanfly-club/ubuntu-w64build|helm/ubuntu-w64build|"

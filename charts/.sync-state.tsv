@@ -12,6 +12,7 @@ highcanfly-club/hcfmailer|helm/hcfmailer|	c09812af261c254baf1025e22a437f55e22cbf
 highcanfly-club/hcfschedule|helm/hcfschedule|hcf	13affc94d93353efd500676ab998b9b8f4f4df35	hcfschedule-0.1.0.tgz
 highcanfly-club/helm-dashboard|helm/helm-dashboard|	4f0d3c11ef7e23b46e17b375a45a3674ade31fa6	helm-dashboard-0.1.9.tgz
 highcanfly-club/helm-roundecubemail|roundcube|	3e552d9eda362f0dafd448e73df0cd412068bba0	roundcube-0.2.8.tgz
+highcanfly-club/odoo-bitnami-custom|helm/odoo|	8b43621ed8d0f3e27347cc4c9f5bbb65ef79ef54	odoo-0.4.1.tgz
 highcanfly-club/pretix|helm/pretix|	f631fd6175352d1ec642fc40975d0fc064253c08	pretix-0.3.5.tgz
 highcanfly-club/ubuntu-net-tools-image|helm/cloudflared|	83ff4b37676543fe90df7d9fbf66fdf3749aef8b	cloudflared-0.2.4.tgz
 highcanfly-club/ubuntu-w64build|helm/ubuntu-w64build|	f7c2aeff868780e5ece324ab2f80c3ccf17ca84f	ubuntu-w64build-0.1.2.tgz
