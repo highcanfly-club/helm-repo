@@ -45,7 +45,17 @@
 
 set -Eeuo pipefail
 
-cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+# portable replacement for `readlink -f` (absent on older macOS): resolve symlinks, then cd to the script's directory
+script_path=${BASH_SOURCE[0]}
+while [[ -L $script_path ]]; do
+        script_dir=$(cd -P "$(dirname "$script_path")" && pwd)
+        script_path=$(readlink "$script_path")
+        [[ $script_path == /* ]] || script_path=$script_dir/$script_path
+done
+cd -P "$(dirname "$script_path")"
+
+# portable SHA-1: sha1sum (GNU/Linux) or shasum (macOS)
+sha1() { if command -v sha1sum >/dev/null 2>&1; then sha1sum "$@"; else shasum -a 1 "$@"; fi; }
 
 REPO_URL="https://helm-repo.highcanfly.club"
 STATE_FILE="charts/.sync-state.tsv"
@@ -116,23 +126,44 @@ elif [[ ${#ONLY[@]} -eq 1 ]]; then
 fi
 
 # ---------------------------------------------------------------- prerequisites / environment
-for tool in curl tar git helm flock awk sed find sha1sum xargs; do
+for tool in curl tar git helm awk sed find xargs tr mktemp; do
         command -v "$tool" >/dev/null || die "missing required tool: $tool"
 done
+command -v sha1sum >/dev/null 2>&1 || command -v shasum >/dev/null 2>&1 || die "missing required tool: sha1sum or shasum"
 
-# one run at a time (the script itself is the lock)
-exec 9<"$0"
-flock -n 9 || die "another sync-charts.sh is already running"
+# one run at a time: flock when available (Linux, `brew install flock` on macOS), else an mkdir lock
+LOCK_DIR=""
+if command -v flock >/dev/null 2>&1; then
+        exec 9<"$0"
+        flock -n 9 || die "another sync-charts.sh is already running"
+else
+        LOCK_DIR="${TMPDIR:-/tmp}/sync-charts.lock"
+        if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+                old_pid=$(cat "$LOCK_DIR/pid" 2>/dev/null || true)
+                if [[ -n $old_pid ]] && kill -0 "$old_pid" 2>/dev/null; then
+                        LOCK_DIR=""
+                        die "another sync-charts.sh is already running"
+                fi
+                rm -rf "$LOCK_DIR"
+                mkdir "$LOCK_DIR" 2>/dev/null || { LOCK_DIR=""; die "cannot take lock"; }
+        fi
+        echo $$ >"$LOCK_DIR/pid"
+fi
+
+cleanup() {
+        [[ -z ${WORK:-} ]] || rm -rf "$WORK"
+        [[ -z ${LOCK_DIR:-} ]] || rm -rf "$LOCK_DIR"
+}
+trap cleanup EXIT
 
 export GIT_TERMINAL_PROMPT=0 # a missing/private repo must fail, not wait for a password
 if [[ -n ${GITHUB_TOKEN:-} ]]; then
         export GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0="http.https://github.com/.extraheader"
-        GIT_CONFIG_VALUE_0="Authorization: Basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+        GIT_CONFIG_VALUE_0="Authorization: Basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 | tr -d '\n')"
         export GIT_CONFIG_VALUE_0
 fi
 
 WORK=$(mktemp -d "${TMPDIR:-/tmp}/sync-charts.XXXXXX")
-trap 'rm -rf "$WORK"' EXIT
 mkdir -p "$WORK"/{src,res,log,build,pkg} charts repo
 
 # ---------------------------------------------------------------- phase 1 worker (runs in parallel)
@@ -140,7 +171,7 @@ mkdir -p "$WORK"/{src,res,log,build,pkg} charts repo
 fetch_one() {
         local id=$1 repo=$2 path=$3 ref=$4
         local key="$repo|$path|${ref/#HEAD/}" sha tgz_known known_sha n
-        local TOKEN_ARGS=() # arrays cannot be exported: rebuilt here
+        local TOKEN_ARGS=() # arrays cannot be exported: rebuilt here (bash 3.2 + set -u: expand as ${a[@]+"${a[@]}"})
         [[ -z ${GITHUB_TOKEN:-} ]] || TOKEN_ARGS=(-H "Authorization: Bearer ${GITHUB_TOKEN}")
 
         local out="$WORK/res/$id"
@@ -170,7 +201,7 @@ fetch_one() {
         # 3. download the tarball pinned to that SHA
         local archive="$WORK/src/$id.tar.gz" top="${repo#*/}-${sha}" dest="$WORK/src/$id"
         echo "  downloading ${repo}@${sha:0:9} (${ref:-HEAD})"
-        curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 15 --max-time 300 "${TOKEN_ARGS[@]}" \
+        curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 15 --max-time 300 ${TOKEN_ARGS[@]+"${TOKEN_ARGS[@]}"} \
                 -o "$archive" "https://codeload.github.com/${repo}/tar.gz/${sha}" || { fail "download failed"; return 0; }
         mkdir -p "$dest"
 
@@ -185,9 +216,10 @@ fetch_one() {
         if [[ -f $base/Chart.yaml ]]; then
                 chart=$base
         else
-                mapfile -t cands < <(find "$dest/$top" -name Chart.yaml -not -path '*/charts/*' -printf '%h\n' 2>/dev/null | sort)
+                cands=()
+                while IFS= read -r c; do cands+=("$c"); done < <(find "$dest/$top" -name Chart.yaml -not -path '*/charts/*' 2>/dev/null | sed 's|/Chart.yaml$||' | sort)
                 # prefer the directory named like the path, else accept a single unambiguous candidate
-                for c in "${cands[@]}"; do
+                for c in ${cands[@]+"${cands[@]}"}; do
                         [[ ${c##*/} == "$(basename "$path")" ]] && { chart=$c; break; }
                 done
                 [[ -n $chart || ${#cands[@]} -ne 1 ]] || chart=${cands[0]}
@@ -205,7 +237,7 @@ fetch_line() {
         { echo "[$repo $path]"; fetch_one "$id" "$repo" "$path" "$ref"; } >"$WORK/log/$id" 2>&1 || true
         [[ -f $WORK/res/$id ]] || printf 'error\t\t\n' >"$WORK/res/$id"
 }
-export -f fetch_one fetch_line
+export -f fetch_one fetch_line sha1
 export WORK FORCE
 export GITHUB_TOKEN="${GITHUB_TOKEN:-}"
 
@@ -221,7 +253,7 @@ ensure_deps() {
         # classic repositories must be known to helm; oci:// and file:// need nothing
         while read -r url; do
                 [[ $url =~ ^https?:// ]] || continue
-                name="sync-$(printf '%s' "$url" | sha1sum | cut -c1-10)"
+                name="sync-$(printf '%s' "$url" | sha1 | cut -c1-10)"
                 helm repo add --force-update "$name" "$url" >/dev/null
         done < <(sed -nE "s/^[[:space:]]*(-[[:space:]]+)?repository:[[:space:]]*['\"]?([^'\"[:space:]]+).*/\2/p" "$dir/Chart.yaml" | sort -u)
         echo "  fetching dependencies"
@@ -233,20 +265,20 @@ ensure_deps() {
 [[ -f $STATE_FILE ]] && cp "$STATE_FILE" "$WORK/state.tsv" || : >"$WORK/state.tsv"
 
 IDS=() KEYS=() NAMES=()
-declare -A SEEN=()
+SEEN=" " # names already mirrored (no associative array: bash 3.2 on macOS)
 : >"$WORK/list"
 for i in "${!CHARTS[@]}"; do
         IFS='|' read -r repo path ref <<<"${CHARTS[$i]}"
         [[ -n $repo && -n $path ]] || die "bad CHARTS entry: ${CHARTS[$i]}"
         name=$(basename "$path")
-        [[ -z ${SEEN[$name]:-} ]] || die "two sources would be mirrored to charts/$name"
-        SEEN[$name]=1
+        [[ $SEEN != *" $name "* ]] || die "two sources would be mirrored to charts/$name"
+        SEEN+="$name "
         IDS+=("$i"); KEYS+=("$repo|$path|$ref"); NAMES+=("$name")
         printf '%s\t%s\t%s\t%s\n' "$i" "$repo" "$path" "${ref:-HEAD}" >>"$WORK/list"
 done
 # the key stores the ref exactly as written in the table (empty stays empty)
 log "Checking ${#CHARTS[@]} source(s), ${JOBS} in parallel..."
-xargs -a "$WORK/list" -d '\n' -P "$JOBS" -I{} bash -c 'fetch_line "$1"' _ {} || true
+tr '\n' '\0' <"$WORK/list" | xargs -0 -P "$JOBS" -I{} bash -c 'fetch_line "$1"' _ {} || true
 for i in "${IDS[@]}"; do cat "$WORK/log/$i"; done
 
 # ---------------------------------------------------------------- phase 2: package (serial)
@@ -276,7 +308,10 @@ for i in "${IDS[@]}"; do
                 awk -F'\t' -v k="$key_state" '$1==k' "$WORK/state.tsv" >>"$WORK/state.new"
                 continue
         fi
-        tgz=$(find "$pkg" -maxdepth 1 -name '*.tgz' -printf '%f\n' | head -n1)
+        tgz=""
+        for f in "$pkg"/*.tgz; do
+                if [[ -e $f ]]; then tgz=${f##*/}; break; fi
+        done
         [[ -n $tgz ]] || { FAILED+=("$name (no package produced)"); continue; }
 
         mv -f "$pkg/$tgz" "repo/$tgz"
@@ -319,7 +354,7 @@ fi
 # ---------------------------------------------------------------- summary
 log ""
 log "Summary: ${#UPDATED[@]} updated, ${UNCHANGED} unchanged, ${#FAILED[@]} failed"
-for t in "${UPDATED[@]}"; do log "  updated: $t"; done
+for t in ${UPDATED[@]+"${UPDATED[@]}"}; do log "  updated: $t"; done
 if [[ ${#FAILED[@]} -gt 0 ]]; then
         for f in "${FAILED[@]}"; do log "  FAILED: $f"; done
         exit 1
